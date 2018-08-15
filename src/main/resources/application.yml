@@ -1,0 +1,85 @@
+
+#Project Config
+smart:
+  name: facedamon
+  version: 0.0.1
+  copyrightYear: 2018
+
+  profile: D:/profile/
+  addressEnabled: true
+
+#Dev Config
+server:
+  port: 80
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 100
+    min-spare-threads: 10
+
+#日志配置
+logging:
+  level:
+    com.facedamon: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug
+
+#用户配置
+user:
+  password:
+    #密码错误{maxRetryCount}次锁定用户10min
+    maxRetryCount: 5
+
+#Spring配置
+spring:
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    #禁用缓存
+    cache: false
+  messages:
+    basename: i18n/messages
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    #加载application-druid.yml
+    active: druid
+  #文件上传
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  #热部署开关
+  devtools:
+    restart:
+      enabled: true
+
+#MyBatis
+mybatis:
+  #搜索指定包别名
+  type-aliases-package: com.facedamon.project
+  #配置mapper扫描
+  mapper-locations: classpath:mybatis/**/*Mapper.xml
+  #加载全局配置文件
+  config-location: classpath:mybatis/mybatis-config.xml
+
+#PageHelper 分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#Shiro
+
+#generator
+generator:
+  author: facedamon
+  packageName: com.facedamon.project.module
+  autoRemovePre: true
+  tablePrefix: sys_
+
+
+

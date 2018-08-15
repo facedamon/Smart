@@ -1,0 +1,22 @@
+html{
+    height: 100%;
+}
+
+body.signin{
+    height: auto;
+    background: darkgrey no-repeat center fixed;
+    -webkit-background-size: cover;/*chrome*/
+    -moz-background-size: cover;/*firefox*/
+    -o-background-size: cover;/*欧鹏*/
+    background-size: cover;/*all*/
+    color: rgba(255,255,255,95)
+}
+.siginpanel{
+    wifth:750px;
+    margin: 10px auto 0
+}
+.siginpanel.sigin-info ul{
+    list-style: none;
+    padding: 0;
+    margin: 20px 0
+}
