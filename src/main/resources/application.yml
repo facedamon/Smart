@@ -18,25 +18,25 @@ server:
     max-threads: 100
     min-spare-threads: 10
 
-#ÈÕÖ¾ÅäÖÃ
+#æ—¥å¿—é…ç½®
 logging:
   level:
     com.facedamon: debug
     org.springframework: WARN
     org.spring.springboot.dao: debug
 
-#ÓÃ»§ÅäÖÃ
+#ç”¨æˆ·é…ç½®
 user:
   password:
-    #ÃÜÂë´íÎó{maxRetryCount}´ÎËø¶¨ÓÃ»§10min
+    #å¯†ç é”™è¯¯{maxRetryCount}æ¬¡é”å®š10åˆ†é’Ÿ
     maxRetryCount: 5
 
-#SpringÅäÖÃ
+#Spring Config
 spring:
   thymeleaf:
     mode: HTML
     encoding: UTF-8
-    #½ûÓÃ»º´æ
+    # ç¦ç”¨ç¼“å­˜
     cache: false
   messages:
     basename: i18n/messages
@@ -44,28 +44,33 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles:
-    #¼ÓÔØapplication-druid.yml
+    #load application-druid.yml
     active: druid
-  #ÎÄ¼şÉÏ´«
+  #æ–‡ä»¶ä¸Šä¼ 
   servlet:
     multipart:
       max-file-size: 30MB
       max-request-size: 30MB
-  #ÈÈ²¿Êğ¿ª¹Ø
+  #çƒ­éƒ¨ç½²å¼€å…³
   devtools:
     restart:
       enabled: true
 
 #MyBatis
 mybatis:
-  #ËÑË÷Ö¸¶¨°ü±ğÃû
-  type-aliases-package: com.facedamon.project
-  #ÅäÖÃmapperÉ¨Ãè
-  mapper-locations: classpath:mybatis/**/*Mapper.xml
-  #¼ÓÔØÈ«¾ÖÅäÖÃÎÄ¼ş
-  config-location: classpath:mybatis/mybatis-config.xml
 
-#PageHelper ·ÖÒ³²å¼ş
+  #æœç´¢æŒ‡å®šåŒ…åˆ«å
+  type-aliases-package: com.facedamon.smart.project
+  #é…ç½®mapperçš„æ‰«æï¼Œæ‰¾åˆ°æ‰€æœ‰çš„mapper.xmlæ˜ å°„æ–‡ä»¶
+  mapper-locations: classpath:mybatis/**/*Mapper.xml
+  #åŠ è½½å…¨å±€çš„é…ç½®æ–‡ä»¶
+  #config-location: classpath:mybatis/mybatis-config.xml
+  configuration:
+    cache-enabled: true
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#PageHelper
 pagehelper:
   helper-dialect: mysql
   reasonable: true
@@ -77,7 +82,7 @@ pagehelper:
 #generator
 generator:
   author: facedamon
-  packageName: com.facedamon.project.module
+  packageName: com.facedamon.smart.project.module
   autoRemovePre: true
   tablePrefix: sys_
 

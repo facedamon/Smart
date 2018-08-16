@@ -1,6 +1,5 @@
 package com.facedamon.smart.core.web.page;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 

@@ -3,10 +3,8 @@ package com.facedamon.smart.core.web.domain;
 import com.facedamon.smart.common.constant.Constants;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.apache.shiro.crypto.hash.Hash;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
 * @Description:    统一数据返回
