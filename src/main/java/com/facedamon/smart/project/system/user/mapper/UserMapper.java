@@ -19,82 +19,82 @@ public interface UserMapper {
      * @param user 用户信息
      * @return 用户列表
      */
-    public List<User> selectUserList(User user);
+     List<User> selectUserList(User user);
 
     /**
      * 通过用户名查询
      * @param userName
      * @return
      */
-    public User selectUserByLoginName(String userName);
+     User selectUserByLoginName(String userName);
 
     /**
      * 通过手机号码查询
      * @param phoneNumber
      * @return
      */
-    public User selectUserByPhoneNumber(String phoneNumber);
+     User selectUserByPhoneNumber(String phoneNumber);
 
     /**
      * 通过email查询
      * @param email
      * @return
      */
-    public User selectUserByEmail(String email);
+     User selectUserByEmail(String email);
 
     /**
      * 通过ID查询用户
      * @param userId
      * @return
      */
-    public User selectUserById(Long userId);
+     User selectUserById(Long userId);
 
     /**
      * 通过用户ID删除用户
      * @param userId
      * @return
      */
-    public int deleteUserById(Long userId);
+     int deleteUserById(Long userId);
 
     /**
      * 批量删除用户
      * @param ids
      * @return
      */
-    public int deleteUserByIds(Long[] ids);
+     int deleteUserByIds(Long[] ids);
 
     /**
      * 更新用户信息
      * @param user
      * @return
      */
-    public int updateUser(User user);
+     int updateUser(User user);
 
     /**
      * 新增用户
      * @param user
      * @return
      */
-    public int insertUser(User user);
+     int insertUser(User user);
 
     /**
      * 校验用户名称是否唯一
      * @param loginName
      * @return
      */
-    public int checkLoginNameUnique(String loginName);
+     int checkLoginNameUnique(String loginName);
 
     /**
      * 校验手机号码是否唯一
      * @param phoneNumber
      * @return
      */
-    public int checkPhoneNumberUnique(String phoneNumber);
+     int checkPhoneNumberUnique(String phoneNumber);
 
     /**
      * 校验email是否唯一
      * @param email
      * @return
      */
-    public int checkEmailUnique(String email);
+     int checkEmailUnique(String email);
 }
