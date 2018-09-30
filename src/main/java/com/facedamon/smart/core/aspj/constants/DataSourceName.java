@@ -10,6 +10,14 @@ package com.facedamon.smart.core.aspj.constants;
 * @Version:        1.0
 */
 public enum DataSourceName {
+
+    /**
+     * 主数据源
+     */
     MASTER,
+
+    /**
+     * 副数据源
+     */
     SLAVE
 }

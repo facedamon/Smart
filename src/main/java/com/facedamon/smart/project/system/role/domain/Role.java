@@ -4,6 +4,15 @@ import com.facedamon.smart.core.web.domain.BaseEntity;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
+/**
+ * @Description:    角色bean
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:06
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:06
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 @Data
 @Alias("Role")
 public class Role extends BaseEntity {

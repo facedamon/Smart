@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @Description:    树形结构工具类
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:12
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:12
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 public class TreeUtils {
 
     /**

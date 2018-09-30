@@ -4,6 +4,15 @@ import com.facedamon.smart.project.system.role.domain.Role;
 
 import java.util.List;
 
+/**
+ * @Description:    角色mapper
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:06
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:06
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 public interface RoleMapper {
 
     /**
@@ -57,6 +66,7 @@ public interface RoleMapper {
 
     /**
      * 校验角色名称是否唯一
+     * @param roleName
      * @return
      */
     Role checkRoleNameUnique(String roleName);

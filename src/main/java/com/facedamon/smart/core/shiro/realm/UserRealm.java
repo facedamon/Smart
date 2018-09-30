@@ -14,6 +14,15 @@ import org.apache.shiro.subject.PrincipalCollection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @Description:    自定义用户realm
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:14
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:14
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
 

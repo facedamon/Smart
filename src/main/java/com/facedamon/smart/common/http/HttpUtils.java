@@ -27,7 +27,7 @@ public class HttpUtils {
      * @param msg
      */
     public static void renderString(HttpServletResponse response,String msg){
-        response.setContentType("application/json");
+        response.setContentType(HttpConstants.CONTENT_TYPE.getValue());
         response.setCharacterEncoding(Constants.UTF8.getValue());
         PrintWriter writer = null;
         try {
@@ -43,22 +43,22 @@ public class HttpUtils {
     }
 
     public static boolean isAjaxRequest(HttpServletRequest request){
-        String accept = request.getHeader("accept");
-        if (StringUtils.indexOf(accept,"application/json") != -1){
+        String accept = request.getHeader(HttpConstants.HEADER_ACCEPT.getValue());
+        if (StringUtils.indexOf(accept,HttpConstants.CONTENT_TYPE.getValue()) != -1){
             return true;
         }
-        String xRequestedWith = request.getHeader("X-Requested-With");
-        if (StringUtils.indexOf(xRequestedWith,"XMLHttpRequest") != -1){
+        String xRequestedWith = request.getHeader(HttpConstants.HEADER_X_REQUEST.getValue());
+        if (StringUtils.indexOf(xRequestedWith,HttpConstants.HEADER_XML_REQUEST.getValue()) != -1){
             return true;
         }
         String uri = request.getRequestURI();
-        if (StringUtils.containsIgnoreCase(uri,".json") ||
-                StringUtils.containsIgnoreCase(uri,".xml")){
+        if (StringUtils.containsIgnoreCase(uri,Constants.JSON_SUFFIX.getValue()) ||
+                StringUtils.containsIgnoreCase(uri,Constants.XML_SUFFIX.getValue())){
             return true;
         }
         String ajax = request.getParameter("__ajax");
-        if (StringUtils.containsIgnoreCase(ajax,"json") ||
-                StringUtils.containsIgnoreCase(ajax,"xml")){
+        if (StringUtils.containsIgnoreCase(ajax,Constants.JSON.getValue()) ||
+                StringUtils.containsIgnoreCase(ajax,Constants.XML.getValue())){
             return true;
         }
         return false;

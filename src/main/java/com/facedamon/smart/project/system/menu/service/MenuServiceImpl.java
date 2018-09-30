@@ -15,6 +15,15 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.*;
 
+/**
+ * @Description:    菜单service接口实现类
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:05
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:05
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 @Service
 @Slf4j
 public class MenuServiceImpl implements IMenuService {
@@ -69,7 +78,10 @@ public class MenuServiceImpl implements IMenuService {
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms){
             if (StringUtils.isNotBlank(perm)){
-                permsSet.addAll(Arrays.asList(perm.trim().split(",")));//我觉得应该是:
+                /**
+                 * 我觉得应该是:
+                 */
+                permsSet.addAll(Arrays.asList(perm.trim().split(",")));
             }
         }
         return permsSet;

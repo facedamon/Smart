@@ -9,8 +9,20 @@ package com.facedamon.smart.project.system.user.domain;
 * @Version:        1.0
 */
 public enum UserStatus {
+
+    /**
+     * 用户状态正常
+     */
     OK("0","正常"),
+
+    /**
+     * 用户停用
+     */
     DISABLED("1","停用"),
+
+    /**
+     * 用户已被删除
+     */
     DELETED("2","删除");
 
     private final String code;

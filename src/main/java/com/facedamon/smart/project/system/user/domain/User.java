@@ -7,6 +7,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * @Description:    用户bean
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:12
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:12
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 @Data
 @Alias("User")
 public class User extends BaseEntity {

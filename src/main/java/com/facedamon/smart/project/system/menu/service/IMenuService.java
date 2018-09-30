@@ -7,6 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @Description:    菜单service接口
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:04
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:04
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 public interface IMenuService {
 
     /**

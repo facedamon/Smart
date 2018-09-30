@@ -5,6 +5,15 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @Description:    菜单mapper
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:05
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:05
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 public interface MenuMapper {
 
     /**

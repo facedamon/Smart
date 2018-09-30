@@ -2,6 +2,15 @@ package com.facedamon.smart.common.utils;
 
 import java.util.Locale;
 
+/**
+ * @Description:    继承apache stringutils 并添加扩展方法
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:11
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:11
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static final String SEPARATOR = "_";
 

@@ -7,6 +7,15 @@ import org.apache.ibatis.type.Alias;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Description:    菜单bean
+ * @Author:         facedamon
+ * @CreateDate:     2018/9/30 下午9:05
+ * @UpdateUser:     facedamon
+ * @UpdateDate:     2018/9/30 下午9:05
+ * @UpdateRemark:   修改内容
+ * @Version:        1.0
+ */
 @Data
 @Alias("Menu")
 public class Menu extends BaseEntity {
