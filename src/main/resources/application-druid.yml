@@ -5,14 +5,14 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       master:
-        url: jdbc:mysql://127.0.0.1:3306/ry?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        url: jdbc:mysql://127.0.0.1:3306/smart?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
         username: damon
         password: damon
-      #slave:  #从库
-      #    open: true
-      #    url: jdbc:mysql://localhost:3306/ry?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
-      #    username: root
-      #    password: password
+      slave:  #从库
+        enabled: false
+        url: jdbc:mysql://localhost:3306/smart?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        username: root
+        password: password
       initial-size: 10
       max-active: 100
       min-idle: 10

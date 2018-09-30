@@ -24,6 +24,22 @@ public class ShiroUtils {
         getSubject().logout();
     }
 
+    public static Long getUserId() {
+        return getUser().getUserId().longValue();
+    }
+
+    public static String getLoginName() {
+        return getUser().getLoginName();
+    }
+
+    public static String getIp() {
+        return getSubject().getSession().getHost();
+    }
+
+    public static String getSessionId() {
+        return String.valueOf(getSubject().getSession().getId());
+    }
+
     public static User getUser(){
         User user = null;
         Object obj = getSubject().getPrincipal();

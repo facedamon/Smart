@@ -13,7 +13,12 @@ public enum Constants {
     PAGE_NUM("pageNum"),
     PAGE_SIZE("pageSize"),
     ORDER_BY_COLUMN("orderByColumn"),
-    IS_ASC("isAsc");
+    IS_ASC("isAsc"),
+
+    PREMISSION("[\"{0}\"]"),
+
+    MENU_NAME_UNIQUE("0"),
+    MENU_NAME_NOT_UNIQUE("1");
 
     private String value;
 

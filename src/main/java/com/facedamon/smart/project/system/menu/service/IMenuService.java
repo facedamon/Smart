@@ -69,7 +69,7 @@ public interface IMenuService {
      * @param parentId
      * @return
      */
-     int selectCOuntMenuByParentId(Long parentId);
+     int selectCountMenuByParentId(Long parentId);
 
     /**
      * 查询菜单使用数量
