@@ -77,4 +77,5 @@ public interface RoleMapper {
      * @return
      */
     Role checkRoleKeyUnique(String roleKey);
+
 }

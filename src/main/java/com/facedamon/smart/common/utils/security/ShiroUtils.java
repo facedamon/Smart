@@ -8,8 +8,6 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * @Description:    shiro工具类
  * @Author:         facedamon

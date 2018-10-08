@@ -1,6 +1,7 @@
 package com.facedamon.smart.project.system.role.domain;
 
 import com.facedamon.smart.core.web.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
@@ -14,6 +15,7 @@ import org.apache.ibatis.type.Alias;
  * @Version:        1.0
  */
 @Data
+@Builder
 @Alias("Role")
 public class Role extends BaseEntity {
 

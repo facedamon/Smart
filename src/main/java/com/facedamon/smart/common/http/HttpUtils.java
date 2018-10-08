@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
 * @Description:    Http 工具类
@@ -28,7 +29,7 @@ public class HttpUtils {
      */
     public static void renderString(HttpServletResponse response,String msg){
         response.setContentType(HttpConstants.CONTENT_TYPE.getValue());
-        response.setCharacterEncoding(Constants.UTF8.getValue());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
         PrintWriter writer = null;
         try {
             writer = response.getWriter();

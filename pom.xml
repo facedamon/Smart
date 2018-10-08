@@ -32,6 +32,7 @@
         <druid.version>1.1.10</druid.version>
         <pagehelper.spring.boot.starter.version>1.2.5</pagehelper.spring.boot.starter.version>
         <shiro.version>1.4.0</shiro.version>
+        <bitwalker.version>1.19</bitwalker.version>
     </properties>
 
     <dependencies>
@@ -113,6 +114,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
+        </dependency>
+
+        <!-- 解析客户端操作系统、浏览器等 -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>${bitwalker.version}</version>
         </dependency>
     </dependencies>
 

@@ -1,5 +1,6 @@
 package com.facedamon.smart.project.system.user.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
@@ -14,6 +15,7 @@ import org.apache.ibatis.type.Alias;
  */
 @Data
 @Alias("UserPost")
+@Builder
 public class UserPost{
     private Long userId;
 

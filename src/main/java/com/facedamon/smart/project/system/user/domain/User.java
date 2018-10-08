@@ -1,11 +1,14 @@
 package com.facedamon.smart.project.system.user.domain;
 
 import com.facedamon.smart.core.web.domain.BaseEntity;
+import com.facedamon.smart.project.system.role.domain.Role;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:    用户bean
@@ -66,12 +69,30 @@ public class User extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
 
+    /** 角色集合 */
+    private List<Role> roles;
+
+    /** 角色组 */
+    private Long[] roleIds;
+
+    /** 岗位组 */
+    private Long[] postIds;
+
     public boolean isAdmin(){
         return isAdmin(this.userId);
     }
 
     public static boolean isAdmin(Long userId){
         return userId != null && 1L == userId;
+    }
+
+    /**
+     * 增加随机盐
+     */
+    public void randomSalt(){
+        SecureRandomNumberGenerator secureRandom = new SecureRandomNumberGenerator();
+        String hex = secureRandom.nextBytes(3).toHex();
+        setSalt(hex);
     }
 
 }

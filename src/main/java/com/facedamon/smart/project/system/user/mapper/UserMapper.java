@@ -89,12 +89,12 @@ public interface UserMapper {
      * @param phoneNumber
      * @return
      */
-     int checkPhoneNumberUnique(String phoneNumber);
+     User checkPhoneUnique(String phoneNumber);
 
     /**
      * 校验email是否唯一
      * @param email
      * @return
      */
-     int checkEmailUnique(String email);
+     User checkEmailUnique(String email);
 }

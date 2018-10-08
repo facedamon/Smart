@@ -3,7 +3,6 @@ package com.facedamon.smart.core.config;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.facedamon.smart.core.aspj.constants.DataSourceName;
 import com.facedamon.smart.core.datasource.DynamicDataSource;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;

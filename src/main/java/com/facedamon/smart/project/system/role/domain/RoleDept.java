@@ -1,5 +1,6 @@
 package com.facedamon.smart.project.system.role.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
@@ -13,6 +14,7 @@ import org.apache.ibatis.type.Alias;
  * @Version:        1.0
  */
 @Data
+@Builder
 @Alias("RoleDept")
 public class RoleDept {
 

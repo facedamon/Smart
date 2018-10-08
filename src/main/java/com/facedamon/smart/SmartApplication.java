@@ -21,4 +21,30 @@ public class SmartApplication {
     public static void main(String[] args) {
         SpringApplication.run(SmartApplication.class, args);
     }
+
+    public static String builder() {
+        StringBuffer sb = new StringBuffer()
+                .append("                            _ooOoo_                     \n")
+                .append("                           o8888888o                    \n")
+                .append("                           88  .  88                    \n")
+                .append("                           (| -_- |)                    \n")
+                .append("                            O\\ = /O                    \n")
+                .append("                        ____/`---'\\____                \n")
+                .append("                      .   ' \\| |// `.                  \n")
+                .append("                       / \\||| : |||// \\               \n")
+                .append("                     / _||||| -:- |||||- \\\\             \n")
+                .append("                       | | \\\\\\ - /// | |             \n")
+                .append("                     | \\_| ''\\---/'' | |              \n")
+                .append("                      \\ .-\\__ `-` ___/-. /            \n")
+                .append("                   ___`. .' /--.--\\ `. . __            \n")
+                .append("                .\"\" '< `.___\\_<|>_/___.' >'\"\".         \n")
+                .append("               | | : `- \\`.;`\\ _ /`;.`/ - ` : | |     \n")
+                .append("                 \\ \\ `-. \\_ __\\ /__ _/ .-` / /      \n")
+                .append("         ======`-.____`-.___\\_____/___.-`____.-'====== \n")
+                .append("                            `=---=' \n")
+                .append("                                                        \n")
+                .append("         .............................................  \n")
+                .append("                  佛祖镇楼             BUG辟邪          ");
+        return sb.toString();
+    }
 }

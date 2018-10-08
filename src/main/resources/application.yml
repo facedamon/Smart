@@ -40,6 +40,7 @@ spring:
     cache: false
   messages:
     basename: i18n/messages
+    encoding: UTF-8
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -68,7 +69,7 @@ mybatis:
   configuration:
     cache-enabled: true
     use-generated-keys: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 #PageHelper
 pagehelper:
@@ -78,6 +79,41 @@ pagehelper:
   params: count=countSql
 
 #Shiro
+shiro:
+  user:
+    #登录地址
+    loginUrl: /login
+    #认证失败地址
+    unauthorizedUrl: /unauth
+    #首页地址
+    indexUrl : /index
+    #验证码开关
+    captchaEnabled : true
+    #验证码类型 match char
+    cachchaType : math
+  cookie:
+    #设置Cookie的域名 默认空，即当前访问的域名
+    domain:
+    #设置cookie的有效访问路径
+    path: /
+    #设置HttpOnly属性
+    #如何保障我们的Cookie安全呢？
+    #Cookie都是通过document对象获取的，我们如果能让cookie在浏览器中不可见就可以了，
+    #那HttpOnly就是在设置cookie时接受这样一个参数，一旦被设置，在浏览器的document对象中就看不到cookie了。
+    #而浏览器在浏览网页的时候不受任何影响，因为Cookie会被放在浏览器头中发送出去(包括Ajax的时候)，
+    #应用程序也一般不会在JS里操作这些敏感Cookie的，对于一些敏感的Cookie我们采用HttpOnly，
+    #对于一些需要在应用程序中用JS操作的cookie我们就不予设置，这样就保障了Cookie信息的安全也保证了应用
+    httpOnly: true
+    #设置Cookie的过期时间.单位天
+    maxAge: 30
+  session:
+    #Session超时时间（默认30分钟）
+    expireTime: 30
+    #同步session到数据库的周期（默认1分钟）
+    dbSyncPeriod: 1
+    #相隔多久检查一次session的有效性，默认就是10分钟
+    validationInterval: 10
+
 
 #generator
 generator:
