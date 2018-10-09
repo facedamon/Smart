@@ -3,9 +3,7 @@ package com.facedamon.smart.core.config;
 import com.facedamon.smart.core.shiro.realm.UserRealm;
 import com.facedamon.smart.core.shiro.session.OnlineSessionDAO;
 import com.facedamon.smart.core.shiro.session.OnlineSessionFactory;
-import com.facedamon.smart.core.shiro.web.filter.LogoutFilter;
 import com.facedamon.smart.core.shiro.web.session.OnlineWebSessionManager;
-import com.facedamon.smart.core.shiro.web.session.SpringSessionValidationScheduler;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -132,12 +130,12 @@ public class ShiroConfig {
 
     // TODO LogoutFilter Config
 
-    @Bean
+    /*@Bean
     public LogoutFilter logoutFilter(){
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setLoginUrl(loginUrl);
         return logoutFilter;
-    }
+    }*/
 
     /**
      * 安全管理器

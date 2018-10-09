@@ -2,7 +2,6 @@ package com.facedamon.smart.project.monitor.online.domain;
 
 import com.facedamon.smart.core.web.domain.BaseEntity;
 import lombok.Data;
-import lombok.Getter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;

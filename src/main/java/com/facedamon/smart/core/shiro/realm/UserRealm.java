@@ -38,6 +38,7 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     private IMenuService menuService;
 
+    @Autowired
     private LoginService loginService;
 
     /**

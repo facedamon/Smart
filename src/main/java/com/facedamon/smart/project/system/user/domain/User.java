@@ -1,6 +1,7 @@
 package com.facedamon.smart.project.system.user.domain;
 
 import com.facedamon.smart.core.web.domain.BaseEntity;
+import com.facedamon.smart.project.system.dept.domain.Dept;
 import com.facedamon.smart.project.system.role.domain.Role;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
@@ -77,6 +78,8 @@ public class User extends BaseEntity {
 
     /** 岗位组 */
     private Long[] postIds;
+
+    private Dept dept;
 
     public boolean isAdmin(){
         return isAdmin(this.userId);

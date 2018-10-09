@@ -2,7 +2,9 @@ package com.facedamon.smart.common.exception.base;
 
 import com.facedamon.smart.common.utils.MessageUtils;
 import com.facedamon.smart.common.utils.StringUtils;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @Description:    基础自定义异常

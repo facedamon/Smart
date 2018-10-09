@@ -1,10 +1,8 @@
 package com.facedamon.smart.core.shiro.web.session;
 
-import com.facedamon.smart.project.monitor.online.domain.OnlineSession;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.mgt.SessionKey;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 
 /**
