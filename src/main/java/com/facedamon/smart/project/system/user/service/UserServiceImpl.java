@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description:    user service
- * @Author:         facedamon
- * @CreateDate:     2018/10/2 下午2:56
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/2 下午2:56
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: user service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/2 下午2:56
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/2 下午2:56
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class UserServiceImpl implements IUserService {
@@ -48,6 +48,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 根据条件分页查询用户
+     *
      * @param user
      * @return
      */
@@ -58,6 +59,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过登录名查询用户
+     *
      * @param loginName
      * @return
      */
@@ -68,6 +70,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过电话查询用户
+     *
      * @param phoneNumber
      * @return
      */
@@ -78,6 +81,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过email查询用户
+     *
      * @param email
      * @return
      */
@@ -88,6 +92,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过用户ID删除用户
+     *
      * @param userId
      * @return
      */
@@ -101,8 +106,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public int deleteUserByIds(String ids) throws Exception {
         Long[] userIds = Convert.toLongArray(ids);
-        for (Long id : userIds){
-            if (User.isAdmin(id)){
+        for (Long id : userIds) {
+            if (User.isAdmin(id)) {
                 throw new Exception("不允许删除管理员账户");
             }
         }
@@ -111,13 +116,14 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 新增用户
+     *
      * @param user
      * @return
      */
     @Override
     public int insertUser(User user) {
         user.randomSalt();
-        user.setPassword(passwordService.encryptPassword(user.getLoginName(),user.getPassword(),user.getSalt()));
+        user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         user.setCreateBy(ShiroUtils.getLoginName());
 
         int rows = userMapper.insertUser(user);
@@ -129,6 +135,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 更新用户信息
+     *
      * @param user
      * @return
      */
@@ -147,6 +154,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 更新用户详细信息
+     *
      * @param user
      * @return
      */
@@ -157,48 +165,52 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 修改密码
+     *
      * @param user
      * @return
      */
     @Override
     public int resetUserPwd(User user) {
         user.randomSalt();
-        user.setPassword(passwordService.encryptPassword(user.getLoginName(),user.getPassword(),user.getSalt()));
+        user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         return updateUserInfo(user);
     }
 
     /**
      * 新增用户角色信息
+     *
      * @param user
      * @return
      */
     public void insertUserRole(User user) {
         List<UserRole> userRoles = new ArrayList<>();
-        for (Long roleId : user.getRoleIds()){
+        for (Long roleId : user.getRoleIds()) {
             userRoles.add(UserRole.builder().roleId(roleId).userId(user.getUserId()).build());
         }
-        if (!userRoles.isEmpty()){
+        if (!userRoles.isEmpty()) {
             userRoleMapper.batchUserRole(userRoles);
         }
     }
 
     /**
      * 新增用户岗位信息
+     *
      * @param user
      * @return
      */
     public void insertUserPost(User user) {
         List<UserPost> userPosts = new ArrayList<>();
-        for (Long postId : user.getPostIds()){
+        for (Long postId : user.getPostIds()) {
             userPosts.add(UserPost.builder().postId(postId).userId(user.getUserId()).build());
         }
-        if (!userPosts.isEmpty()){
+        if (!userPosts.isEmpty()) {
             userPostMapper.batchUserPost(userPosts);
         }
     }
 
     /**
      * 校验登录名是否唯一
+     *
      * @param loginName
      * @return
      */
@@ -210,6 +222,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 校验用户电话是否唯一
+     *
      * @param user
      * @return
      */
@@ -223,6 +236,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 校验用户email唯一
+     *
      * @param user
      * @return
      */
@@ -236,6 +250,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 查询用户所属角色组
+     *
      * @param userId
      * @return
      */
@@ -243,17 +258,18 @@ public class UserServiceImpl implements IUserService {
     public String selectUserRoleGroup(Long userId) {
         List<Role> roles = roleMapper.selectRolesByUserId(userId);
         StringBuffer sb = new StringBuffer();
-        for (Role role : roles){
+        for (Role role : roles) {
             sb.append(role.getRoleName() + ",");
         }
-        if (StringUtils.isNotBlank(sb.toString())){
-            return sb.substring(0,sb.length() - 1);
+        if (StringUtils.isNotBlank(sb.toString())) {
+            return sb.substring(0, sb.length() - 1);
         }
         return sb.toString();
     }
 
     /**
      * 查询用户所属岗位组
+     *
      * @param userId
      * @return
      */

@@ -7,13 +7,13 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * @Description:    基础自定义异常
- * @Author:         facedamon
- * @CreateDate:     2018/10/1 下午5:18
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/1 下午5:18
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 基础自定义异常
+ * @Author: facedamon
+ * @CreateDate: 2018/10/1 下午5:18
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/1 下午5:18
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Getter
 @ToString
@@ -43,9 +43,9 @@ public class BaseException extends RuntimeException {
     @Override
     public String getMessage() {
         String message = "";
-        if (StringUtils.isBlank(code)){
+        if (StringUtils.isBlank(code)) {
             message = defaultMessage;
-        }else{
+        } else {
             message = MessageUtils.message(code);
         }
         return message;

@@ -1,13 +1,13 @@
 package com.facedamon.smart.common.constant;
 
 /**
- * @Description:    常量枚举
- * @Author:         facedamon
- * @CreateDate:     2018/9/30 下午8:48
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/9/30 下午8:48
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 常量枚举
+ * @Author: facedamon
+ * @CreateDate: 2018/9/30 下午8:48
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/9/30 下午8:48
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public enum Constants {
 
@@ -15,6 +15,11 @@ public enum Constants {
      * 返回成功状态
      */
     SUCCESS("0"),
+
+    /**
+     * 返回失败状态
+     */
+    FAIL("1"),
 
     /**
      * 返回异常状态

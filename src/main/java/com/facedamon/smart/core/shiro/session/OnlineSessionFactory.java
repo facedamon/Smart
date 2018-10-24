@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description:    自定义session factory 创建session
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午4:50
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午4:50
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 自定义session factory 创建session
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午4:50
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午4:50
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Component
 public class OnlineSessionFactory implements SessionFactory {
@@ -28,10 +28,10 @@ public class OnlineSessionFactory implements SessionFactory {
     @Override
     public Session createSession(SessionContext initData) {
         OnlineSession session = new OnlineSession();
-        if (null != initData && initData instanceof WebSessionContext){
+        if (null != initData && initData instanceof WebSessionContext) {
             WebSessionContext sessionContext = (WebSessionContext) initData;
             HttpServletRequest request = (HttpServletRequest) sessionContext.getServletRequest();
-            if (null != request){
+            if (null != request) {
                 UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
                 /**
                  * 获取客户端操作系统
@@ -50,9 +50,9 @@ public class OnlineSessionFactory implements SessionFactory {
         return session;
     }
 
-    public Session createSession(UserOnline userOnline){
+    public Session createSession(UserOnline userOnline) {
         OnlineSession session = userOnline.getSession();
-        if (null != session && session.getId() == null){
+        if (null != session && session.getId() == null) {
             session.setId(userOnline.getSessionId());
         }
         return session;

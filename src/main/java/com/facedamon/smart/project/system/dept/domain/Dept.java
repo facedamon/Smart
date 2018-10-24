@@ -6,13 +6,13 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 /**
- * @Description:    菜单 domain
- * @Author:         facedamon
- * @CreateDate:     2018/10/9 15:36
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/9 15:36
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 菜单 domain
+ * @Author: facedamon
+ * @CreateDate: 2018/10/9 15:36
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/9 15:36
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Data
 @Alias("Dept")

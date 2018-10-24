@@ -5,18 +5,19 @@ import com.facedamon.smart.project.system.user.domain.User;
 import java.util.List;
 
 /**
- * @Description:    user service
- * @Author:         facedamon
- * @CreateDate:     2018/10/2 下午2:41
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/2 下午2:41
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: user service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/2 下午2:41
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/2 下午2:41
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IUserService {
 
     /**
      * 根据条件分页查询用户
+     *
      * @param user
      * @return
      */
@@ -24,6 +25,7 @@ public interface IUserService {
 
     /**
      * 通过登录名查询用户
+     *
      * @param loginName
      * @return
      */
@@ -31,6 +33,7 @@ public interface IUserService {
 
     /**
      * 通过电话查询用户
+     *
      * @param phoneNumber
      * @return
      */
@@ -38,6 +41,7 @@ public interface IUserService {
 
     /**
      * 通过email查询用户
+     *
      * @param email
      * @return
      */
@@ -45,6 +49,7 @@ public interface IUserService {
 
     /**
      * 通过用户ID删除用户
+     *
      * @param userId
      * @return
      */
@@ -52,6 +57,7 @@ public interface IUserService {
 
     /**
      * 批量删除用户
+     *
      * @param ids
      * @return
      * @throws Exception
@@ -60,6 +66,7 @@ public interface IUserService {
 
     /**
      * 新增用户
+     *
      * @param user
      * @return
      */
@@ -67,6 +74,7 @@ public interface IUserService {
 
     /**
      * 更新用户
+     *
      * @param user
      * @return
      */
@@ -74,6 +82,7 @@ public interface IUserService {
 
     /**
      * 修改用户详细信息
+     *
      * @param user
      * @return
      */
@@ -81,6 +90,7 @@ public interface IUserService {
 
     /**
      * 重置密码
+     *
      * @param user
      * @return
      */
@@ -88,6 +98,7 @@ public interface IUserService {
 
     /**
      * 校验用户登录名唯一
+     *
      * @param loginName
      * @return
      */
@@ -95,6 +106,7 @@ public interface IUserService {
 
     /**
      * 校验电话唯一
+     *
      * @param user
      * @return
      */
@@ -102,6 +114,7 @@ public interface IUserService {
 
     /**
      * 校验email唯一
+     *
      * @param user
      * @return
      */
@@ -109,6 +122,7 @@ public interface IUserService {
 
     /**
      * 查询用户所属角色组
+     *
      * @param userId
      * @return
      */
@@ -116,6 +130,7 @@ public interface IUserService {
 
     /**
      * 查询用户所属岗位组
+     *
      * @param userId
      * @return
      */

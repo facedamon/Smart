@@ -16,21 +16,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @Description:
-* @Author:         facedamon
-* @CreateDate:     2018/8/15 17:06
-* @UpdateUser:     facedamon
-* @UpdateDate:     2018/8/15 17:06
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description:
+ * @Author: facedamon
+ * @CreateDate: 2018/8/15 17:06
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/8/15 17:06
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 @Controller
 public class LoginController extends BaseController {
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response){
-        if (HttpUtils.isAjaxRequest(request)){
-            HttpUtils.renderString(response,"{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
+    public String login(HttpServletRequest request, HttpServletResponse response) {
+        if (HttpUtils.isAjaxRequest(request)) {
+            HttpUtils.renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
             return null;
         }
         return "login";
@@ -38,14 +38,14 @@ public class LoginController extends BaseController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Response login(String username,String password,Boolean rememberMe){
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+    public Response login(String username, String password, Boolean rememberMe) {
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
 
         try {
             subject.login(token);
             return Response.success();
-        }catch(AuthenticationException e){
+        } catch (AuthenticationException e) {
             return Response.error("用户名或密码错误");
         }
     }

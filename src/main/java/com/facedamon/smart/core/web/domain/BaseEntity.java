@@ -8,14 +8,14 @@ import java.util.Date;
 import java.util.Map;
 
 /**
-* @Description:    所有实体的共同域
-* @Author:         facedamon
-* @CreateDate:     2018/8/15 16:05
-* @UpdateUser:     facedamon
-* @UpdateDate:     2018/8/15 16:05
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description: 所有实体的共同域
+ * @Author: facedamon
+ * @CreateDate: 2018/8/15 16:05
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/8/15 16:05
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 @Data
 public class BaseEntity implements Serializable {
     /**
@@ -53,5 +53,5 @@ public class BaseEntity implements Serializable {
     /**
      * 请求参数
      */
-    private Map<String,Object> params;
+    private Map<String, Object> params;
 }

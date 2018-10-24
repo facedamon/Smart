@@ -5,8 +5,8 @@
 <mapper namespace="com.facedamon.smart.project.system.user.mapper.UserRoleMapper">
 
     <resultMap type="UserRole" id="UserRoleResult">
-        <result property="userId"     column="user_id"      />
-        <result property="roleId"     column="role_id"      />
+        <result property="userId" column="user_id"/>
+        <result property="roleId" column="role_id"/>
     </resultMap>
 
     <delete id="deleteUserRoleByUserId" parameterType="Long">

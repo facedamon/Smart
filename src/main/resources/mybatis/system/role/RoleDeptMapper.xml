@@ -5,8 +5,8 @@
 <mapper namespace="com.facedamon.smart.project.system.role.mapper.RoleDeptMapper">
 
     <resultMap type="RoleDept" id="RoleDeptResult">
-        <result property="roleId"     column="role_id"      />
-        <result property="detpId"     column="dept_id"      />
+        <result property="roleId" column="role_id"/>
+        <result property="detpId" column="dept_id"/>
     </resultMap>
 
     <delete id="deleteRoleDeptByRoleId" parameterType="Long">

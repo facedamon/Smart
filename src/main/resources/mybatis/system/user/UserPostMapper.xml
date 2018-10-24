@@ -5,8 +5,8 @@
 <mapper namespace="com.facedamon.smart.project.system.user.mapper.UserPostMapper">
 
     <resultMap type="UserPost" id="UserPostResult">
-        <result property="userId"     column="user_id"      />
-        <result property="postId"     column="post_id"      />
+        <result property="userId" column="user_id"/>
+        <result property="postId" column="post_id"/>
     </resultMap>
 
     <delete id="deleteUserPostByUserId" parameterType="Long">

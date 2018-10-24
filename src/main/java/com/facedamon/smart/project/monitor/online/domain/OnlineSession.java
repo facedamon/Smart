@@ -8,13 +8,13 @@ import org.apache.shiro.session.mgt.SimpleSession;
 import java.util.Map;
 
 /**
- * @Description:    在线用户会话属性
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午3:51
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午3:51
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 在线用户会话属性
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午3:51
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午3:51
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @ToString
 public class OnlineSession extends SimpleSession {
@@ -109,7 +109,7 @@ public class OnlineSession extends SimpleSession {
         return attributeChanged;
     }
 
-    public static enum OnlineStatus{
+    public static enum OnlineStatus {
         ON_LINE("在线"),
         OFF_LINE("离线");
         private final String value;

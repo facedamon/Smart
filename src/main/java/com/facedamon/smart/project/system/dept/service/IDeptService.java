@@ -7,18 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:    dept service
- * @Author:         facedamon
- * @CreateDate:     2018/10/9 16:09
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/9 16:09
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: dept service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/9 16:09
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/9 16:09
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IDeptService {
 
     /**
      * 查询部门管理数据
+     *
      * @param dept
      * @return
      */
@@ -26,19 +27,22 @@ public interface IDeptService {
 
     /**
      * 查询部门树
+     *
      * @return
      */
-    List<Map<String,Object>> selectDeptTree();
+    List<Map<String, Object>> selectDeptTree();
 
     /**
      * 根据角色ID查询菜单
+     *
      * @param role
      * @return
      */
-    List<Map<String,Object>> roleDeptTreeData(Role role);
+    List<Map<String, Object>> roleDeptTreeData(Role role);
 
     /**
      * 查询部门人数
+     *
      * @param parentId
      * @return
      */
@@ -46,6 +50,7 @@ public interface IDeptService {
 
     /**
      * 查询部门是否存在用户
+     *
      * @param deptId
      * @return
      */
@@ -53,6 +58,7 @@ public interface IDeptService {
 
     /**
      * 删除部门关系信息
+     *
      * @param deptId
      * @return
      */
@@ -60,6 +66,7 @@ public interface IDeptService {
 
     /**
      * 新增保存部门信息
+     *
      * @param dept
      * @return
      */
@@ -67,6 +74,7 @@ public interface IDeptService {
 
     /**
      * 修改保存部门信息
+     *
      * @param dept
      * @return
      */
@@ -74,6 +82,7 @@ public interface IDeptService {
 
     /**
      * 根据部门ID查询信息
+     *
      * @param deptId
      * @return
      */
@@ -81,6 +90,7 @@ public interface IDeptService {
 
     /**
      * 校验部门名称是否唯一
+     *
      * @param dept
      * @return
      */

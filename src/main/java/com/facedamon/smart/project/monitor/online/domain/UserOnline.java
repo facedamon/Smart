@@ -1,22 +1,24 @@
 package com.facedamon.smart.project.monitor.online.domain;
 
 import com.facedamon.smart.core.web.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
 
 /**
- * @Description:    当前在线会话
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午3:39
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午3:39
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 当前在线会话
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午3:39
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午3:39
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Data
 @Alias("UserOnline")
+@Builder
 public class UserOnline extends BaseEntity {
 
     /**

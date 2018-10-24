@@ -7,13 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Description:    Date Utils
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午4:40
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午4:40
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: Date Utils
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午4:40
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午4:40
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class DateUtils {
 

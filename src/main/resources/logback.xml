@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="log.path" value="/Users/facedamon/Documents/work/workspace/Smart/log" />
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.path" value="/Users/facedamon/Documents/work/workspace/Smart/log"/>
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -67,16 +67,16 @@
         <logger name="org.springframework.jdbc" level="debug" />
     -->
 
-    <logger name="com.facedmaon" level="info" />
+    <logger name="com.facedmaon" level="info"/>
 
     <root level="info">
-        <appender-ref ref="console" />
+        <appender-ref ref="console"/>
     </root>
 
     <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
     </root>
 
     <!--系统用户操作日志-->

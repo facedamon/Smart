@@ -10,13 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * @Description:    同步session数据到数据库
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午6:47
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午6:47
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 同步session数据到数据库
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午6:47
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午6:47
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class SyncOnlineSessionFilter extends PathMatchingFilter {
 
@@ -25,6 +25,7 @@ public class SyncOnlineSessionFilter extends PathMatchingFilter {
 
     /**
      * 同步会话数据到DB 一次请求最多同步一次 防止过多处理 需要放到Shiro过滤器之前
+     *
      * @param request
      * @param response
      * @return
@@ -36,7 +37,7 @@ public class SyncOnlineSessionFilter extends PathMatchingFilter {
         /**
          * 如果stoptimestamp不为null则说明已经停止了
          */
-        if (null != onlineSession && onlineSession.getUserId() != null && onlineSession.getStopTimestamp() == null){
+        if (null != onlineSession && onlineSession.getUserId() != null && onlineSession.getStopTimestamp() == null) {
             onlineSessionDAO.syncToDb(onlineSession);
         }
         return true;

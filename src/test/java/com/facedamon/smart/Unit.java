@@ -7,16 +7,16 @@ import java.nio.charset.StandardCharsets;
 public class Unit {
 
     @Test
-    public void test(){
+    public void test() {
         System.out.println(StandardCharsets.UTF_8.displayName());
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         System.out.println(builder());
     }
 
-    private String builder(){
+    private String builder() {
         StringBuffer sb = new StringBuffer()
                 .append("                            _ooOoo_                     \n")
                 .append("                           o8888888o                    \n")

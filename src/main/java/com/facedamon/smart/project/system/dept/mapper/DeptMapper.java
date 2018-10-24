@@ -6,18 +6,19 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description:    部门 mapper
- * @Author:         facedamon
- * @CreateDate:     2018/10/9 15:54
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/9 15:54
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 部门 mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/10/9 15:54
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/9 15:54
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface DeptMapper {
 
     /**
      * 查询部门人数
+     *
      * @param dept
      * @return
      */
@@ -25,6 +26,7 @@ public interface DeptMapper {
 
     /**
      * 查询部门是否存在用户
+     *
      * @param deptId
      * @return
      */
@@ -32,6 +34,7 @@ public interface DeptMapper {
 
     /**
      * 查询部门管理数据
+     *
      * @param dept
      * @return
      */
@@ -39,6 +42,7 @@ public interface DeptMapper {
 
     /**
      * 删除部门管理信息
+     *
      * @param deptId
      * @return
      */
@@ -46,6 +50,7 @@ public interface DeptMapper {
 
     /**
      * 新增部门信息
+     *
      * @param dept
      * @return
      */
@@ -53,6 +58,7 @@ public interface DeptMapper {
 
     /**
      * 修改部门信息
+     *
      * @param dept
      * @return
      */
@@ -60,6 +66,7 @@ public interface DeptMapper {
 
     /**
      * 修改子元素关系
+     *
      * @param depts
      * @return
      */
@@ -67,6 +74,7 @@ public interface DeptMapper {
 
     /**
      * 根据部门Id查询信息
+     *
      * @param deptId
      * @return
      */
@@ -74,13 +82,15 @@ public interface DeptMapper {
 
     /**
      * 检查部门名称是否唯一
+     *
      * @param deptName
      * @return
      */
-    Dept checkDeptNameUnique(@Param("deptName") String deptName,@Param("parentId") Long parentId);
+    Dept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") Long parentId);
 
     /**
      * 根据角色ID查询部门
+     *
      * @param roleId
      * @return
      */

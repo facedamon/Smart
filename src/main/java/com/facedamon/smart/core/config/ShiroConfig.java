@@ -3,30 +3,36 @@ package com.facedamon.smart.core.config;
 import com.facedamon.smart.core.shiro.realm.UserRealm;
 import com.facedamon.smart.core.shiro.session.OnlineSessionDAO;
 import com.facedamon.smart.core.shiro.session.OnlineSessionFactory;
+import com.facedamon.smart.core.shiro.web.filter.LogoutFilter;
+import com.facedamon.smart.core.shiro.web.filter.online.OnlineSessionFilter;
+import com.facedamon.smart.core.shiro.web.filter.online.SyncOnlineSessionFilter;
 import com.facedamon.smart.core.shiro.web.session.OnlineWebSessionManager;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @Description:    shiro config
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午2:46
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午2:46
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: shiro config
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午2:46
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午2:46
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 public class ShiroConfig {
@@ -87,17 +93,18 @@ public class ShiroConfig {
 
     /**
      * 缓存管理器
+     *
      * @return
      */
     @Bean
-    public EhCacheManager getEhCacheManager(){
+    public EhCacheManager getEhCacheManager() {
         CacheManager cacheManager = CacheManager.getCacheManager("smart");
         EhCacheManager ehCacheManager = new EhCacheManager();
 
-        if (null == cacheManager){
+        if (null == cacheManager) {
             ehCacheManager.setCacheManagerConfigFile("classpath:ehcache/ehcache-shiro.xml");
             return ehCacheManager;
-        }else{
+        } else {
             ehCacheManager.setCacheManager(cacheManager);
             return ehCacheManager;
         }
@@ -105,11 +112,12 @@ public class ShiroConfig {
 
     /**
      * 自定义用户realm
+     *
      * @param manager
      * @return
      */
     @Bean
-    public UserRealm userRealm(EhCacheManager manager){
+    public UserRealm userRealm(EhCacheManager manager) {
         UserRealm userRealm = new UserRealm();
         userRealm.setCacheManager(manager);
         return userRealm;
@@ -117,32 +125,33 @@ public class ShiroConfig {
 
     /**
      * OnlineSessionDAO config
+     *
      * @return
      */
     @Bean
-    public OnlineSessionDAO onlineSessionDAO(){
+    public OnlineSessionDAO onlineSessionDAO() {
         return new OnlineSessionDAO();
     }
+
     @Bean
-    public OnlineSessionFactory onlineSessionFactory(){
+    public OnlineSessionFactory onlineSessionFactory() {
         return new OnlineSessionFactory();
     }
 
-    // TODO LogoutFilter Config
-
-    /*@Bean
-    public LogoutFilter logoutFilter(){
+    @Bean
+    public LogoutFilter logoutFilter() {
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setLoginUrl(loginUrl);
         return logoutFilter;
-    }*/
+    }
 
     /**
      * 安全管理器
+     *
      * @return
      */
     @Bean
-    public SecurityManager securityManager(UserRealm realm){
+    public SecurityManager securityManager(UserRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(realm);
         manager.setCacheManager(getEhCacheManager());
@@ -154,10 +163,11 @@ public class ShiroConfig {
 
     /**
      * session manager
+     *
      * @return
      */
     @Bean
-    public OnlineWebSessionManager sessionValidationManager(){
+    public OnlineWebSessionManager sessionValidationManager() {
         OnlineWebSessionManager onlineWebSessionManager = new OnlineWebSessionManager();
         onlineWebSessionManager.setCacheManager(getEhCacheManager());
         /**
@@ -188,9 +198,10 @@ public class ShiroConfig {
 
     /**
      * 设置记住我管理器
+     *
      * @return
      */
-    public CookieRememberMeManager rememberMeManager(){
+    public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
         /**
@@ -203,20 +214,21 @@ public class ShiroConfig {
 
     /**
      * cookie setting
+     *
      * @return
      */
-    public SimpleCookie rememberMeCookie(){
+    public SimpleCookie rememberMeCookie() {
         SimpleCookie cookie = new SimpleCookie("rememberMe");
         cookie.setDomain(domain);
         cookie.setPath(path);
         cookie.setHttpOnly(httpOnly);
-        cookie.setMaxAge(maxAge * 24 * 60 *60);
+        cookie.setMaxAge(maxAge * 24 * 60 * 60);
 
         return cookie;
     }
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         /**
          * shiro核心安全接口
@@ -236,7 +248,7 @@ public class ShiroConfig {
         /**
          * 自定义过滤链
          */
-        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>(20);
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>(14);
         /**
          * 静态资源设置匿名访问
          */
@@ -259,9 +271,66 @@ public class ShiroConfig {
         /**
          * 不需要拦截的访问
          */
-        filterChainDefinitionMap.put("/login", "anon,captchaValidate");
+        filterChainDefinitionMap.put("/login", "anon");
 
-        //TODO session Filter
+        /**
+         * 添加自定义过滤器
+         */
+        Map<String, Filter> filters = new LinkedHashMap<>();
+        filters.put("onlineSession", onlineSessionFilter());
+        filters.put("syncOnlineSession", syncOnlineSessionFilter());
+        //TODO filters.put("captchaValidate", captchaValidateFilter());
+
+        /**
+         * 注销跳转
+         */
+        filters.put("logout", logoutFilter());
+
+        shiroFilterFactoryBean.setFilters(filters);
+
+        filterChainDefinitionMap.put("/**", "user,onlineSession,syncOnlineSession");
+
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
+    }
+
+    /**
+     * 自定义在线用户过滤器
+     *
+     * @return
+     */
+    @Bean
+    public OnlineSessionFilter onlineSessionFilter() {
+        OnlineSessionFilter sessionFilter = new OnlineSessionFilter();
+        sessionFilter.setLoginUrl(loginUrl);
+        return sessionFilter;
+    }
+
+    /**
+     * 自定义在线用户同步过滤器
+     *
+     * @return
+     */
+    @Bean
+    public SyncOnlineSessionFilter syncOnlineSessionFilter() {
+        return new SyncOnlineSessionFilter();
+    }
+
+    // TODO 验证码
+
+    // TODO 模板引擎
+
+    /**
+     * 开启注解通知
+     *
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager")
+                                                                                               SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
     }
 }

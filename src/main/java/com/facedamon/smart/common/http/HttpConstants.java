@@ -1,13 +1,13 @@
 package com.facedamon.smart.common.http;
 
 /**
- * @Description:    http常量
- * @Author:         facedamon
- * @CreateDate:     2018/9/30 下午8:51
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/9/30 下午8:51
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: http常量
+ * @Author: facedamon
+ * @CreateDate: 2018/9/30 下午8:51
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/9/30 下午8:51
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public enum HttpConstants {
 

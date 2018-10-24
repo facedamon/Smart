@@ -11,13 +11,13 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 /**
- * @Description:    资源文件拦截加载
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午2:07
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午2:07
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 资源文件拦截加载
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午2:07
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午2:07
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 public class I18nConfig implements WebMvcConfigurer {
@@ -29,17 +29,18 @@ public class I18nConfig implements WebMvcConfigurer {
 
     /**
      * 会话方言配置
+     *
      * @return
      */
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         SessionLocaleResolver resolver = new SessionLocaleResolver();
         resolver.setDefaultLocale(Locale.SIMPLIFIED_CHINESE);
         return resolver;
     }
 
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor(){
+    public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         return interceptor;

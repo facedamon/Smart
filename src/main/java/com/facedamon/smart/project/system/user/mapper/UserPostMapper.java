@@ -5,13 +5,13 @@ import com.facedamon.smart.project.system.user.domain.UserPost;
 import java.util.List;
 
 /**
- * @Description:    用户-岗位关系mapper N->1
- * @Author:         facedamon
- * @CreateDate:     2018/10/1 上午5:50
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/1 上午5:50
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 用户-岗位关系mapper N->1
+ * @Author: facedamon
+ * @CreateDate: 2018/10/1 上午5:50
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/1 上午5:50
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface UserPostMapper {
 

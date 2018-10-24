@@ -5,18 +5,19 @@ import com.facedamon.smart.project.monitor.online.domain.UserOnline;
 import java.util.List;
 
 /**
- * @Description:    在线用户 mapper
- * @Author:         facedamon
- * @CreateDate:     2018/10/6 下午4:09
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/6 下午4:09
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 在线用户 mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/10/6 下午4:09
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/6 下午4:09
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface UserOnlineMapper {
 
     /**
      * 通过会话ID查询在线信息
+     *
      * @param sessionId
      * @return
      */
@@ -24,6 +25,7 @@ public interface UserOnlineMapper {
 
     /**
      * 通过会话ID删除在线信息
+     *
      * @param sessionId
      * @return
      */
@@ -31,6 +33,7 @@ public interface UserOnlineMapper {
 
     /**
      * 保存用户在线信息
+     *
      * @param userOnline
      * @return
      */
@@ -38,6 +41,7 @@ public interface UserOnlineMapper {
 
     /**
      * 条件匹配在线信息
+     *
      * @param userOnline
      * @return
      */
@@ -45,8 +49,9 @@ public interface UserOnlineMapper {
 
     /**
      * 查询过期会话
-     * @param userOnline
+     *
+     * @param lastAccessTime
      * @return
      */
-    List<UserOnline> selectOnlineByExpired(UserOnline userOnline);
+    List<UserOnline> selectOnlineByExpired(String lastAccessTime);
 }

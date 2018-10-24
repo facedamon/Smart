@@ -6,18 +6,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Description:    角色service
- * @Author:         facedamon
- * @CreateDate:     2018/9/30 下午10:55
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/9/30 下午10:55
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 角色service
+ * @Author: facedamon
+ * @CreateDate: 2018/9/30 下午10:55
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/9/30 下午10:55
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IRoleService {
 
     /**
      * 根据角色分页查找角色信息
+     *
      * @param role
      * @return
      */
@@ -25,6 +26,7 @@ public interface IRoleService {
 
     /**
      * 根据用户ID查询权限信息
+     *
      * @param userId
      * @return
      */
@@ -32,6 +34,7 @@ public interface IRoleService {
 
     /**
      * 根据用户ID查询角色
+     *
      * @param userId
      * @return
      */
@@ -39,12 +42,14 @@ public interface IRoleService {
 
     /**
      * 查询所有角色
+     *
      * @return
      */
     List<Role> selectRoleAll();
 
     /**
      * 通过角色ID查询角色
+     *
      * @param roleId
      * @return
      */
@@ -52,6 +57,7 @@ public interface IRoleService {
 
     /**
      * 通过角色ID删除角色
+     *
      * @param roleId
      * @return
      */
@@ -59,6 +65,7 @@ public interface IRoleService {
 
     /**
      * 批量删除角色信息
+     *
      * @param ids
      * @return
      * @throws Exception
@@ -67,6 +74,7 @@ public interface IRoleService {
 
     /**
      * 新增角色
+     *
      * @param role
      * @return
      */
@@ -74,6 +82,7 @@ public interface IRoleService {
 
     /**
      * 更新角色
+     *
      * @param role
      * @return
      */
@@ -81,6 +90,7 @@ public interface IRoleService {
 
     /**
      * 更新数据权限信息
+     *
      * @param role
      * @return
      */
@@ -88,6 +98,7 @@ public interface IRoleService {
 
     /**
      * 校验角色名称唯一
+     *
      * @param role
      * @return
      */
@@ -95,6 +106,7 @@ public interface IRoleService {
 
     /**
      * 校验角色权限唯一
+     *
      * @param role
      * @return
      */
@@ -102,6 +114,7 @@ public interface IRoleService {
 
     /**
      * 通过角色ID查询角色使用量
+     *
      * @param roleId
      * @return
      */

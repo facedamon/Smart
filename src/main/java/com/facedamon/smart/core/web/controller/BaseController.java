@@ -14,43 +14,44 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @Description:    web 通用controller
-* @Author:         facedamon
-* @CreateDate:     2018/8/15 15:20
-* @UpdateUser:     facedamon
-* @UpdateDate:     2018/8/15 15:20
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description: web 通用controller
+ * @Author: facedamon
+ * @CreateDate: 2018/8/15 15:20
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/8/15 15:20
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 public class BaseController {
 
     /**
      * 封装分页数据
      */
-    protected static void startPage(){
+    protected static void startPage() {
         PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null != pageDomain){
+        if (null != pageDomain) {
             Integer pageNum = pageDomain.getPageNum();
             Integer pageSize = pageDomain.getPageSize();
-            PageHelper.startPage(pageNum,pageSize);
+            PageHelper.startPage(pageNum, pageSize);
         }
     }
 
     /**
      * 将前台传递过来的日期格式的字符串，自动转化为Date类型
+     *
      * @param binder
      */
     @InitBinder
-    public void initBinder(WebDataBinder binder){
+    public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
     /**
      * 响应请求分页数据
      */
-    protected TableDataInfo getDataTable(List<?> list){
+    protected TableDataInfo getDataTable(List<?> list) {
         return TableDataInfo.builder().code(0)
                 .rows(list)
                 .total(new PageInfo<>(list).getTotal())

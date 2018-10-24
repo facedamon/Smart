@@ -5,14 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
-* @Description:    分页对象
-* @Author:         facedamon
-* @CreateDate:     2018/8/15 13:01
-* @UpdateUser:     facedamon
-* @UpdateDate:     2018/8/15 13:01
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description: 分页对象
+ * @Author: facedamon
+ * @CreateDate: 2018/8/15 13:01
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/8/15 13:01
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 @Data
 @Builder
 public class PageDomain {
@@ -36,8 +36,8 @@ public class PageDomain {
      */
     private String isAsc;
 
-    public String getOrderBy(){
-        if (StringUtils.isBlank(orderByColumn)){
+    public String getOrderBy() {
+        if (StringUtils.isBlank(orderByColumn)) {
             return StringUtils.EMPTY;
         }
         return StringUtils.camel2Under(orderByColumn) + " " + isAsc;

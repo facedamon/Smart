@@ -292,8 +292,9 @@ public class Convert {
 
     /**
      * 转换为Long数组
+     *
      * @param split 分割符
-     * @param str 被转换的值
+     * @param str   被转换的值
      * @return
      */
     public static Long[] toLongArray(String split, String str) {

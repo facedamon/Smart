@@ -8,14 +8,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
-* @Description:    自定义多数据源切换注解
-* @Author:         facedamon
-* @CreateDate:     2018/8/14 16:21
-* @UpdateUser:     facedamon
-* @UpdateDate:     2018/8/14 16:21
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description: 自定义多数据源切换注解
+ * @Author: facedamon
+ * @CreateDate: 2018/8/14 16:21
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/8/14 16:21
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AspjDB {

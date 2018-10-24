@@ -5,8 +5,8 @@
 <mapper namespace="com.facedamon.smart.project.system.role.mapper.RoleMenuMapper">
 
     <resultMap type="RoleMenu" id="RoleMenuResult">
-        <result property="roleId"     column="role_id"      />
-        <result property="menuId"     column="menu_id"      />
+        <result property="roleId" column="role_id"/>
+        <result property="menuId" column="menu_id"/>
     </resultMap>
 
     <delete id="deleteRoleMenuByRoleId" parameterType="Long">

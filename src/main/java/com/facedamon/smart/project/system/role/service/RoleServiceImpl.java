@@ -9,19 +9,20 @@ import com.facedamon.smart.project.system.role.domain.RoleMenu;
 import com.facedamon.smart.project.system.role.mapper.RoleDeptMapper;
 import com.facedamon.smart.project.system.role.mapper.RoleMapper;
 import com.facedamon.smart.project.system.role.mapper.RoleMenuMapper;
+import com.facedamon.smart.project.system.user.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
- * @Description:    角色服务
- * @Author:         facedamon
- * @CreateDate:     2018/9/30 下午11:20
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/9/30 下午11:20
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 角色服务
+ * @Author: facedamon
+ * @CreateDate: 2018/9/30 下午11:20
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/9/30 下午11:20
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class RoleServiceImpl implements IRoleService {
@@ -35,8 +36,12 @@ public class RoleServiceImpl implements IRoleService {
     @Autowired
     private RoleDeptMapper roleDeptMapper;
 
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
     /**
      * 根据角色条件分页查询角色信息
+     *
      * @param role
      * @return
      */
@@ -47,6 +52,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 根据用户ID查询权限信息
+     *
      * @param userId
      * @return
      */
@@ -54,8 +60,8 @@ public class RoleServiceImpl implements IRoleService {
     public Set<String> selectRoleKeys(Long userId) {
         List<Role> perms = roleMapper.selectRolesByUserId(userId);
         Set<String> permsSet = new HashSet<>();
-        for (Role perm : perms){
-            if (null != perm){
+        for (Role perm : perms) {
+            if (null != perm) {
                 permsSet.addAll(Arrays.asList(perm.getRoleKey().trim().split(",")));
             }
         }
@@ -64,6 +70,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 根据用户ID查询角色信息
+     *
      * @param userId
      * @return
      */
@@ -71,9 +78,9 @@ public class RoleServiceImpl implements IRoleService {
     public List<Role> selectRoleByUserId(Long userId) {
         List<Role> perms = roleMapper.selectRolesByUserId(userId);
         List<Role> roles = selectRoleAll();
-        for (Role role : roles){
-            for (Role perm : perms){
-                if (perm.getRoleId().longValue() == role.getRoleId().longValue()){
+        for (Role role : roles) {
+            for (Role perm : perms) {
+                if (perm.getRoleId().longValue() == role.getRoleId().longValue()) {
                     role.setFlag(true);
                     break;
                 }
@@ -84,6 +91,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 查询所有角色
+     *
      * @return
      */
     @Override
@@ -93,6 +101,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 通过角色ID查询角色
+     *
      * @param roleId
      * @return
      */
@@ -102,7 +111,8 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     /**
-     *  通过制定角色ID删除角色
+     * 通过制定角色ID删除角色
+     *
      * @param roleId
      * @return
      */
@@ -114,15 +124,19 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public int deleteRoleByIds(String ids) throws Exception {
         Long[] roleIds = Convert.toLongArray(ids);
-        for (Long roleId : roleIds){
+        for (Long roleId : roleIds) {
             Role role = roleMapper.selectRoleById(roleId);
-            //TODO 删除角色
+
+            if (selectUserRoleByRoleId(roleId) > 0) {
+                throw new Exception(String.format("%1$s已分配，不能删除", role.getRoleName()));
+            }
         }
-        return 0;
+        return roleMapper.deleteRoleByIds(roleIds);
     }
 
     /**
      * 新增角色
+     *
      * @param role
      * @return
      */
@@ -130,12 +144,16 @@ public class RoleServiceImpl implements IRoleService {
     public int insertRole(Role role) {
         role.setCreateBy(ShiroUtils.getLoginName());
         roleMapper.insertRole(role);
-        //TODO 刷新shiro权限缓存
+        /**
+         * 刷新shiro权限缓存
+         */
+        ShiroUtils.clearCachedAuthorizationInfo();
         return insertRoleMenu(role);
     }
 
     /**
      * 更新角色
+     *
      * @param role
      * @return
      */
@@ -143,7 +161,10 @@ public class RoleServiceImpl implements IRoleService {
     public int updateRole(Role role) {
         role.setUpdateBy(ShiroUtils.getLoginName());
         roleMapper.updateRole(role);
-        //TODO 刷新shiro权限缓存
+        /**
+         * 刷新shiro权限缓存
+         */
+        ShiroUtils.clearCachedAuthorizationInfo();
         /**
          * 角色菜单关系发生变化
          */
@@ -154,6 +175,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 更新数据权限信息
+     *
      * @param role
      * @return
      */
@@ -161,13 +183,17 @@ public class RoleServiceImpl implements IRoleService {
     public int updateRule(Role role) {
         role.setUpdateBy(ShiroUtils.getLoginName());
         roleMapper.updateRole(role);
-        //TODO 刷新shiro权限缓存
+        /**
+         * 刷新shiro权限缓存
+         */
+        ShiroUtils.clearCachedAuthorizationInfo();
         roleDeptMapper.deleteRoleDeptByRoleId(role.getRoleId());
         return insertRoleDept(role);
     }
 
     /**
      * 校验角色名称是否唯一
+     *
      * @param role
      * @return
      */
@@ -175,7 +201,7 @@ public class RoleServiceImpl implements IRoleService {
     public String checkRoleNameUnique(Role role) {
         Long roleId = role == null ? -1L : role.getRoleId();
         Role next = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (null != next && next.getRoleId().longValue() == roleId.longValue()){
+        if (null != next && next.getRoleId().longValue() == roleId.longValue()) {
             return Constants.ROLE_NAME_NOT_UNIQUE.getValue();
         }
         return Constants.ROLE_NAME_UNIQUE.getValue();
@@ -183,6 +209,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 校验角色权限是否唯一
+     *
      * @param role
      * @return
      */
@@ -190,7 +217,7 @@ public class RoleServiceImpl implements IRoleService {
     public String checkRoleKeyUnique(Role role) {
         Long roleId = role == null ? -1L : role.getRoleId();
         Role next = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (null != next && next.getRoleId().longValue() == roleId.longValue()){
+        if (null != next && next.getRoleId().longValue() == roleId.longValue()) {
             return Constants.ROLE_KEY_NOT_UNIQUE.getValue();
         }
         return Constants.ROLE_KEY_UNIQUE.getValue();
@@ -198,22 +225,22 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public int selectUserRoleByRoleId(Long roleId) {
-        // TODO
-        return 0;
+        return userRoleMapper.countUserRoleByRoleId(roleId);
     }
 
     /**
      * 新增角色菜单信息
+     *
      * @param role
      * @return
      */
-    private int insertRoleMenu(Role role){
+    private int insertRoleMenu(Role role) {
         int rows = 0;
         List<RoleMenu> roleMenus = new ArrayList<>();
-        for (Long menuId : role.getMenuIds()){
+        for (Long menuId : role.getMenuIds()) {
             roleMenus.add(RoleMenu.builder().menuId(menuId).roleId(role.getRoleId()).build());
         }
-        if (!roleMenus.isEmpty()){
+        if (!roleMenus.isEmpty()) {
             rows = roleMenuMapper.batchRoleMenu(roleMenus);
         }
         return rows;
@@ -221,18 +248,21 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 新增角色部门信息
+     *
      * @param role
      * @return
      */
     private int insertRoleDept(Role role) {
         int rows = 0;
         List<RoleDept> roleDepts = new ArrayList<>();
-        for (Long deptId : role.getDeptIds()){
+        for (Long deptId : role.getDeptIds()) {
             roleDepts.add(RoleDept.builder().deptId(deptId).roleId(role.getRoleId()).build());
         }
-        if (!roleDepts.isEmpty()){
+        if (!roleDepts.isEmpty()) {
             rows = roleDeptMapper.batchRoleDept(roleDepts);
         }
         return rows;
     }
+
+
 }
