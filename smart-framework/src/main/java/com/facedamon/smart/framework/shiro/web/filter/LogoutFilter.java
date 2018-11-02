@@ -1,6 +1,9 @@
 package com.facedamon.smart.framework.shiro.web;
 
+import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.utils.StringUtils;
+import com.facedamon.smart.framework.syn.AsyncFactory;
+import com.facedamon.smart.framework.util.MessageUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.system.doamin.User;
 import lombok.extern.slf4j.Slf4j;
@@ -44,8 +47,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                 User user = ShiroUtils.getUser();
                 if (null != user) {
                     String loginName = user.getLoginName();
-                    // 记录用户退出日志
-
+                    AsyncFactory.INSTANCE.recordLogininfor(loginName,Constants.LOGOUT.getValue(),MessageUtils.message("user.logout.success"));
                 }
                 // 退出登录
                 subject.logout();

@@ -38,7 +38,7 @@ public interface IRoleService {
      * @param userId
      * @return
      */
-    List<Role> selectRoleByUserId(Long userId);
+    List<Role> selectRolesByUserId(Long userId);
 
     /**
      * 查询所有角色

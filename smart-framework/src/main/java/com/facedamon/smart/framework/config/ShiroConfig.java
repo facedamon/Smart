@@ -5,6 +5,7 @@ import com.facedamon.smart.framework.shiro.realm.UserRealm;
 import com.facedamon.smart.framework.shiro.session.OnlineSessionDAO;
 import com.facedamon.smart.framework.shiro.session.OnlineSessionFactory;
 import com.facedamon.smart.framework.shiro.web.LogoutFilter;
+import com.facedamon.smart.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
 import com.facedamon.smart.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.facedamon.smart.framework.shiro.web.filter.online.SyncOnlineSessionFilter;
 import com.facedamon.smart.framework.shiro.web.session.OnlineWebSessionManager;
@@ -56,6 +57,9 @@ public class ShiroConfig {
      */
     @Value("${shiro.user.captchaEnabled}")
     private boolean captchaEnabled;
+
+    @Value("${shiro.user.captchaType}")
+    private String captchaType;
 
     /**
      * 设置cookie域名
@@ -297,7 +301,7 @@ public class ShiroConfig {
         /**
          * 不需要拦截的访问
          */
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/login", "anon,captchaValidate");
 
         /**
          * 添加自定义过滤器
@@ -305,7 +309,7 @@ public class ShiroConfig {
         Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("onlineSession", onlineSessionFilter());
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
-        //TODO filters.put("captchaValidate", captchaValidateFilter());
+        filters.put("captchaValidate", captchaValidateFilter());
 
         filters.put("logout",logoutFilter());
         shiroFilterFactoryBean.setFilters(filters);
@@ -347,9 +351,17 @@ public class ShiroConfig {
         return new SyncOnlineSessionFilter();
     }
 
-    // TODO 验证码
-
-    // TODO 模板引擎
+    /**
+     * 验证码
+     * @return
+     */
+    @Bean
+    public CaptchaValidateFilter captchaValidateFilter(){
+        CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
+        captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
+        captchaValidateFilter.setCaptchaType(captchaType);
+        return captchaValidateFilter;
+    }
 
     /**
      * 开启注解通知

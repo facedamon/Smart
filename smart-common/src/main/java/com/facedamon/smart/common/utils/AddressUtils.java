@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Version: 1.0
  */
 @Slf4j
+@Deprecated
 public class AddressUtils {
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
@@ -26,6 +27,7 @@ public class AddressUtils {
                 log.error("获取地理位置异常 {}", ip);
                 return address;
             }
+
             JSONObject obj = JSONObject.parseObject(rspStr);
             JSONObject data = obj.getObject("data", JSONObject.class);
             String region = data.getString("region");

@@ -1,5 +1,7 @@
 package com.facedamon.smart.common.utils;
 
+import com.facedamon.smart.common.support.StrFormatter;
+
 import java.util.Locale;
 
 /**
@@ -107,6 +109,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             }
         }
         return sb.toString().toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String format(String template, Object... params){
+        if (params == null || params. length < 1 || isBlank(template)){
+            return template;
+        }
+        return StrFormatter.format(template,params);
     }
 
 }

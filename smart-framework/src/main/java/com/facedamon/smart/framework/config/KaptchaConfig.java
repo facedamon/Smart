@@ -53,12 +53,12 @@ public class KaptchaConfig {
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "yes");
         properties.setProperty("kaptcha.border.color", "105,179,90");
-        properties.setProperty("kaptcha.textproducer.font.color", "blue");
+        properties.setProperty("kaptcha.textproducer.font.color", "red");
         properties.setProperty("kaptcha.image.width", "160");
         properties.setProperty("kaptcha.image.height", "60");
         properties.setProperty("kaptcha.textproducer.font.size", "38");
         properties.setProperty("kaptcha.session.key", "kaptchaCodeMath");
-        properties.setProperty("kaptcha.textproducer.impl", "com.ruoyi.framework.config.KaptchaTextCreator");
+        properties.setProperty("kaptcha.textproducer.impl", "com.facedamon.smart.framework.config.KaptchaTextCreator");
         properties.setProperty("kaptcha.textproducer.char.spac", "5");
         properties.setProperty("kaptcha.textproducer.char.length", "6");
         properties.setProperty("kaptcha.textproducer.font.names", "Arial,Courier");

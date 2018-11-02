@@ -39,6 +39,10 @@ public class I18nConfig implements WebMvcConfigurer {
         return resolver;
     }
 
+    /**
+     * 该拦截器通过名为”lang”的参数来拦截HTTP请求，使其重新设置页面的区域化信息
+     * @return
+     */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();

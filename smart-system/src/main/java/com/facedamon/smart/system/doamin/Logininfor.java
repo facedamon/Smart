@@ -44,6 +44,7 @@ public class Logininfor extends BaseEntity {
     /**
      * 登录地点
      */
+    @Deprecated
     private String loginLocation;
 
     /**

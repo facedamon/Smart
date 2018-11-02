@@ -42,7 +42,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>smart-admin</module>
+        <module>smart-web</module>
         <module>smart-framework</module>
         <module>smart-system</module>
         <module>smart-quartz</module>

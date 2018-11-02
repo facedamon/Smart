@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.service.impl;
 
+import com.facedamon.smart.common.annotation.DataScope;
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.support.Convert;
 import com.facedamon.smart.common.utils.StringUtils;
@@ -49,6 +50,7 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
+    @DataScope(tableAlias = "u")
     public List<User> selectUserList(User user) {
         return userMapper.selectUserList(user);
     }
@@ -87,6 +89,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
+     * 通过userId查询用户
+     * @param userId
+     * @return
+     */
+    @Override
+    public User selectUserById(Long userId) {
+        return userMapper.selectUserById(userId);
+    }
+
+    /**
      * 通过用户ID删除用户
      *
      * @param userId
@@ -121,7 +133,7 @@ public class UserServiceImpl implements IUserService {
 
         int rows = userMapper.insertUser(user);
         insertUserPost(user);
-        insertUserPost(user);
+        insertUserRole(user);
 
         return rows;
     }

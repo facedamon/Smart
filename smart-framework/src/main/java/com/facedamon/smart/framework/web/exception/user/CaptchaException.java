@@ -12,7 +12,7 @@ package com.facedamon.smart.framework.web.exception.user;
  */
 public class CaptchaException extends UserException {
 
-    CaptchaException() {
+    public CaptchaException() {
         super("user.jcaptcha.error", null);
     }
 }

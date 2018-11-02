@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.service.impl;
 
+import com.facedamon.smart.common.annotation.DataScope;
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.system.Ancestor;
 import com.facedamon.smart.system.doamin.Dept;
@@ -36,6 +37,7 @@ public class DeptServiceImpl implements IDeptService {
      * @return
      */
     @Override
+    @DataScope(tableAlias = "d")
     public List<Dept> selectDeptList(Dept dept) {
         return deptMapper.selectDeptList(dept);
     }

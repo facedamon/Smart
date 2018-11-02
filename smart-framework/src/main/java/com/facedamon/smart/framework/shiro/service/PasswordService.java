@@ -1,7 +1,9 @@
 package com.facedamon.smart.framework.shiro.service;
 
+import com.facedamon.smart.common.constant.Constants;
+import com.facedamon.smart.framework.syn.AsyncFactory;
+import com.facedamon.smart.framework.util.MessageUtils;
 import com.facedamon.smart.framework.web.exception.user.UserPasswordNotMatchException;
-import com.facedamon.smart.framework.web.exception.user.UserPasswordRetryLimitExceedException;
 import com.facedamon.smart.system.doamin.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
@@ -64,7 +66,8 @@ public class PasswordService {
          * 输错密码达到上线
          */
         /*if (retryCount.incrementAndGet() > Integer.valueOf(maxRetryCount).intValue()) {
-            // TODO ASYNC
+
+            AsyncFactory.INSTANCE.recordLogininfor(loginName,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.retry.limit.exceed"));
             throw new UserPasswordRetryLimitExceedException(Integer.valueOf(maxRetryCount).intValue());
         }*/
 
@@ -72,7 +75,7 @@ public class PasswordService {
          * 密码输入错误
          */
         if (!match(user, password)) {
-            // TODO ASYNC
+            AsyncFactory.INSTANCE.recordLogininfor(loginName,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.retry.limit.count"));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         } else {

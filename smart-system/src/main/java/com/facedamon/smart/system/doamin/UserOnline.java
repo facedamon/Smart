@@ -45,6 +45,7 @@ public class UserOnline extends BaseEntity {
     /**
      * 登录地址
      */
+    @Deprecated
     private String loginLocation;
 
     /**

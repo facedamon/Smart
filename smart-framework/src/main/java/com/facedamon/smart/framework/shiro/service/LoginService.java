@@ -2,20 +2,20 @@ package com.facedamon.smart.framework.shiro.service;
 
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.constant.PasswordConstants;
+import com.facedamon.smart.common.constant.ShiroConstants;
 import com.facedamon.smart.common.constant.UserConstants;
 import com.facedamon.smart.common.enums.UserStatus;
+import com.facedamon.smart.common.utils.DateUtils;
 import com.facedamon.smart.common.utils.StringUtils;
+import com.facedamon.smart.framework.syn.AsyncFactory;
+import com.facedamon.smart.framework.util.MessageUtils;
+import com.facedamon.smart.framework.util.ServletUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
-import com.facedamon.smart.framework.web.exception.user.UserBlockedException;
-import com.facedamon.smart.framework.web.exception.user.UserDeleteException;
-import com.facedamon.smart.framework.web.exception.user.UserNotExistsException;
-import com.facedamon.smart.framework.web.exception.user.UserPasswordNotMatchException;
+import com.facedamon.smart.framework.web.exception.user.*;
 import com.facedamon.smart.system.doamin.User;
 import com.facedamon.smart.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * @Description: 登录校验服务
@@ -36,15 +36,19 @@ public class LoginService {
     private IUserService userService;
 
     public User login(String username, String password) {
-        // TODO
+
         /**
          * 验证码校验
          */
-
+        if (StringUtils.isNotBlank((String)ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA.getValue()))){
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.jcaptcha.error"));
+            throw new CaptchaException();
+        }
         /**
          * 用户名或密码为空
          */
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("not.null"));
             throw new UserNotExistsException();
         }
 
@@ -53,6 +57,7 @@ public class LoginService {
          */
         if (password.length() < PasswordConstants.PASSWORD_MIN_LENGTH.getValue()
                 || password.length() > PasswordConstants.PASSWORD_MAX_LENGTH.getValue()) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.not.match"));
             throw new UserPasswordNotMatchException();
         }
 
@@ -61,6 +66,7 @@ public class LoginService {
          */
         if (username.length() < UserConstants.UserName.USERNAME_MIN_LENGTH.getValue()
                 || username.length() > UserConstants.UserName.USERNAME_MAX_LENGTH.getValue()) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.not.match"));
             throw new UserPasswordNotMatchException();
         }
 
@@ -76,16 +82,20 @@ public class LoginService {
             user = userService.selectUserByEmail(username);
         }
         if (null == user) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.not.exists"));
             throw new UserNotExistsException();
         }
         if (UserStatus.DELETED.getCode().equals(user.getDelFlag())) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.delete"));
             throw new UserDeleteException();
         }
         if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
+            AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.blocked"));
             throw new UserBlockedException(user.getRemark());
         }
 
         passwordService.validate(user, password);
+        AsyncFactory.INSTANCE.recordLogininfor(username,Constants.LOGIN_SUCCESS.getValue(),MessageUtils.message("user.login.success"));
         recordLoginInfo(user);
 
         return user;
@@ -118,7 +128,7 @@ public class LoginService {
      */
     public void recordLoginInfo(User user) {
         user.setLoginIp(ShiroUtils.getIp());
-        user.setLoginDate(new Date());
+        user.setLoginDate(DateUtils.getNowDate());
         userService.updateUserInfo(user);
     }
 }

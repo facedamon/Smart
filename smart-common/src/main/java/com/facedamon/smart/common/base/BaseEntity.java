@@ -2,10 +2,13 @@ package com.facedamon.smart.common.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Description: 所有实体的共同域
@@ -16,7 +19,6 @@ import java.util.Map;
  * @UpdateRemark: 修改内容
  * @Version: 1.0
  */
-@Data
 public class BaseEntity implements Serializable {
     /**
      * 搜索词
@@ -54,4 +56,92 @@ public class BaseEntity implements Serializable {
      * 请求参数
      */
     private Map<String, Object> params;
+
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BaseEntity that = (BaseEntity) o;
+
+        return new EqualsBuilder()
+                .append(searchValue, that.searchValue)
+                .append(createBy, that.createBy)
+                .append(createTime, that.createTime)
+                .append(updateBy, that.updateBy)
+                .append(updateTime, that.updateTime)
+                .append(remark, that.remark)
+                .append(params, that.params)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(searchValue)
+                .append(createBy)
+                .append(createTime)
+                .append(updateBy)
+                .append(updateTime)
+                .append(remark)
+                .append(params)
+                .toHashCode();
+    }
 }

@@ -34,7 +34,7 @@ public class User extends BaseEntity {
     /**
      * 部门父ID
      */
-    private long parentId;
+    private Long parentId;
 
     /**
      * 登录名称

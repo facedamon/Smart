@@ -80,7 +80,7 @@ public enum SmartConfig {
      * @return
      */
     public String getCopyrightYear() {
-        return StringUtils.nvl(getConfig("copyrightYear"), "2018");
+        return StringUtils.nvl(getConfig("smart.copyrightYear"), "2018");
     }
 
     /**

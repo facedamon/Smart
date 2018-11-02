@@ -1,6 +1,7 @@
 package com.facedamon.smart.framework.aspectj;
 
 import com.facedamon.smart.common.annotation.DataScope;
+import com.facedamon.smart.common.base.BaseEntity;
 import com.facedamon.smart.common.utils.StringUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.system.doamin.Role;
@@ -59,7 +60,7 @@ public class DataScopeAspect {
         User user = ShiroUtils.getUser();
         if (null != user){
             if (!user.isAdmin()){
-
+                dataScopeFilter(point,user,dataScope.tableAlias());
             }
         }
     }
@@ -77,8 +78,14 @@ public class DataScopeAspect {
             if (DATA_SCOPE_ALL.equals(dataScope)){
                 break;
             }else if (DATA_SCOPE_CUSTOM.equals(dataScope)){
-               // sql.append(StringUtils.)
+               sql.append(StringUtils.format("OR {}.dept_id IN ( select dept_id from sys_role where role_id = {})"
+                    ,alias,role.getRoleId()));
             }
+        }
+
+        if (StringUtils.isNotBlank(sql.toString())){
+            BaseEntity baseEntity = (BaseEntity) point.getArgs()[0];
+            baseEntity.getParams().put(DATA_SCOPE," AND (" + sql.substring(4) + ")");
         }
     }
 

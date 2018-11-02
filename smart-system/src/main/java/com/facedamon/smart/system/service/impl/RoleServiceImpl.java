@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.service.impl;
 
+import com.facedamon.smart.common.annotation.DataScope;
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.support.Convert;
 import com.facedamon.smart.system.doamin.Role;
@@ -46,6 +47,7 @@ public class RoleServiceImpl implements IRoleService {
      * @return
      */
     @Override
+    @DataScope(tableAlias = "u")
     public List<Role> selectRoleList(Role role) {
         return roleMapper.selectRoleList(role);
     }
@@ -75,7 +77,7 @@ public class RoleServiceImpl implements IRoleService {
      * @return
      */
     @Override
-    public List<Role> selectRoleByUserId(Long userId) {
+    public List<Role> selectRolesByUserId(Long userId) {
         List<Role> perms = roleMapper.selectRolesByUserId(userId);
         List<Role> roles = selectRoleAll();
         for (Role role : roles) {
