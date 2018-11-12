@@ -69,7 +69,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">岗位：</label>
                 <div class="col-sm-8">
-                    <select id="post" name="post" class="form-control select2-hidden-accessible" multiple="">
+                    <select id="post" name="post" class="form-control" multiple="">
                         <option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:disabled="${post.status == '1'}"></option>
                     </select>
 
@@ -98,7 +98,7 @@
             loginName:{
                 required: true,
                 minlength: 2,
-                maxlangth: 20,
+                maxlength: 20,
                 remote: {
                     url: ctx + "system/user/checkLoginNameUnique",
                     type: "post",
@@ -108,7 +108,7 @@
                             return $.common.trim($('#loginName').val());
                         }
                     },
-                    dataFilter: function () {
+                    dataFilter: function (data,type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -136,7 +136,7 @@
                             return $.common.trim($('#email').val());
                         }
                     },
-                    dataFilter: function () {
+                    dataFilter: function (data,type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -145,7 +145,7 @@
                 required: true,
                 isPhone: true,
                 remote: {
-                    url: ctx + "system/user/checlPhoneUnique",
+                    url: ctx + "system/user/checkPhoneUnique",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -153,7 +153,7 @@
                             return $.common.trim($('#phonenumber').val());
                         }
                     },
-                    dataFilter: function () {
+                    dataFilter: function (data,type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -172,6 +172,12 @@
         }
     });
 
+    function submitHandler(){
+        if ($.validate.form()){
+            add();
+        }
+    }
+
     function add(){
         var userId = $("input[name='userId']").val();
         var deptId = $("input[name='deptId']").val();
@@ -183,7 +189,7 @@
         var sex = $("#sex option:selected").val();
         var status = $("input[name='status']").is(":checked") == true ? 0 : 1;
         var roleIds = $.form.selectCheckeds("role");
-        var postIds = $.form.selectCheckeds("post");
+        var postIds = $.form.selectSelects("post");
 
         $.ajax({
             cache: true,
@@ -210,6 +216,28 @@
                 $.modal.alertError("保存失败");
             }
         });
+    }
+
+    function selectDeptTree(){
+        var treeId = $('#treeId').val();
+        var deptId = $.common.isEmpty(treeId) ? '100' : treeId;
+        var options = {
+            title: '选择部门',
+            width: '380',
+            url : ctx + 'system/dept/selectDeptTree/' + deptId,
+            callBack: openDialog
+        };
+        $.modal.openOptions(options);
+    }
+
+    function openDialog(index,layero){
+        var tree = layero.find('iframe')[0].contentWindow.$._tree;
+        if ($.tree.notAllowParents(tree)){
+            var body = layer.getChildFrame('body',index);
+            $('#treeId').val(body.find('#treeId').val());
+            $('#treeName').val(body.find('#treeName').val());
+            layer.close(index);
+        }
     }
 </script>
 </body>

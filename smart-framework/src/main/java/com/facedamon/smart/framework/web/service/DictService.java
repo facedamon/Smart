@@ -23,7 +23,7 @@ public class DictService {
     private IDictDataService dictDataService;
 
     /**
-     * g恩据字典类型获取数据信息
+     * 根据字典类型获取数据信息
      * @param dictType
      * @return
      */

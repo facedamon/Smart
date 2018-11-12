@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.doamin;
 
+import com.facedamon.smart.common.annotation.Excel;
 import com.facedamon.smart.common.base.BaseEntity;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
@@ -24,6 +25,7 @@ public class User extends BaseEntity {
     /**
      * 用户ID
      */
+    @Excel(name = "用户编号")
     private Long userId;
 
     /**
@@ -39,26 +41,31 @@ public class User extends BaseEntity {
     /**
      * 登录名称
      */
+    @Excel(name = "登录名称")
     private String loginName;
 
     /**
      * 用户名称
      */
+    @Excel(name = "用户名称")
     private String userName;
 
     /**
      * 用户邮箱
      */
+    @Excel(name = "邮箱")
     private String email;
 
     /**
      * 手机号码
      */
+    @Excel(name = "手机号码")
     private String phonenumber;
 
     /**
      * 用户性别
      */
+    @Excel(name = "性别" ,isDict = true,dictType = "sys_user_sex")
     private String sex;
 
     /**

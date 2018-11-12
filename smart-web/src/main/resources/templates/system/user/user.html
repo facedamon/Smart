@@ -75,6 +75,7 @@
         var removeFlag = [[${@permission.hasPermi('system:user:remove')}]];
         var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd')}]];
         var datas = [[${@dict.selectDataByType('sys_normal_disable')}]];
+        var sex =   [[${@dict.selectDataByType('sys_user_sex')}]];
         var prefix = ctx + "system/user";
 
         $(function () {
@@ -129,7 +130,11 @@
                         field: 'email',
                         title: '邮箱',
                         //TODO
-                        visible: true
+                        visible: false
+                    },
+                    {
+                        field: 'phonenumber',
+                        title: '电话'
                     },
                     {
                         field: 'status',
@@ -137,6 +142,13 @@
                         align: 'center',
                         formatter: function (value,row,index) {
                             return $.table.selectDictLabel(datas,value);
+                        }
+                    },
+                    {
+                        field: 'sex',
+                        title: '性别',
+                        formatter: function (value,row,index) {
+                            return $.table.selectDictLabel(sex,value);
                         }
                     },
                     {

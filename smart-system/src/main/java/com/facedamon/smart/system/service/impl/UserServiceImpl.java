@@ -246,8 +246,8 @@ public class UserServiceImpl implements IUserService {
     public String checkEmailUnique(User user) {
         Long userId = user.getUserId() == null ? -1L : user.getUserId();
         User next = userMapper.checkEmailUnique(user.getEmail());
-        return (null != next && next.getUserId().longValue() != userId.longValue()) ? Constants.USER_EMAIl_UNIQUE.getValue()
-                : Constants.USER_EMAIL_NOT_UNIQUE.getValue();
+        return (null != next && next.getUserId().longValue() != userId.longValue()) ? Constants.USER_EMAIL_NOT_UNIQUE.getValue()
+                : Constants.USER_EMAIl_UNIQUE.getValue();
     }
 
     /**
