@@ -102,6 +102,20 @@ $(function () {
     }
 
     /**
+     * tree表格树 展开/折叠
+     * @type {boolean}
+     */
+    var expandFlag = false;
+    $('#expandAllBtn').click(function () {
+        if (expandFlag){
+            $('#bootstrap-table').bootstrapTreeTable('expandAll');
+        } else {
+            $('#bootstrap-table').bootstrapTreeTable('collapseAll');
+        }
+        expandFlag = expandFlag ? false : true;
+    })
+
+    /**
      * select2 标签复选框事件绑定
      */
     if ($.fn.select2 != undefined){
