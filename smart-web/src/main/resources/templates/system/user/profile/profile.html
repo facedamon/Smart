@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>个人信息</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>个人信息</h5>
+                        <div class="ibox-tools">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="javascript:edit()">修改信息</a></li>
+                                <li><a href="javascript:resetPwd()">修改密码</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="col-sm-8">
+                            <h3><strong>[[${user.loginName}]]</strong></h3>
+                            <p><i class="fa fa-user"></i> [[${user.userName}]] / [[${#strings.defaultString(roleGroup,'无角色')}]]
+                            <p><i class="fa fa-phone"></i> [[${user.phonenumber}]]</p>
+                            <p><i class="fa fa-group"></i> [[${user.dept?.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
+                            <p><i class="fa fa-transgender"></i> 性别：[[${user.sex}]]</p>
+                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
+                            <p><i class="fa fa-calendar"></i> [[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="include::footer"></div>
+
+    <script type="text/javascript">
+        var userId = [[${user.userId}]];
+        
+        function edit() {
+            $.modal.open('修改用户',ctx + "system/user/profile/edit/" + userId);
+        }
+        
+        function resetPwd() {
+            $.modal.open('修改密码',ctx + "system/user/profile/resetPwd/" + userId,'800','500');
+        }
+    </script>
+</body>
+</html>

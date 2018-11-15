@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     druid:
       master:
-        url: jdbc:mysql://127.0.0.1:3306/smart?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        url: jdbc:mysql://127.0.0.1:3306/smart?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: damon
         password: damon
       slave:  #从库
@@ -40,6 +40,13 @@ spring:
         stat:
           log-slow-sql: true
           slow-sql-millis: 1000
+        slf4j:
+          connection-log-enabled: true
+          statement-log-enabled: true
+          result-set-log-enabled: true
+          statement-executable-sql-log-enable: true
+          statement-execute-query-after-log-enabled: true
+          statement-sql-pretty-format: true
         wall:
           config:
             multi-statement-allow: true
