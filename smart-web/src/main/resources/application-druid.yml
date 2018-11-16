@@ -47,6 +47,7 @@ spring:
           statement-executable-sql-log-enable: true
           statement-execute-query-after-log-enabled: true
           statement-sql-pretty-format: true
+          enabled: true
         wall:
           config:
             multi-statement-allow: true

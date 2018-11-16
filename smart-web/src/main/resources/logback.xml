@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="log.path" value="/home/facedamon/logs" />
+    <property name="log.path" value="/Users/facedamon/Downloads/logs" />
     <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
 
     <!-- 控制台输出 -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${log.pattern}</pattern>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -64,8 +65,13 @@
 
     <logger name="com.facedamon.smart" level="info" />
 
-    <root level="info">
-        <appender-ref ref="console" />
+    <!--druid log configure-->
+    <logger name="druid.sql.DataSource" level="debug"/>
+    <logger name="druid.sql.Connection" level="debug"/>
+    <logger name="druid.sql.Statement" level="debug"/>
+
+    <root level="debug">
+        <appender-ref ref="stdout" />
     </root>
 
     <!--系统操作日志-->
