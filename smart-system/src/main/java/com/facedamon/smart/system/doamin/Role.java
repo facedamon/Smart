@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.doamin;
 
+import com.facedamon.smart.common.annotation.Excel;
 import com.facedamon.smart.common.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -22,31 +23,37 @@ public class Role extends BaseEntity {
     /**
      * 角色ID
      */
+    @Excel(name = "角色编号")
     private Long roleId;
 
     /**
      * 角色名称
      */
+    @Excel(name = "角色名称")
     private String roleName;
 
     /**
      * 角色权限
      */
+    @Excel(name = "角色权限")
     private String roleKey;
 
     /**
      * 角色排序
      */
+    @Excel(name = "角色排序")
     private String roleSort;
 
     /**
      * 数据范围（1：所有数据权限；2：自定数据权限）
      */
+    @Excel(name = "操作部门数据权限")
     private String dataScope;
 
     /**
      * 角色状态（0正常 1停用）
      */
+    @Excel(name = "角色状态",isDict = true,dictType = "sys_normal_disable")
     private String status;
 
     /**

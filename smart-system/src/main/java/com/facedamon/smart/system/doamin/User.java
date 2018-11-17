@@ -86,6 +86,7 @@ public class User extends BaseEntity {
     /**
      * 帐号状态（0正常 1停用）
      */
+    @Excel(name = "用户状态",isDict = true,dictType = "sys_normal_disable")
     private String status;
 
     /**

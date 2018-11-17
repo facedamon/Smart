@@ -4,14 +4,8 @@ import com.facedamon.smart.common.annotation.DataScope;
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.support.Convert;
 import com.facedamon.smart.common.utils.StringUtils;
-import com.facedamon.smart.system.doamin.Role;
-import com.facedamon.smart.system.doamin.User;
-import com.facedamon.smart.system.doamin.UserPost;
-import com.facedamon.smart.system.doamin.UserRole;
-import com.facedamon.smart.system.mapper.RoleMapper;
-import com.facedamon.smart.system.mapper.UserMapper;
-import com.facedamon.smart.system.mapper.UserPostMapper;
-import com.facedamon.smart.system.mapper.UserRoleMapper;
+import com.facedamon.smart.system.doamin.*;
+import com.facedamon.smart.system.mapper.*;
 import com.facedamon.smart.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +36,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private RoleMapper roleMapper;
+
+    @Autowired
+    private PostMapper postMapper;
 
     /**
      * 根据条件分页查询用户
@@ -277,7 +274,14 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public String selectUserPostGroup(Long userId) {
-        // TODO
-        return null;
+        List<Post> posts = postMapper.selectPostsByUserId(userId);
+        StringBuffer sb = new StringBuffer();
+        for (Post post : posts){
+            sb.append(post.getPostName() + ",");
+        }
+        if (StringUtils.isNotBlank(sb.toString())){
+            return sb.substring(0,sb.length() - 1);
+        }
+        return sb.toString();
     }
 }

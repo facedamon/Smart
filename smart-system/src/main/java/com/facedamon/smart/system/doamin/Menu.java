@@ -1,6 +1,7 @@
 package com.facedamon.smart.system.doamin;
 
 import com.facedamon.smart.common.base.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @Data
+@Builder
 @Alias("Menu")
 public class Menu extends BaseEntity {
     /**

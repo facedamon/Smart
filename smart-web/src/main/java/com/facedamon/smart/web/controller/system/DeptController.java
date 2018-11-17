@@ -5,11 +5,13 @@ import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.system.doamin.Dept;
+import com.facedamon.smart.system.doamin.Role;
 import com.facedamon.smart.system.service.IDeptService;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +58,7 @@ public class DeptController extends BaseController {
     @Log(model = "新增部门",businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dept:add")
     @PostMapping("/add")
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Response add(Dept dept){
         dept.setCreateBy(ShiroUtils.getLoginName());
@@ -75,6 +78,7 @@ public class DeptController extends BaseController {
     @Log(model = "修改部门",businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dept:edit")
     @PostMapping("/edit")
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Response edit(Dept dept){
         dept.setUpdateBy(ShiroUtils.getLoginName());
@@ -84,6 +88,7 @@ public class DeptController extends BaseController {
     @Log(model = "删除部门", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dept:remove")
     @PostMapping("/remove/{deptId}")
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Response remove(@PathVariable("deptId") Long deptId){
         if (deptService.selectDeptCount(deptId) > 0){
@@ -105,6 +110,15 @@ public class DeptController extends BaseController {
     @ResponseBody
     public List<Map<String,Object>> treeData(){
         return deptService.selectDeptTree();
+    }
+
+    /**
+     * 加载角色部门（数据权限）列表树
+     */
+    @GetMapping("/roleDeptTreeData")
+    @ResponseBody
+    public List<Map<String, Object>> deptTreeData(Role role) {
+        return deptService.roleDeptTreeData(role);
     }
 
 }

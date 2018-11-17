@@ -1,6 +1,7 @@
 package com.facedamon.smart.system.service;
 
 import com.facedamon.smart.system.doamin.Menu;
+import com.facedamon.smart.system.doamin.Role;
 import com.facedamon.smart.system.doamin.User;
 
 import java.util.List;
@@ -49,7 +50,11 @@ public interface IMenuService {
      */
     Set<String> selectPermsByUserId(Long userId);
 
-    // List<Map<String,Object>> roleMenuTreeData();
+    /**
+     * 根据角色ID查询权限
+     * @return
+     */
+    List<Map<String,Object>> roleMenuTreeData(Role role);
 
     /**
      * 查询所有菜单信息

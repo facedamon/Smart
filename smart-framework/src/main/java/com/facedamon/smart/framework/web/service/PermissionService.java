@@ -17,6 +17,7 @@ public class PermissionService {
 
     /**
      * 按钮是否有permission的权限
+     * css 显示配置
      * @param permission
      * @return
      */

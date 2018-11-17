@@ -161,8 +161,7 @@ public class RoleServiceImpl implements IRoleService {
          * 角色菜单关系发生变化
          */
         roleMenuMapper.deleteRoleMenuByRoleId(role.getRoleId());
-        insertRoleMenu(role);
-        return 0;
+        return insertRoleMenu(role);
     }
 
     /**
@@ -186,9 +185,9 @@ public class RoleServiceImpl implements IRoleService {
      */
     @Override
     public String checkRoleNameUnique(Role role) {
-        Long roleId = role == null ? -1L : role.getRoleId();
+        Long roleId = role.getRoleId() == null ? -1L : role.getRoleId();
         Role next = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (null != next && next.getRoleId().longValue() == roleId.longValue()) {
+        if (null != next && next.getRoleId().longValue() != roleId.longValue()) {
             return Constants.ROLE_NAME_NOT_UNIQUE.getValue();
         }
         return Constants.ROLE_NAME_UNIQUE.getValue();
@@ -202,9 +201,9 @@ public class RoleServiceImpl implements IRoleService {
      */
     @Override
     public String checkRoleKeyUnique(Role role) {
-        Long roleId = role == null ? -1L : role.getRoleId();
+        Long roleId = role.getRoleId() == null ? -1L : role.getRoleId();
         Role next = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (null != next && next.getRoleId().longValue() == roleId.longValue()) {
+        if (null != next && next.getRoleId().longValue() != roleId.longValue()) {
             return Constants.ROLE_KEY_NOT_UNIQUE.getValue();
         }
         return Constants.ROLE_KEY_UNIQUE.getValue();

@@ -73,4 +73,21 @@ public class Dept extends BaseEntity {
      * 父部门名称
      */
     private String parentName;
+
+    public Dept() {
+    }
+
+    public Dept(Long deptId, String deptName, Long parentId, String ancestors, String orderNum, String leader, String phone, String email, String status, String delFlag, String parentName) {
+        this.deptId = deptId;
+        this.deptName = deptName;
+        this.parentId = parentId;
+        this.ancestors = ancestors;
+        this.orderNum = orderNum;
+        this.leader = leader;
+        this.phone = phone;
+        this.email = email;
+        this.status = status;
+        this.delFlag = delFlag;
+        this.parentName = parentName;
+    }
 }

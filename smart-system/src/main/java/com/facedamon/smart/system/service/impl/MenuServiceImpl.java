@@ -4,6 +4,7 @@ import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.utils.StringUtils;
 import com.facedamon.smart.system.TreeUtils;
 import com.facedamon.smart.system.doamin.Menu;
+import com.facedamon.smart.system.doamin.Role;
 import com.facedamon.smart.system.doamin.User;
 import com.facedamon.smart.system.mapper.MenuMapper;
 import com.facedamon.smart.system.mapper.RoleMenuMapper;
@@ -93,6 +94,28 @@ public class MenuServiceImpl implements IMenuService {
             }
         }
         return permsSet;
+    }
+
+    /**
+     * 根据角色查询菜单
+     * @param role
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> roleMenuTreeData(Role role) {
+        Long roleId = role.getRoleId();
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<Menu> menuList = menuMapper.selectMenuAll();
+        if (null != roleId)
+        {
+            List<String> roleMenuList = menuMapper.selectMenuTree(roleId);
+            trees = getTrees(menuList, true, roleMenuList, true);
+        }
+        else
+        {
+            trees = getTrees(menuList, false, null, true);
+        }
+        return trees;
     }
 
     @Override
@@ -195,7 +218,7 @@ public class MenuServiceImpl implements IMenuService {
     public String checkMenuNameUnique(Menu menu) {
         Long menuId = null == menu.getMenuId() ? -1L : menu.getMenuId();
         Menu next = menuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
-        if (null != next && next.getMenuId().longValue() == menuId.longValue()) {
+        if (null != next && next.getMenuId().longValue() != menuId.longValue()) {
             return Constants.MENU_NAME_NOT_UNIQUE.getValue();
         }
         return Constants.MENU_NAME_UNIQUE.getValue();
@@ -219,7 +242,7 @@ public class MenuServiceImpl implements IMenuService {
             deptMap.put("name", transMenuName(menu, roleMenuList, permsFlag));
             deptMap.put("title", menu.getMenuName());
             if (isCheck) {
-                deptMap.put("checked", roleMenuList.contains(menu.getMenuId() + menu.getMenuName()));
+                deptMap.put("checked", roleMenuList.contains(menu.getMenuId() + menu.getPerms()));
             } else {
                 deptMap.put("checked", false);
             }
@@ -240,7 +263,7 @@ public class MenuServiceImpl implements IMenuService {
         StringBuffer sb = new StringBuffer();
         sb.append(menu.getMenuName());
         if (permsFlag) {
-            sb.append("<font color=\"#888\">&nbsp;&nbsp;&nbsp;" + menu.getPerms() + "</font>");
+            sb.append("<font color=\"#393D49\">&nbsp;&nbsp;&nbsp;" + menu.getPerms() + "</font>");
         }
         return sb.toString();
     }
