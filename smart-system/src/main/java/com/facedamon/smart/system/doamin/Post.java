@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.doamin;
 
+import com.facedamon.smart.common.annotation.Excel;
 import com.facedamon.smart.common.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -22,26 +23,31 @@ public class Post extends BaseEntity {
     /**
      * 岗位Id
      */
+    @Excel(name = "岗位序号")
     private Long postId;
 
     /**
      * 岗位编码
      */
+    @Excel(name = "岗位编码")
     private String postCode;
 
     /**
      * 岗位名称
      */
+    @Excel(name = "岗位名称")
     private String postName;
 
     /**
      * 岗位排序
      */
+    @Excel(name = "岗位排序")
     private String postSort;
 
     /**
      * 状态
      */
+    @Excel(name = "状态", isDict = true, dictType = "sys_normal_disable")
     private String status;
 
     /**

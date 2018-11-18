@@ -50,6 +50,9 @@
              * @param params
              */
             queryParams: function(params){
+                /**
+                 * 可以覆盖传递更多参数
+                 */
                 return {
                     pageSize:       params.limit,
                     pageNum:        params.offset / params.limit + 1,

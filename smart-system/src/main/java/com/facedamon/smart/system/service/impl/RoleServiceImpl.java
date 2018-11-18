@@ -221,7 +221,7 @@ public class RoleServiceImpl implements IRoleService {
      * @return
      */
     private int insertRoleMenu(Role role) {
-        int rows = 0;
+        int rows = 1;
         List<RoleMenu> roleMenus = new ArrayList<>();
         for (Long menuId : role.getMenuIds()) {
             roleMenus.add(RoleMenu.builder().menuId(menuId).roleId(role.getRoleId()).build());
@@ -239,7 +239,7 @@ public class RoleServiceImpl implements IRoleService {
      * @return
      */
     private int insertRoleDept(Role role) {
-        int rows = 0;
+        int rows = 1;
         List<RoleDept> roleDepts = new ArrayList<>();
         for (Long deptId : role.getDeptIds()) {
             roleDepts.add(RoleDept.builder().deptId(deptId).roleId(role.getRoleId()).build());

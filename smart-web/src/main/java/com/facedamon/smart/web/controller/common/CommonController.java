@@ -29,6 +29,9 @@ public class CommonController {
     public void download(String fileName, Boolean delete,
                          HttpServletRequest request, HttpServletResponse response){
         try {
+            /**
+             * 此时filePath已经下载了文件
+             */
             String filePath = SmartConfig.INSTANCE.getDownloadPath() + fileName;
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");

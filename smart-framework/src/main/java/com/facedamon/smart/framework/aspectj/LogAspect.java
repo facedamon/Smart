@@ -12,6 +12,8 @@ import com.facedamon.smart.system.doamin.User;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -41,8 +43,9 @@ public class LogAspect {
      *
      * @param point
      */
+    @AfterReturning(pointcut = "logPointCut()")
     public void afterReturning(JoinPoint point){
-
+        handleLog(point, null);
     }
 
     /**
@@ -50,8 +53,9 @@ public class LogAspect {
      * @param poin
      * @param e
      */
-    public void afterThrowing(JoinPoint poin,Exception e){
-
+    @AfterThrowing(value = "logPointCut()", throwing = "e")
+    public void afterThrowing(JoinPoint poin, Exception e) {
+        handleLog(poin, e);
     }
 
     protected void handleLog(final JoinPoint point,final Exception e){
@@ -90,7 +94,7 @@ public class LogAspect {
             /**
              * 保存数据库
              */
-            AsyncFactory.INSTANCE.recordOper(OperLog.builder().build());
+            AsyncFactory.INSTANCE.recordOper(operLogBuilder.build());
         }catch (Exception ex){
             log.error("===前置通知异常===");
             log.error("异常信息{}",ex.getMessage());

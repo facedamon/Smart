@@ -123,7 +123,7 @@ public class DictTypeServiceImpl implements IDictTypeService {
      */
     @Override
     public String checkDictTypeUnique(DictType dict) {
-        Long dictId = null != dict.getDictId() ? -1L : dict.getDictId();
+        Long dictId = null != dict.getDictId() ? dict.getDictId() : -1L;
         DictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (null != dictType && dictType.getDictId().longValue() != dictId.longValue()) {
             return UserConstants.DICT_TYPE_NOT_UNIQUE.getValue();

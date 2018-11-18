@@ -136,6 +136,6 @@ async:
 #generator
 generator:
   author: facedamon
-  packageName: com.facedamon.smart.project.module
+  packageName: com.facedamon.smart.system.domain
   autoRemovePre: true
   tablePrefix: sys_

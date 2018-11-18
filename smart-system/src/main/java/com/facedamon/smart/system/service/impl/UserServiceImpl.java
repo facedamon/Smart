@@ -40,6 +40,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private PostMapper postMapper;
 
+    @Autowired
+    private DeptMapper deptMapper;
+
     /**
      * 根据条件分页查询用户
      *
@@ -60,7 +63,11 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public User selectUserByLoginName(String loginName) {
-        return userMapper.selectUserByLoginName(loginName);
+        User user = userMapper.selectUserByLoginName(loginName);
+        if (null != user && user.getDeptId() != null) {
+            user.setDept(deptMapper.selectDeptById(user.getDeptId()));
+        }
+        return user;
     }
 
     /**
