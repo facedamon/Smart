@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.doamin;
 
+import com.facedamon.smart.common.annotation.Excel;
 import com.facedamon.smart.common.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -22,26 +23,31 @@ public class DictData extends BaseEntity {
     /**
      * 字典编码
      */
+    @Excel(name = "字典编码")
     private Long dictCode;
 
     /**
      * 字典排序
      */
+    @Excel(name = "字典排序")
     private Long dictSort;
 
     /**
      * 字典标签
      */
+    @Excel(name = "字典标签")
     private String dictLabel;
 
     /**
      * 字典值
      */
+    @Excel(name = "字典值")
     private String dictValue;
 
     /**
      * 字典类型
      */
+    @Excel(name = "字典类型")
     private String dictType;
     /**
      * 样式属性
@@ -51,15 +57,18 @@ public class DictData extends BaseEntity {
     /**
      * 表格回显样式
      */
+    @Excel(name = "样式")
     private String listClass;
 
     /**
      * 是否默认
      */
+    @Excel(name = "是否默认")
     private String isDefault;
 
     /**
      * 状态
      */
+    @Excel(name = "状态",isDict = true,dictType = "sys_normal_disable")
     private String status;
 }
