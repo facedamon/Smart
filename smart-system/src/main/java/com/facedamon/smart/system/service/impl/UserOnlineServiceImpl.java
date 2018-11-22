@@ -1,7 +1,7 @@
 package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.utils.DateUtils;
-import com.facedamon.smart.system.doamin.UserOnline;
+import com.facedamon.smart.system.domain.UserOnline;
 import com.facedamon.smart.system.mapper.UserOnlineMapper;
 import com.facedamon.smart.system.service.IUserOnlineService;
 import org.springframework.beans.factory.annotation.Autowired;

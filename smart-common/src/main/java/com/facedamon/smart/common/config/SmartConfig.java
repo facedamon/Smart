@@ -148,4 +148,22 @@ public enum SmartConfig {
     public String getTablePrefix() {
         return StringUtils.nvl(getConfig("generator.tablePrefix"), "sys_");
     }
+
+    /**
+     * 工程路径
+     * @return
+     */
+    public String getProjectPath(){return StringUtils.nvl(getConfig("generator.projectPath"),"main/java/com/facedamon/smart");}
+
+    /**
+     * mybatis 路径
+     * @return
+     */
+    public String getMybatisPath(){return StringUtils.nvl(getConfig("generator.mybatisPath"),"main/resources/mybatis");}
+
+    /**
+     * html模板路径
+     * @return
+     */
+    public String getTemplatesPath(){return StringUtils.nvl(getConfig("generator.templatesPath"),"main/resources/templates");}
 }

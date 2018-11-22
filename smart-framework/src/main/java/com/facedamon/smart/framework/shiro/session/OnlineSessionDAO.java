@@ -2,7 +2,7 @@ package com.facedamon.smart.framework.shiro.session;
 
 import com.facedamon.smart.common.enums.OnlineStatus;
 import com.facedamon.smart.framework.syn.AsyncFactory;
-import com.facedamon.smart.system.doamin.UserOnline;
+import com.facedamon.smart.system.domain.UserOnline;
 import com.facedamon.smart.system.service.IUserOnlineService;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;

@@ -1,0 +1,45 @@
+package ${package}.domain;
+#foreach($column in $columns)
+    #if($column.javaType=='Date')
+        #break
+    #end
+#end
+
+/**
+ * @Description:    ${tableComment} 表 ${tableName}
+ * @Author:         ${author}
+ * @CreateDate:     ${datetime}
+ * @UpdateUser:     ${author}
+ * @UpdateDate:     ${datetime}
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
+public class ${className} extends BaseEntity
+        {
+private static final long serialVersionUID=1L;
+
+#foreach ($column in $columns)
+/** $column.columnComment */
+private $column.javaType $column.attrNameLower;
+#end
+
+#foreach ($column in $columns)
+public void set${column.attrName}($column.javaType $column.attrNameLower)
+        {
+        this.$column.attrNameLower = $column.attrNameLower;
+        }
+
+public $column.javaType get${column.attrName}()
+        {
+        return $column.attrNameLower;
+        }
+#end
+
+public String toString(){
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+    #foreach ($column in $columns)
+            .append("${column.attrNameLower}",get${column.attrName}())
+    #end
+        .toString();
+        }
+        }

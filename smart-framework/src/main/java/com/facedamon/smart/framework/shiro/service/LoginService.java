@@ -12,7 +12,7 @@ import com.facedamon.smart.framework.util.MessageUtils;
 import com.facedamon.smart.framework.util.ServletUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.exception.user.*;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import com.facedamon.smart.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

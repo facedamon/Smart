@@ -5,7 +5,7 @@ import com.facedamon.smart.common.enums.OnlineStatus;
 import com.facedamon.smart.framework.shiro.session.OnlineSession;
 import com.facedamon.smart.framework.shiro.session.OnlineSessionDAO;
 import com.facedamon.smart.framework.util.ShiroUtils;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;

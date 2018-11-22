@@ -6,7 +6,7 @@ import com.facedamon.smart.common.enums.BusinessType;
 import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
-import com.facedamon.smart.system.doamin.Role;
+import com.facedamon.smart.system.domain.Role;
 import com.facedamon.smart.system.service.IRoleService;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

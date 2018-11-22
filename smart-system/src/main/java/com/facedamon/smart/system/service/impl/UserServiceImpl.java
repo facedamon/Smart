@@ -4,7 +4,7 @@ import com.facedamon.smart.common.annotation.DataScope;
 import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.common.support.Convert;
 import com.facedamon.smart.common.utils.StringUtils;
-import com.facedamon.smart.system.doamin.*;
+import com.facedamon.smart.system.domain.*;
 import com.facedamon.smart.system.mapper.*;
 import com.facedamon.smart.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

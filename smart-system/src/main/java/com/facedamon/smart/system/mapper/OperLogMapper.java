@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.OperLog;
+import com.facedamon.smart.system.domain.OperLog;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import com.facedamon.smart.framework.shiro.service.PasswordService;
 import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import com.facedamon.smart.system.service.IPostService;
 import com.facedamon.smart.system.service.IRoleService;
 import com.facedamon.smart.system.service.IUserService;

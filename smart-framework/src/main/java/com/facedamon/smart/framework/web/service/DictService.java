@@ -1,6 +1,6 @@
 package com.facedamon.smart.framework.web.service;
 
-import com.facedamon.smart.system.doamin.DictData;
+import com.facedamon.smart.system.domain.DictData;
 import com.facedamon.smart.system.service.IDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

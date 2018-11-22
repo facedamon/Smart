@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.RoleMenu;
+import com.facedamon.smart.system.domain.RoleMenu;
 
 import java.util.List;
 

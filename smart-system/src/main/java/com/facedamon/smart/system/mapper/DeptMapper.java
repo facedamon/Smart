@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.Dept;
+import com.facedamon.smart.system.domain.Dept;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

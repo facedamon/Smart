@@ -5,7 +5,7 @@ import com.facedamon.smart.common.utils.StringUtils;
 import com.facedamon.smart.framework.syn.AsyncFactory;
 import com.facedamon.smart.framework.util.MessageUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;

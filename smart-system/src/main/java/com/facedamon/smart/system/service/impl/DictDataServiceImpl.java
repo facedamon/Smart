@@ -1,7 +1,7 @@
 package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.DictData;
+import com.facedamon.smart.system.domain.DictData;
 import com.facedamon.smart.system.mapper.DictDataMapper;
 import com.facedamon.smart.system.service.IDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;

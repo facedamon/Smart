@@ -1,8 +1,8 @@
 package com.facedamon.smart.system.service;
 
-import com.facedamon.smart.system.doamin.Menu;
-import com.facedamon.smart.system.doamin.Role;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.Menu;
+import com.facedamon.smart.system.domain.Role;
+import com.facedamon.smart.system.domain.User;
 
 import java.util.List;
 import java.util.Map;

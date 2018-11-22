@@ -2,7 +2,7 @@ package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.constant.UserConstants;
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.Config;
+import com.facedamon.smart.system.domain.Config;
 import com.facedamon.smart.system.mapper.ConfigMapper;
 import com.facedamon.smart.system.service.IConfigService;
 import org.springframework.beans.factory.annotation.Autowired;

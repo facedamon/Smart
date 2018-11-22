@@ -3,7 +3,7 @@ package com.facedamon.smart.framework.shiro.realm;
 import com.facedamon.smart.framework.shiro.service.LoginService;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.exception.user.*;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import com.facedamon.smart.system.service.IMenuService;
 import com.facedamon.smart.system.service.IRoleService;
 import lombok.extern.slf4j.Slf4j;

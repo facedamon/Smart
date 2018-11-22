@@ -4,7 +4,7 @@ import com.facedamon.smart.common.constant.Constants;
 import com.facedamon.smart.framework.syn.AsyncFactory;
 import com.facedamon.smart.framework.util.MessageUtils;
 import com.facedamon.smart.framework.web.exception.user.UserPasswordNotMatchException;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;

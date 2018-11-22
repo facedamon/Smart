@@ -1,7 +1,7 @@
 package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.Logininfor;
+import com.facedamon.smart.system.domain.Logininfor;
 import com.facedamon.smart.system.mapper.LogininforMapper;
 import com.facedamon.smart.system.service.ILogininforService;
 import org.springframework.beans.factory.annotation.Autowired;

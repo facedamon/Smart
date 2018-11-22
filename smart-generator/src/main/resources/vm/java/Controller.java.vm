@@ -1,0 +1,110 @@
+package
+
+import com.facedamon.smart.common.annotation.Log;
+import com.facedamon.smart.common.base.Response;
+import com.facedamon.smart.common.enums.BusinessType;
+import com.facedamon.smart.framework.web.page.TableDataInfo;
+import com.facedamon.smart.web.core.base.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+${package}.web.controller;
+    ${package}.domain.${className};
+    ${package}.service.I${className}Service;
+
+/**
+ * ${tableComment} 信息操作处理
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${moduleName}/${classNameLower}")
+public class ${className}Controller extends BaseController
+{
+    private String prefix = "${moduleName}/${classNameLower}";
+
+    @Autowired
+    private I${className}Service ${classNameLower}Service;
+
+    @RequiresPermissions("${moduleName}:${classNameLower}:view")
+    @GetMapping()
+    public String ${classNameLower}()
+    {
+        return prefix + "/${classNameLower}";
+    }
+
+    /**
+     * 查询${tableComment}列表
+     */
+    @RequiresPermissions("${moduleName}:${classNameLower}:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(${className} ${classNameLower})
+    {
+        startPage();
+        List<${className}> list = ${classNameLower}Service.select${className}List(${classNameLower});
+        return getDataTable(list);
+    }
+
+    /**
+     * 新增${tableComment}
+     */
+    @GetMapping("/add")
+    public String add()
+    {
+        return prefix + "/add";
+    }
+
+    /**
+     * 新增保存${tableComment}
+     */
+    @RequiresPermissions("${moduleName}:${classNameLower}:add")
+    @Log(model = "${tableComment}", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public Response addSave(${className} ${classNameLower})
+    {
+        return toAjax(${classNameLower}Service.insert${className}(${classNameLower}));
+    }
+
+    /**
+     * 修改${tableComment}
+     */
+    @GetMapping("/edit/{${primaryKey.attrNameLower}}")
+    public String edit(@PathVariable("${primaryKey.attrNameLower}") ${primaryKey.javaType} ${primaryKey.attrNameLower}, ModelMap mmap)
+    {
+        ${className} ${classNameLower} = ${classNameLower}Service.select${className}ById(${primaryKey.attrNameLower});
+        mmap.put("${classNameLower}", ${classNameLower});
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存${tableComment}
+     */
+    @RequiresPermissions("${moduleName}:${classNameLower}:edit")
+    @Log(model = "${tableComment}", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public Response editSave(${className} ${classNameLower})
+    {
+        return toAjax(${classNameLower}Service.update${classNameLower}(${classNameLower}));
+    }
+
+    /**
+     * 删除${tableComment}
+     */
+    @RequiresPermissions("${moduleName}:${classNameLower}:remove")
+    @Log(model = "${tableComment}", businessType = BusinessType.DELETE)
+    @PostMapping( "/remove")
+    @ResponseBody
+    public Response remove(String ids)
+    {
+        return toAjax(${classNameLower}Service.delete${className}ByIds(ids));
+    }
+
+}

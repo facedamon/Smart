@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.UserOnline;
+import com.facedamon.smart.system.domain.UserOnline;
 
 import java.util.List;
 

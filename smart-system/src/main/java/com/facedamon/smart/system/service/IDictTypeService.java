@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.service;
 
-import com.facedamon.smart.system.doamin.DictType;
+import com.facedamon.smart.system.domain.DictType;
 
 import java.util.List;
 

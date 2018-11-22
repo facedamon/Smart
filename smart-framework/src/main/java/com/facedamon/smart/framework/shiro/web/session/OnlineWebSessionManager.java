@@ -4,7 +4,7 @@ import com.facedamon.smart.common.constant.ShiroConstants;
 import com.facedamon.smart.common.utils.DateUtils;
 import com.facedamon.smart.framework.shiro.session.OnlineSession;
 import com.facedamon.smart.framework.util.ApplicationHolder;
-import com.facedamon.smart.system.doamin.UserOnline;
+import com.facedamon.smart.system.domain.UserOnline;
 import com.facedamon.smart.system.service.impl.UserOnlineServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.ExpiredSessionException;

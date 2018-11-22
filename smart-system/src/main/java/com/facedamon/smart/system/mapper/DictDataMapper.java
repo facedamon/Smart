@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.DictData;
+import com.facedamon.smart.system.domain.DictData;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

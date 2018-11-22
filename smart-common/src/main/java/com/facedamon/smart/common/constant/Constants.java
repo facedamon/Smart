@@ -67,6 +67,11 @@ public enum Constants {
     IS_ASC("isAsc"),
 
     /**
+     * 自动去除前缀
+     */
+    AUTO_REMOVE_PRE("true"),
+
+    /**
      * 权限正则表达式
      */
     PREMISSION("[\"{0}\"]"),

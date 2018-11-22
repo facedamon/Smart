@@ -1,14 +1,12 @@
 package com.facedamon.smart.common.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @Description: 所有实体的共同域

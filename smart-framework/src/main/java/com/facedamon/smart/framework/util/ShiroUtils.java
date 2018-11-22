@@ -1,7 +1,7 @@
 package com.facedamon.smart.framework.util;
 
 import com.facedamon.smart.framework.shiro.realm.UserRealm;
-import com.facedamon.smart.system.doamin.User;
+import com.facedamon.smart.system.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.mgt.RealmSecurityManager;

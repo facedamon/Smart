@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.service;
 
-import com.facedamon.smart.system.doamin.Post;
+import com.facedamon.smart.system.domain.Post;
 
 import java.util.List;
 

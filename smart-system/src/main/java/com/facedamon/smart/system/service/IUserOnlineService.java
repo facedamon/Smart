@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.service;
 
-import com.facedamon.smart.system.doamin.UserOnline;
+import com.facedamon.smart.system.domain.UserOnline;
 
 import java.util.Date;
 import java.util.List;

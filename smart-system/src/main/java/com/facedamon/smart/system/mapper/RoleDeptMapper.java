@@ -1,6 +1,6 @@
 package com.facedamon.smart.system.mapper;
 
-import com.facedamon.smart.system.doamin.RoleDept;
+import com.facedamon.smart.system.domain.RoleDept;
 
 import java.util.List;
 

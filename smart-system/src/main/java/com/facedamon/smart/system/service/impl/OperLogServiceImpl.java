@@ -1,7 +1,7 @@
 package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.OperLog;
+import com.facedamon.smart.system.domain.OperLog;
 import com.facedamon.smart.system.mapper.OperLogMapper;
 import com.facedamon.smart.system.service.IOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;

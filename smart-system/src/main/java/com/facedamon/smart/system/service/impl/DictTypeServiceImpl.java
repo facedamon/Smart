@@ -2,7 +2,7 @@ package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.constant.UserConstants;
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.DictType;
+import com.facedamon.smart.system.domain.DictType;
 import com.facedamon.smart.system.mapper.DictDataMapper;
 import com.facedamon.smart.system.mapper.DictTypeMapper;
 import com.facedamon.smart.system.service.IDictTypeService;

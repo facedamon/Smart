@@ -6,7 +6,7 @@ import com.facedamon.smart.common.enums.BusinessType;
 import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
-import com.facedamon.smart.system.doamin.Post;
+import com.facedamon.smart.system.domain.Post;
 import com.facedamon.smart.system.service.IPostService;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

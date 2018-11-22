@@ -57,6 +57,8 @@ spring:
     restart:
       enabled: true
 
+database:
+  type: mysql
 
 #MyBatis
 mybatis:
@@ -71,6 +73,7 @@ mybatis:
     cache-enabled: true
     use-generated-keys: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    database-id: ${database.type}
 
 #PageHelper
 pagehelper:
@@ -136,6 +139,10 @@ async:
 #generator
 generator:
   author: facedamon
-  packageName: com.facedamon.smart.system.domain
+  packageName: com.facedamon.smart.system
   autoRemovePre: true
   tablePrefix: sys_
+
+  projectPath: main/java/com/facedamon/smart
+  mybatisPath: main/resources/mybatis
+  templatesPath: main/resources/templates

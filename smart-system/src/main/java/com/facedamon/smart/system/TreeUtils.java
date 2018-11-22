@@ -1,6 +1,6 @@
 package com.facedamon.smart.system;
 
-import com.facedamon.smart.system.doamin.Menu;
+import com.facedamon.smart.system.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.Iterator;

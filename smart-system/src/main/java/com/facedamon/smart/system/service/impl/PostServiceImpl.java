@@ -2,7 +2,7 @@ package com.facedamon.smart.system.service.impl;
 
 import com.facedamon.smart.common.constant.UserConstants;
 import com.facedamon.smart.common.support.Convert;
-import com.facedamon.smart.system.doamin.Post;
+import com.facedamon.smart.system.domain.Post;
 import com.facedamon.smart.system.mapper.PostMapper;
 import com.facedamon.smart.system.mapper.UserPostMapper;
 import com.facedamon.smart.system.service.IPostService;
