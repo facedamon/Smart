@@ -1,4 +1,4 @@
-package
+package ${package}.web.controller;
 
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
@@ -7,14 +7,13 @@ import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-${package}.web.controller;
-    ${package}.domain.${className};
-    ${package}.service.I${className}Service;
+import ${package}.domain.${className};
+import ${package}.service.I${className}Service;
 
 /**
  * ${tableComment} 信息操作处理
@@ -69,7 +68,7 @@ public class ${className}Controller extends BaseController
     @ResponseBody
     public Response addSave(${className} ${classNameLower})
     {
-        return toAjax(${classNameLower}Service.insert${className}(${classNameLower}));
+        return isSuccess(${classNameLower}Service.insert${className}(${classNameLower}));
     }
 
     /**
@@ -92,7 +91,7 @@ public class ${className}Controller extends BaseController
     @ResponseBody
     public Response editSave(${className} ${classNameLower})
     {
-        return toAjax(${classNameLower}Service.update${classNameLower}(${classNameLower}));
+        return isSuccess(${classNameLower}Service.update${classNameLower}(${classNameLower}));
     }
 
     /**
@@ -104,7 +103,7 @@ public class ${className}Controller extends BaseController
     @ResponseBody
     public Response remove(String ids)
     {
-        return toAjax(${classNameLower}Service.delete${className}ByIds(ids));
+        return isSuccess(${classNameLower}Service.delete${className}ByIds(ids));
     }
 
 }

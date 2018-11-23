@@ -1,9 +1,7 @@
-package
+package ${package}.mapper
 
 import java.util.List;
-
-${package}.mapper
-    ${package}.domain.${className}
+import ${package}.domain.${className}
 
 /**
  * @Description:    ${tableComment} mapper

@@ -62,7 +62,7 @@ public enum AsyncFactory {
      */
     @Async
     public void recordOper(final OperLog operLog){
-        ApplicationHolder.getBean(IOperLogService.class).insertOperlog(operLog);
+        ApplicationHolder.getBean(IOperLogService.class).insertOperLog(operLog);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.facedamon.smart.system.domain;
 
+import com.facedamon.smart.common.annotation.Excel;
 import com.facedamon.smart.common.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -24,46 +25,55 @@ public class OperLog extends BaseEntity {
     /**
      * 日志主键
      */
+    @Excel(name = "日志序号")
     private Long operId;
 
     /**
      * 操作模块
      */
+    @Excel(name = "操作模块")
     private String model;
 
     /**
      * 业务类型
      */
+    @Excel(name = "业务类型")
     private Integer businessType;
 
     /**
      * 请求方法
      */
+    @Excel(name = "请求参数")
     private String method;
 
     /**
      * 操作类别
      */
+    @Excel(name = "操作类别",isDict = true, dictType = "sys_oper_type")
     private Integer operatorType;
 
     /**
      * 操作人员
      */
+    @Excel(name = "操作人员")
     private String operName;
 
     /**
      * 部门名称
      */
+    @Excel(name = "部门")
     private String deptName;
 
     /**
      * 请求URL
      */
+    @Excel(name = "请求链接")
     private String operUrl;
 
     /**
      * 操作地址
      */
+    @Excel(name = "操作地址")
     private String operIp;
 
     /**
@@ -75,20 +85,24 @@ public class OperLog extends BaseEntity {
     /**
      * 请求参数
      */
+    @Excel(name = "请求参数")
     private String operParam;
 
     /**
      * 操作状态
      */
+    @Excel(name = "操作状态",isDict = true,dictType = "sys_normal_disable")
     private Integer status;
 
     /**
      *  错误消息
      */
+    @Excel(name = "错误消息")
     private String errorMsg;
 
     /**
      * 操作时间
      */
+    @Excel(name = "操作时间")
     private Date operTime;
 }

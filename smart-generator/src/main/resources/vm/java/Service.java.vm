@@ -1,9 +1,8 @@
-package
+package {package}.service;
 
 import java.util.List;
+import ${package}.domain.${className};
 
-{package}.service;
-    ${package}.domain.${className};
 /**
  * @Description: $ tableComment} service
  * @Author: $ author}

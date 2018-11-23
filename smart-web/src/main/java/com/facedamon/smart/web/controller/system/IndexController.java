@@ -5,6 +5,7 @@ import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.system.domain.Menu;
 import com.facedamon.smart.system.domain.User;
 import com.facedamon.smart.system.service.IMenuService;
+import com.facedamon.smart.system.service.INoticeService;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

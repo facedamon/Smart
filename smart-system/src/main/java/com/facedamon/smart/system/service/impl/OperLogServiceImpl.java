@@ -30,9 +30,9 @@ public class OperLogServiceImpl implements IOperLogService
      * @param operLog 操作日志对象
      */
     @Override
-    public void insertOperlog(OperLog operLog)
+    public void insertOperLog(OperLog operLog)
     {
-        operLogMapper.insertOperlog(operLog);
+        operLogMapper.insertOperLog(operLog);
     }
 
     /**

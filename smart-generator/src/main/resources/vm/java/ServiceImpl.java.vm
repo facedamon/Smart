@@ -1,15 +1,13 @@
-package
+package ${package}.service;
 
 import com.facedamon.smart.common.support.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-{package}.service;
-    ${package}.mapper.${className}Mapper;
-    ${package}.domain.${className};
-    ${package}.service.I${className}Service;
+import ${package}.mapper.${className}Mapper;
+import ${package}.domain.${className};
+import ${package}.service.I${className}Service;
 
 /**
  * ${tableComment} 服务层实现
