@@ -36,4 +36,10 @@ public interface LogininforMapper {
      */
     int deleteLogininforByIds(String[] ids);
 
+    /**
+     * 清空系统登录日志
+     * @return
+     */
+    int cleanLogininfo();
+
 }

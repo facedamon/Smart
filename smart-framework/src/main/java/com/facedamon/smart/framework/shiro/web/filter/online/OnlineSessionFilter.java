@@ -18,7 +18,7 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- * @Description: 自定义访问控制 实现模板方法
+ * @Description: 权限访问控制器
  * @Author: facedamon
  * @CreateDate: 2018/10/6 下午5:26
  * @UpdateUser: facedamon

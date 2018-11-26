@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 针对自定义的shiro session 的 DB 操作
+ * @Description: session 触发器
  * @Author: facedamon
  * @CreateDate: 2018/10/6 下午4:46
  * @UpdateUser: facedamon

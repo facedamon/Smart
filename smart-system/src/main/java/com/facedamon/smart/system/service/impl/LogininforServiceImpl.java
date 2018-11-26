@@ -52,4 +52,13 @@ public class LogininforServiceImpl implements ILogininforService {
     public int deleteLogininforByIds(String ids) {
         return logininforMapper.deleteLogininforByIds(Convert.toStrArray(ids));
     }
+
+    /**
+     * 清空系统登录日志
+     * @return
+     */
+    @Override
+    public int cleanLogininfo() {
+        return logininforMapper.cleanLogininfo();
+    }
 }
