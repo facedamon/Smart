@@ -9,7 +9,8 @@ package com.facedamon.smart.common.constant;
  * @UpdateRemark: 修改内容
  * @Version: 1.0
  */
-public enum UserConstants {
+public enum
+UserConstants {
 
     /**
      *

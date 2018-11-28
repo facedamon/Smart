@@ -23,6 +23,7 @@ logging:
     com.facedamon: debug
     org.springframework: WARN
     org.spring.springboot.dao: debug
+    org.quartz: WARN
 
 #用户配置
 user:

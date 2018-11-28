@@ -70,6 +70,8 @@
     <logger name="druid.sql.Connection" level="debug"/>
     <logger name="druid.sql.Statement" level="debug"/>
 
+    <logger name="org.quartz.core" level="ERROR"/>
+
     <root level="debug">
         <appender-ref ref="stdout" />
     </root>
