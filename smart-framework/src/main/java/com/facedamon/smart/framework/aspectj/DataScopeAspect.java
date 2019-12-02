@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 /**
- * @Description:    数据过滤，通过AOP拦截sql
- * @Author:         facedamon
- * @CreateDate:     2018/10/26 15:55
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/26 15:55
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 数据过滤，通过AOP拦截sql
+ * @Author: facedamon
+ * @CreateDate: 2018/10/26 15:55
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/26 15:55
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Aspect
 @Component
@@ -45,60 +45,63 @@ public class DataScopeAspect {
     public static final String DATA_SCOPE = "dataScope";
 
     @Pointcut("@annotation(com.facedamon.smart.common.annotation.DataScope)")
-    public void dataScopePointCut(){}
+    public void dataScopePointCut() {
+    }
 
     @Before("dataScopePointCut()")
-    public void doBefore(JoinPoint point){
+    public void doBefore(JoinPoint point) {
 
     }
 
-    protected void handleDataScope(final JoinPoint point){
+    protected void handleDataScope(final JoinPoint point) {
         DataScope dataScope = getAnnotation(point);
-        if (null == dataScope){
+        if (null == dataScope) {
             return;
         }
         User user = ShiroUtils.getUser();
-        if (null != user){
-            if (!user.isAdmin()){
-                dataScopeFilter(point,user,dataScope.tableAlias());
+        if (null != user) {
+            if (!user.isAdmin()) {
+                dataScopeFilter(point, user, dataScope.tableAlias());
             }
         }
     }
 
     /**
      * 数据过滤范围
+     *
      * @param point
-     * @param user 当前用户
+     * @param user  当前用户
      * @param alias DataScope tableAlias
      */
-    public static void dataScopeFilter(JoinPoint point,User user,String alias){
+    public static void dataScopeFilter(JoinPoint point, User user, String alias) {
         StringBuffer sql = new StringBuffer();
-        for (Role role : user.getRoles()){
+        for (Role role : user.getRoles()) {
             String dataScope = role.getDataScope();
-            if (DATA_SCOPE_ALL.equals(dataScope)){
+            if (DATA_SCOPE_ALL.equals(dataScope)) {
                 break;
-            }else if (DATA_SCOPE_CUSTOM.equals(dataScope)){
-               sql.append(StringUtils.format("OR {}.dept_id IN ( select dept_id from sys_role where role_id = {})"
-                    ,alias,role.getRoleId()));
+            } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
+                sql.append(StringUtils.format("OR {}.dept_id IN ( select dept_id from sys_role where role_id = {})"
+                        , alias, role.getRoleId()));
             }
         }
 
-        if (StringUtils.isNotBlank(sql.toString())){
+        if (StringUtils.isNotBlank(sql.toString())) {
             BaseEntity baseEntity = (BaseEntity) point.getArgs()[0];
-            baseEntity.getParams().put(DATA_SCOPE," AND (" + sql.substring(4) + ")");
+            baseEntity.getParams().put(DATA_SCOPE, " AND (" + sql.substring(4) + ")");
         }
     }
 
     /**
      * 获取声明DataScope方法的注解
+     *
      * @param point
      * @return
      */
-    private DataScope getAnnotation(JoinPoint point){
+    private DataScope getAnnotation(JoinPoint point) {
         Signature signature = point.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
-        if (null != method){
+        if (null != method) {
             return method.getAnnotation(DataScope.class);
         }
         return null;

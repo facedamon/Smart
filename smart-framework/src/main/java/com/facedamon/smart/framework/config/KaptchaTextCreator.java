@@ -5,13 +5,13 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 import java.util.Random;
 
 /**
- * @Description:    验证码文本生成器
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 11:30
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 11:30
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 验证码文本生成器
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 11:30
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 11:30
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class KaptchaTextCreator extends DefaultTextCreator {
 

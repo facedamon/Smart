@@ -112,17 +112,6 @@ public class RoleServiceImpl implements IRoleService {
         return roleMapper.selectRoleById(roleId);
     }
 
-    /**
-     * 通过制定角色ID删除角色
-     *
-     * @param roleId
-     * @return
-     */
-    @Override
-    public boolean deleteRoleById(Long roleId) {
-        return roleMapper.deleteRoleById(roleId) > 0 ? true : false;
-    }
-
     @Override
     public int deleteRoleByIds(String ids) throws Exception {
         Long[] roleIds = Convert.toLongArray(ids);
@@ -132,8 +121,26 @@ public class RoleServiceImpl implements IRoleService {
             if (selectUserRoleByRoleId(roleId) > 0) {
                 throw new Exception(String.format("%1$s已分配，不能删除", role.getRoleName()));
             }
+            deleteRoleById(roleId);
         }
-        return roleMapper.deleteRoleByIds(roleIds);
+        return 1;
+    }
+
+    /**
+     * 通过ID 删除角色
+     * <p>
+     * 删除与角色相关的部门
+     * 删除与角色相关的菜单
+     * 再删除角色本身
+     *
+     * @param roleId
+     * @return
+     */
+    @Override
+    public int deleteRoleById(Long roleId) {
+        roleDeptMapper.deleteRoleDeptByRoleId(roleId);
+        roleMenuMapper.deleteRoleMenuByRoleId(roleId);
+        return roleMapper.deleteRoleById(roleId);
     }
 
     /**

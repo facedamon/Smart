@@ -18,13 +18,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 
 /**
- * @Description:    异步工厂
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 13:47
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 13:47
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 异步工厂
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 13:47
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 13:47
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public enum AsyncFactory {
 
@@ -37,10 +37,11 @@ public enum AsyncFactory {
 
     /**
      * 同步session到数据库
+     *
      * @param session
      */
     @Async
-    public void asyncSessionToDb(final OnlineSession session){
+    public void asyncSessionToDb(final OnlineSession session) {
         UserOnline online = UserOnline.builder()
                 .sessionId(String.valueOf(session.getId()))
                 .deptName(session.getDeptName())
@@ -58,22 +59,24 @@ public enum AsyncFactory {
 
     /**
      * 操作日志记录
+     *
      * @param operLog
      */
     @Async
-    public void recordOper(final OperLog operLog){
+    public void recordOper(final OperLog operLog) {
         ApplicationHolder.getBean(IOperLogService.class).insertOperLog(operLog);
     }
 
     /**
      * 记录登录信息
+     *
      * @param username
      * @param status
      * @param message
      * @param args
      */
     @Async
-    public void recordLogininfor(final String username,final String status,final String message,final Object... args){
+    public void recordLogininfor(final String username, final String status, final String message, final Object... args) {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
         final String ip = ShiroUtils.getIp();
 
@@ -85,7 +88,7 @@ public enum AsyncFactory {
         /**
          * 打印信息到日志
          */
-        sys_user_logger.info(sb.toString(),args);
+        sys_user_logger.info(sb.toString(), args);
 
         /**
          * 获取客户端操作系统
@@ -106,9 +109,9 @@ public enum AsyncFactory {
                 .build();
 
         if (Constants.LOGIN_SUCCESS.getValue().equals(status)
-                || Constants.LOGOUT.getValue().equals(status)){
+                || Constants.LOGOUT.getValue().equals(status)) {
             logininfor.setStatus(Constants.SUCCESS.getValue());
-        }else if (Constants.LOGIN_FAIL.getValue().equals(status)){
+        } else if (Constants.LOGIN_FAIL.getValue().equals(status)) {
             logininfor.setStatus(Constants.FAIL.getValue());
         }
 

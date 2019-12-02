@@ -1,90 +1,92 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <!--水平布局表单-->
-        <form class="form-horizontal m" id="form-user-add">
-            <input name="deptId" type="hidden" id="treeId">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">登陆名称：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" id="loginName" name="loginName">
-                </div>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <!--水平布局表单-->
+    <form class="form-horizontal m" id="form-user-add">
+        <input name="deptId" type="hidden" id="treeId">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">登陆名称：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" id="loginName" name="loginName">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">部门名称：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()"
-                    readonly="true" id="treeName">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">部门名称：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()"
+                       readonly="true" id="treeName">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">用户名称：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="userName" id="userName">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">用户名称：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="userName" id="userName">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">密码：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="password" name="password" id="password"
-                    th:value="${@config.getKey('sys.user.initPassword')}">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">密码：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="password" name="password" id="password"
+                       th:value="${@config.getKey('sys.user.initPassword')}">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">邮箱：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="email" id="email">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="email" id="email">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">手机：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="phonenumber" id="phonenumber">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">手机：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="phonenumber" id="phonenumber">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">性别：</label>
-                <div class="col-sm-8">
-                    <select id="sex" class="form-control m-b" th:with="type=${@dict.selectDataByType('sys_user_sex')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" />
-                    </select>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">性别：</label>
+            <div class="col-sm-8">
+                <select id="sex" class="form-control m-b" th:with="type=${@dict.selectDataByType('sys_user_sex')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"/>
+                </select>
             </div>
-            <!--通过CSS样式修改 checkbox样式-->
-            <div class="form-group">
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-                    <div class="onoffswitch">
-                        <input type="checkbox" th:checked="true" class="onoffswitch-checkbox" id="status" name="status">
-                        <label class="onoffswitch-label" for="status">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">岗位：</label>
-                <div class="col-sm-8">
-                    <select id="post" name="post" class="form-control" multiple="">
-                        <option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:disabled="${post.status == '1'}"></option>
-                    </select>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">角色：</label>
-                <div class="col-sm-8">
-                    <label th:each="role:${roles}" class="check-box">
-                        <input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}">
+        </div>
+        <!--通过CSS样式修改 checkbox样式-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">状态：</label>
+            <div class="col-sm-8">
+                <div class="onoffswitch">
+                    <input type="checkbox" th:checked="true" class="onoffswitch-checkbox" id="status" name="status">
+                    <label class="onoffswitch-label" for="status">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
                     </label>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">岗位：</label>
+            <div class="col-sm-8">
+                <select id="post" name="post" class="form-control" multiple="">
+                    <option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}"
+                            th:disabled="${post.status == '1'}"></option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">角色：</label>
+            <div class="col-sm-8">
+                <label th:each="role:${roles}" class="check-box">
+                    <input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}"
+                           th:disabled="${role.status == '1'}">
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
 
 <div th:include="include::footer"></div>
 <script th:src="@{/ajax/libs/select/select2.js}"></script>
@@ -94,8 +96,8 @@
      * form表单校验器
      */
     $('#form-user-add').validate({
-        rules:{
-            loginName:{
+        rules: {
+            loginName: {
                 required: true,
                 minlength: 2,
                 maxlength: 20,
@@ -104,11 +106,11 @@
                     type: "post",
                     dataType: "json",
                     data: {
-                        name : function () {
+                        name: function () {
                             return $.common.trim($('#loginName').val());
                         }
                     },
-                    dataFilter: function (data,type) {
+                    dataFilter: function (data, type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -119,14 +121,14 @@
             deptName: {
                 required: true
             },
-            password:{
-                required:true,
+            password: {
+                required: true,
                 minlength: 5,
                 maxlength: 20
             },
             email: {
-                required:true,
-                email:true,
+                required: true,
+                email: true,
                 remote: {
                     url: ctx + "system/user/checkEmailUnique",
                     type: "post",
@@ -136,7 +138,7 @@
                             return $.common.trim($('#email').val());
                         }
                     },
-                    dataFilter: function (data,type) {
+                    dataFilter: function (data, type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -153,13 +155,13 @@
                             return $.common.trim($('#phonenumber').val());
                         }
                     },
-                    dataFilter: function (data,type) {
+                    dataFilter: function (data, type) {
                         return $.validate.unique(data);
                     }
                 }
             }
         },
-        messages:{
+        messages: {
             loginName: {
                 remote: "用户已存在"
             },
@@ -172,13 +174,13 @@
         }
     });
 
-    function submitHandler(){
-        if ($.validate.form()){
+    function submitHandler() {
+        if ($.validate.form()) {
             add();
         }
     }
 
-    function add(){
+    function add() {
         var userId = $("input[name='userId']").val();
         var deptId = $("input[name='deptId']").val();
         var loginName = $("input[name='loginName']").val();
@@ -218,22 +220,22 @@
         });
     }
 
-    function selectDeptTree(){
+    function selectDeptTree() {
         var treeId = $('#treeId').val();
         var deptId = $.common.isEmpty(treeId) ? '100' : treeId;
         var options = {
             title: '选择部门',
             width: '380',
-            url : ctx + 'system/dept/selectDeptTree/' + deptId,
+            url: ctx + 'system/dept/selectDeptTree/' + deptId,
             callBack: openDialog
         };
         $.modal.openOptions(options);
     }
 
-    function openDialog(index,layero){
+    function openDialog(index, layero) {
         var tree = layero.find('iframe')[0].contentWindow.$._tree;
-        if ($.tree.notAllowParents(tree)){
-            var body = layer.getChildFrame('body',index);
+        if ($.tree.notAllowParents(tree)) {
+            var body = layer.getChildFrame('body', index);
             $('#treeId').val(body.find('#treeId').val());
             $('#treeName').val(body.find('#treeName').val());
             layer.close(index);

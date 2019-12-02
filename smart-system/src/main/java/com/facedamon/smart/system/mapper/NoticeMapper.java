@@ -5,18 +5,19 @@ import com.facedamon.smart.system.domain.Notice;
 import java.util.List;
 
 /**
- * @Description:    通知公告mapper
- * @Author:         facedamon
- * @CreateDate:     2018/11/23 14:44
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/23 14:44
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 通知公告mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/11/23 14:44
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/23 14:44
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface NoticeMapper {
 
     /**
      * 根据ID查询公告信息
+     *
      * @param noticeId
      * @return
      */
@@ -24,6 +25,7 @@ public interface NoticeMapper {
 
     /**
      * 查询公告列表
+     *
      * @param notice
      * @return
      */
@@ -31,6 +33,7 @@ public interface NoticeMapper {
 
     /**
      * 新增公告
+     *
      * @param notice
      * @return
      */
@@ -38,6 +41,7 @@ public interface NoticeMapper {
 
     /**
      * 更新公告
+     *
      * @param notice
      * @return
      */
@@ -45,6 +49,7 @@ public interface NoticeMapper {
 
     /**
      * 批量删除公告
+     *
      * @param noticeIds
      * @return
      */

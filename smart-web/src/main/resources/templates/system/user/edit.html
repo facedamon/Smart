@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
     <!--水平布局表单-->
     <form class="form-horizontal m" id="form-user-edit" th:object="${user}">
-        <input name="userId" type="hidden" th:field="*{userId}" />
-        <input name="deptId" type="hidden" th:field="*{deptId}" id="treeId" />
+        <input name="userId" type="hidden" th:field="*{userId}"/>
+        <input name="deptId" type="hidden" th:field="*{deptId}" id="treeId"/>
 
         <div class="form-group">
             <label class="col-sm-3 control-label">登陆名称：</label>
@@ -44,7 +44,8 @@
             <label class="col-sm-3 control-label">性别：</label>
             <div class="col-sm-8">
                 <select id="sex" class="form-control m-b" th:with="type=${@dict.selectDataByType('sys_user_sex')}">
-                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sex}" />
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
+                            th:field="*{sex}"/>
                 </select>
             </div>
         </div>
@@ -53,7 +54,8 @@
             <label class="col-sm-3 control-label">状态：</label>
             <div class="col-sm-8">
                 <div class="onoffswitch">
-                    <input type="checkbox" th:checked="${user.status == '0' ? true : false}" class="onoffswitch-checkbox" id="status" name="status">
+                    <input type="checkbox" th:checked="${user.status == '0' ? true : false}"
+                           class="onoffswitch-checkbox" id="status" name="status">
                     <label class="onoffswitch-label" for="status">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
@@ -65,7 +67,8 @@
             <label class="col-sm-3 control-label">岗位：</label>
             <div class="col-sm-8">
                 <select id="post" name="post" class="form-control" multiple="">
-                    <option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:selected="${post.flag}" th:disabled="${post.status == '1'}"></option>
+                    <option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}"
+                            th:selected="${post.flag}" th:disabled="${post.status == '1'}"></option>
                 </select>
 
             </div>
@@ -74,7 +77,8 @@
             <label class="col-sm-3 control-label">角色：</label>
             <div class="col-sm-8">
                 <label th:each="role:${roles}" class="check-box">
-                    <input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:checked="${role.flag}" th:disabled="${role.status == '1'}">
+                    <input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}"
+                           th:checked="${role.flag}" th:disabled="${role.status == '1'}">
                 </label>
             </div>
         </div>
@@ -89,7 +93,7 @@
      * form表单校验器
      */
     $('#form-user-add').validate({
-        rules:{
+        rules: {
             userName: {
                 required: true
             },
@@ -97,8 +101,8 @@
                 required: true
             },
             email: {
-                required:true,
-                email:true,
+                required: true,
+                email: true,
                 remote: {
                     url: ctx + "system/user/checkEmailUnique",
                     type: "post",
@@ -107,11 +111,11 @@
                         userId: function () {
                             return $('#userId').val();
                         },
-                        email: function (){
+                        email: function () {
                             return $.common.trim($('#email').val());
                         }
                     },
-                    dataFilter: function (data,type) {
+                    dataFilter: function (data, type) {
                         return $.validate.unique(data);
                     }
                 }
@@ -131,13 +135,13 @@
                             return $.common.trim($('#phonenumber').val());
                         }
                     },
-                    dataFilter: function (data,type) {
+                    dataFilter: function (data, type) {
                         return $.validate.unique(data);
                     }
                 }
             }
         },
-        messages:{
+        messages: {
             email: {
                 remote: "email已存在"
             },
@@ -147,13 +151,13 @@
         }
     });
 
-    function submitHandler(){
-        if ($.validate.form()){
+    function submitHandler() {
+        if ($.validate.form()) {
             edit();
         }
     }
 
-    function edit(){
+    function edit() {
         var userId = $("input[name='userId']").val();
         var deptId = $("input[name='deptId']").val();
         //var loginName = $("input[name='loginName']").val();
@@ -193,21 +197,21 @@
         });
     }
 
-    function selectDeptTree(){
+    function selectDeptTree() {
         var deptId = $('#treeId').val();
         var options = {
             title: '选择部门',
             width: '380',
-            url : ctx + 'system/dept/selectDeptTree/' + deptId,
+            url: ctx + 'system/dept/selectDeptTree/' + deptId,
             callBack: openDialog
         };
         $.modal.openOptions(options);
     }
 
-    function openDialog(index,layero){
+    function openDialog(index, layero) {
         var tree = layero.find('iframe')[0].contentWindow.$._tree;
-        if ($.tree.notAllowParents(tree)){
-            var body = layer.getChildFrame('body',index);
+        if ($.tree.notAllowParents(tree)) {
+            var body = layer.getChildFrame('body', index);
             $('#treeId').val(body.find('#treeId').val());
             $('#treeName').val(body.find('#treeName').val());
             layer.close(index);

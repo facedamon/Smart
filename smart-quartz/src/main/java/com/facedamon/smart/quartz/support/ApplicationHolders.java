@@ -6,13 +6,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description:    quartz model spring bean holder
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 17:19
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 17:19
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: quartz model spring bean holder
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 17:19
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 17:19
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class ApplicationHolders implements ApplicationContextAware {

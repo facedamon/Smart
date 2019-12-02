@@ -56,7 +56,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
         this.sessionValidationInterval = sessionValidationInterval;
     }
 
-    public void setValidatingSessionManager(ValidatingSessionManager sessionManager){
+    public void setValidatingSessionManager(ValidatingSessionManager sessionManager) {
         this.validatingSessionManager = sessionManager;
     }
 

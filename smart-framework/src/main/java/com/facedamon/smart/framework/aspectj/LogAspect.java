@@ -23,13 +23,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * @Description:    操作日志记录切面
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 10:15
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 10:15
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 操作日志记录切面
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 10:15
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 10:15
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Aspect
 @Component
@@ -37,19 +37,20 @@ import java.util.Map;
 public class LogAspect {
 
     @Pointcut("@annotation(com.facedamon.smart.common.annotation.Log)")
-    public void logPointCut(){}
+    public void logPointCut() {
+    }
 
     /**
-     *
      * @param point
      */
     @AfterReturning(pointcut = "logPointCut()")
-    public void afterReturning(JoinPoint point){
+    public void afterReturning(JoinPoint point) {
         handleLog(point, null);
     }
 
     /**
      * 异常拦截
+     *
      * @param poin
      * @param e
      */
@@ -58,10 +59,10 @@ public class LogAspect {
         handleLog(poin, e);
     }
 
-    protected void handleLog(final JoinPoint point,final Exception e){
+    protected void handleLog(final JoinPoint point, final Exception e) {
         try {
             Log controllerLog = getAnnotation(point);
-            if (null == controllerLog){
+            if (null == controllerLog) {
                 return;
             }
             User user = ShiroUtils.getUser();
@@ -71,16 +72,16 @@ public class LogAspect {
                     .operIp(ShiroUtils.getIp())
                     .operUrl(ServletUtils.getRequest().getRequestURI());
 
-            if (null != user){
+            if (null != user) {
                 operLogBuilder.operName(user.getLoginName());
-                if (null != user.getDept() && StringUtils.isNotBlank(user.getDept().getDeptName())){
+                if (null != user.getDept() && StringUtils.isNotBlank(user.getDept().getDeptName())) {
                     operLogBuilder.deptName(user.getDept().getDeptName());
                 }
             }
 
-            if (null != e){
+            if (null != e) {
                 operLogBuilder.status(BusinessStatus.FAIL.ordinal())
-                        .errorMsg(StringUtils.substring(e.getMessage(),0,2000));
+                        .errorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
             }
 
             String className = point.getTarget().getClass().getName();
@@ -90,56 +91,59 @@ public class LogAspect {
             /**
              * 设置注解参数
              */
-            controllerHandler(controllerLog,operLogBuilder);
+            controllerHandler(controllerLog, operLogBuilder);
             /**
              * 保存数据库
              */
             AsyncFactory.INSTANCE.recordOper(operLogBuilder.build());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.error("===前置通知异常===");
-            log.error("异常信息{}",ex.getMessage());
+            log.error("异常信息{}", ex.getMessage());
             ex.printStackTrace();
         }
     }
 
     /**
      * 获取注解中对方法的描述信息，作用于controller层注解
+     *
      * @param llog
      * @param operLogBuilder
      * @throws Exception
      */
-    protected void controllerHandler(Log llog,OperLog.OperLogBuilder operLogBuilder) throws Exception{
+    protected void controllerHandler(Log llog, OperLog.OperLogBuilder operLogBuilder) throws Exception {
         operLogBuilder.businessType(llog.businessType().ordinal())
                 .model(llog.model())
                 .operatorType(llog.operatorType().ordinal());
 
-        if (llog.isSaveRequestData()){
+        if (llog.isSaveRequestData()) {
             saveRequestDate(operLogBuilder);
         }
     }
 
     /**
      * 获取请求的参数，放到Log中
+     *
      * @param operLogBuilder
      * @throws Exception
      */
-    protected void saveRequestDate(OperLog.OperLogBuilder operLogBuilder) throws Exception{
-        Map<String,String[]> map = ServletUtils.getRequest().getParameterMap();
+    protected void saveRequestDate(OperLog.OperLogBuilder operLogBuilder) throws Exception {
+        Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
         String params = JSON.toJSONString(map);
-        operLogBuilder.operParam(StringUtils.substring(params,0,255));
+        operLogBuilder.operParam(StringUtils.substring(params, 0, 255));
     }
 
     /**
      * 获取Log注解
+     *
      * @param point
      * @return
      * @throws Exception
      */
-    private Log getAnnotation(JoinPoint point) throws Exception{
+    private Log getAnnotation(JoinPoint point) throws Exception {
         Signature signature = point.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
-        if (null != method){
+        if (null != method) {
             return method.getAnnotation(Log.class);
         }
         return null;

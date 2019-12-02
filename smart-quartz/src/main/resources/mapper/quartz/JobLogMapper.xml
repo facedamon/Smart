@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.facedamon.smart.quartz.mapper.JobLogMapper">
     <resultMap type="JobLog" id="JobLogResult">
-        <id     property="jobLogId"       column="job_log_id"      />
-        <result property="jobName"        column="job_name"        />
-        <result property="jobGroup"       column="job_group"       />
-        <result property="methodName"     column="method_name"     />
-        <result property="methodParams"   column="method_params"   />
-        <result property="jobMessage"     column="job_message"     />
-        <result property="status"         column="status"          />
-        <result property="exceptionInfo"  column="exception_info"  />
-        <result property="createTime"     column="create_time"     />
+        <id property="jobLogId" column="job_log_id"/>
+        <result property="jobName" column="job_name"/>
+        <result property="jobGroup" column="job_group"/>
+        <result property="methodName" column="method_name"/>
+        <result property="methodParams" column="method_params"/>
+        <result property="jobMessage" column="job_message"/>
+        <result property="status" column="status"/>
+        <result property="exceptionInfo" column="exception_info"/>
+        <result property="createTime" column="create_time"/>
     </resultMap>
 
     <sql id="selectJobLogVo">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="log.path" value="/Users/facedamon/Downloads/logs" />
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.path" value="/Users/facedamon/Downloads/logs"/>
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -63,23 +63,24 @@
     </appender>
 
 
-    <logger name="com.facedamon.smart" level="info" />
+    <logger name="com.facedamon.smart" level="info"/>
+    <logger name="org.quartz" level="error"/>
 
     <!--druid log configure-->
-    <logger name="druid.sql.DataSource" level="debug"/>
-    <logger name="druid.sql.Connection" level="debug"/>
-    <logger name="druid.sql.Statement" level="debug"/>
+    <logger name="druid.sql.DataSource" level="info"/>
+    <logger name="druid.sql.Connection" level="info"/>
+    <logger name="druid.sql.Statement" level="info"/>
 
     <logger name="org.quartz.core" level="ERROR"/>
 
     <root level="debug">
-        <appender-ref ref="stdout" />
+        <appender-ref ref="stdout"/>
     </root>
 
     <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
     </root>
 
     <!--系统用户操作日志-->

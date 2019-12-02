@@ -5,16 +5,16 @@
 <mapper namespace="com.facedamon.smart.system.mapper.PostMapper">
 
     <resultMap type="Post" id="PostResult">
-        <id     property="postId"        column="post_id"       />
-        <result property="postCode"      column="post_code"     />
-        <result property="postName"      column="post_name"     />
-        <result property="postSort"      column="post_sort"     />
-        <result property="status"        column="status"        />
-        <result property="createBy"      column="create_by"     />
-        <result property="createTime"    column="create_time"   />
-        <result property="updateBy"      column="update_by"     />
-        <result property="updateTime"    column="update_time"   />
-        <result property="remark"        column="remark"        />
+        <id property="postId" column="post_id"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+        <result property="postSort" column="post_sort"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
     <sql id="selectPostVo">

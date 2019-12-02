@@ -8,23 +8,22 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * @Description:    验证码配置
- * @Author:         facedamon
- * @CreateDate:     2018/10/16 下午4:59
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/16 下午4:59
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 验证码配置
+ * @Author: facedamon
+ * @CreateDate: 2018/10/16 下午4:59
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/16 下午4:59
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 public class KaptchaConfig {
 
     /**
-     *
      * @return
      */
     @Bean(name = "captchaProducer")
-    public DefaultKaptcha getKaptcha(){
+    public DefaultKaptcha getKaptcha() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "yes");
@@ -44,7 +43,6 @@ public class KaptchaConfig {
     }
 
     /**
-     *
      * @return
      */
     @Bean(name = "captchaProducerMath")

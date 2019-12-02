@@ -36,7 +36,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
         super.setAttribute(sessionKey, attributeKey, value);
 
         if (null != value && needMarkAttributeChanged(attributeKey)) {
-            OnlineSession onlineSession = (OnlineSession)doGetSession(sessionKey);
+            OnlineSession onlineSession = (OnlineSession) doGetSession(sessionKey);
             onlineSession.markAttributeChanged();
         }
     }

@@ -63,14 +63,6 @@ public interface UserMapper {
     int deleteUserById(Long userId);
 
     /**
-     * 批量删除用户
-     *
-     * @param ids
-     * @return
-     */
-    int deleteUserByIds(Long[] ids);
-
-    /**
      * 更新用户信息
      *
      * @param user

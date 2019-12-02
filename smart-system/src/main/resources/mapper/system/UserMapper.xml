@@ -16,7 +16,6 @@
         <result property="password" column="password"/>
         <result property="salt" column="salt"/>
         <result property="status" column="status"/>
-        <result property="delFlag" column="del_flag"/>
         <result property="loginIp" column="login_ip"/>
         <result property="loginDate" column="login_date"/>
         <result property="createBy" column="create_by"/>
@@ -46,7 +45,7 @@
     </resultMap>
 
     <sql id="selectUserVo">
-        select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_time, u.remark,
+        select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status,
        		    r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
 		from sys_user u
@@ -57,33 +56,34 @@
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
         select u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.password, u.sex, u.avatar,
-        u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name from
+        u.salt, u.status, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name from
         sys_user u
         left join sys_dept d on u.dept_id = d.dept_id
-        where u.del_flag = '0'
-        <if test="loginName != null and loginName != ''">
-            AND u.login_name like concat('%', #{loginName}, '%')
-        </if>
-        <if test="status != null and status != ''">
-            AND u.status = #{status}
-        </if>
-        <if test="phonenumber != null and phonenumber != ''">
-            AND u.phonenumber like concat('%', #{phonenumber}, '%')
-        </if>
-
-        <if test="params != null">
-            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-                AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        <where>
+            <if test="loginName != null and loginName != ''">
+                AND u.login_name like concat('%', #{loginName}, '%')
             </if>
-            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-                AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            <if test="status != null and status != ''">
+                AND u.status = #{status}
             </if>
-        </if>
+            <if test="phonenumber != null and phonenumber != ''">
+                AND u.phonenumber like concat('%', #{phonenumber}, '%')
+            </if>
 
-        <if test="deptId != null and deptId != 0">
-            AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE FIND_IN_SET
-            (#{deptId},ancestors) ))
-        </if>
+            <if test="params != null">
+                <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                    AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+                </if>
+                <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                    AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+                </if>
+            </if>
+
+            <if test="deptId != null and deptId != 0">
+                AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE FIND_IN_SET
+                (#{deptId},ancestors) ))
+            </if>
+        </where>
         <!-- 数据范围过滤 ${params.dataScope}-->
     </select>
 
@@ -122,13 +122,6 @@
     <delete id="deleteUserById" parameterType="Long">
  		delete from sys_user where user_id = #{userId}
  	</delete>
-
-    <delete id="deleteUserByIds" parameterType="Long">
-        update sys_user set del_flag = '2' where user_id in
-        <foreach collection="array" item="userId" open="(" separator="," close=")">
-            #{userId}
-        </foreach>
-    </delete>
 
     <update id="updateUser" parameterType="User">
         update sys_user

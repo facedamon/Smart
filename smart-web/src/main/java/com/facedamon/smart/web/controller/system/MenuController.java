@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:    菜单controller
- * @Author:         facedamon
- * @CreateDate:     2018/11/16 下午7:13
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/16 下午7:13
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 菜单controller
+ * @Author: facedamon
+ * @CreateDate: 2018/11/16 下午7:13
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/16 下午7:13
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Controller
 @RequestMapping("/system/menu")
@@ -38,55 +38,55 @@ public class MenuController extends BaseController {
 
     @RequiresPermissions("system:menu:view")
     @GetMapping
-    public String menu(){
+    public String menu() {
         return prefix + "/menu";
     }
 
     @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
     @ResponseBody
-    public List<Menu> menu(Menu menu){
+    public List<Menu> menu(Menu menu) {
         return menuService.selectMenuList(menu);
     }
 
     @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId,ModelMap map){
+    public String add(@PathVariable("parentId") Long parentId, ModelMap map) {
         Menu menu = null;
-        if (0L != parentId){
+        if (0L != parentId) {
             menu = menuService.selectMenuById(parentId);
         } else {
             menu = Menu.builder().menuId(0L).menuName("主目录").build();
         }
-        map.put("menu",menu);
+        map.put("menu", menu);
         return prefix + "/add";
     }
 
-    @Log(model = "新增部门",businessType = BusinessType.INSERT)
+    @Log(model = "新增部门", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public Response add(Menu menu){
+    public Response add(Menu menu) {
         menu.setCreateBy(ShiroUtils.getLoginName());
         ShiroUtils.clearCachedAuthorizationInfo();
         return isSuccess(menuService.insertMenu(menu));
     }
 
     @GetMapping("/icon")
-    public String icon(){
+    public String icon() {
         return prefix + "/icon";
     }
 
-    @Log(model = "删除菜单",businessType = BusinessType.DELETE)
+    @Log(model = "删除菜单", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
     @PostMapping("/remove/{menuId}")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public Response remove(@PathVariable("menuId") Long menuId){
-        if (menuService.selectCountMenuByParentId(menuId) > 0){
+    public Response remove(@PathVariable("menuId") Long menuId) {
+        if (menuService.selectCountMenuByParentId(menuId) > 0) {
             return Response.error("存在子菜单，不允许删除");
         }
-        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0){
+        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0) {
             return Response.error("菜单已分配角色，不允许删除");
         }
         ShiroUtils.clearCachedAuthorizationInfo();
@@ -94,17 +94,17 @@ public class MenuController extends BaseController {
     }
 
     @GetMapping("/edit/{menuId}")
-    public String edit(@PathVariable("menuId") Long menuId,ModelMap map){
-        map.put("menu",menuService.selectMenuById(menuId));
+    public String edit(@PathVariable("menuId") Long menuId, ModelMap map) {
+        map.put("menu", menuService.selectMenuById(menuId));
         return prefix + "/edit";
     }
 
-    @Log(model = "更新菜单",businessType = BusinessType.UPDATE)
+    @Log(model = "更新菜单", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public Response edit(Menu menu){
+    public Response edit(Menu menu) {
         menu.setUpdateBy(ShiroUtils.getLoginName());
         ShiroUtils.clearCachedAuthorizationInfo();
         return isSuccess(menuService.updateMenu(menu));

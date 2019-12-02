@@ -5,13 +5,13 @@ import com.facedamon.smart.system.domain.DictType;
 import java.util.List;
 
 /**
- * @Description:    字典类型mapper
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 17:04
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 17:04
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 字典类型mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 17:04
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 17:04
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface DictTypeMapper {
 

@@ -6,13 +6,13 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 /**
- * @Description:    参数配置表
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 16:22
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 16:22
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 参数配置表
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 16:22
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 16:22
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Data
 @Builder

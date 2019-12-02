@@ -1,7 +1,7 @@
 /**
  * 菜单处理
  */
-$(function() {
+$(function () {
     /**
      * 左侧菜单
      */
@@ -10,7 +10,7 @@ $(function() {
     /**
      * 固定菜单栏
      */
-    $(function() {
+    $(function () {
         $('.sidebar-collapse').slimScroll({
             height: '100%',
             railOpacity: 0.9,
@@ -21,17 +21,17 @@ $(function() {
     /**
      * 菜单切换 收起/显示菜单
      */
-    $('.navbar-minimalize').click(function() {
+    $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
     });
 
-    $('#side-menu>li').click(function() {
+    $('#side-menu>li').click(function () {
         if ($('body').hasClass('mini-navbar')) {
             NavToggle();
         }
     });
-    $('#side-menu>li li a').click(function() {
+    $('#side-menu>li li a').click(function () {
         if ($(window).width() < 769) {
             NavToggle();
         }
@@ -47,7 +47,7 @@ $(function() {
 });
 
 $(window).bind("load resize",
-    function() {
+    function () {
         if ($(this).width() < 769) {
             $('body').addClass('mini-navbar');
             $('.navbar-static-side').fadeIn();
@@ -61,13 +61,13 @@ function NavToggle() {
 function SmoothlyMenu() {
     if (!$('body').hasClass('mini-navbar')) {
         $('#side-menu').hide();
-        setTimeout(function() {
+        setTimeout(function () {
                 $('#side-menu').fadeIn(500);
             },
             100);
     } else if ($('body').hasClass('fixed-sidebar')) {
         $('#side-menu').hide();
-        setTimeout(function() {
+        setTimeout(function () {
                 $('#side-menu').fadeIn(500);
             },
             300);
@@ -79,11 +79,11 @@ function SmoothlyMenu() {
 /**
  * iframe处理
  */
-$(function() {
+$(function () {
     //计算元素集合的总宽度
     function calSumWidth(elements) {
         var width = 0;
-        $(elements).each(function() {
+        $(elements).each(function () {
             width += $(this).outerWidth(true);
         });
         return width;
@@ -186,7 +186,7 @@ $(function() {
     }
 
     //通过遍历给菜单项加上data-index属性
-    $(".menuItem").each(function(index) {
+    $(".menuItem").each(function (index) {
         if (!$(this).attr('data-index')) {
             $(this).attr('data-index', index);
         }
@@ -201,13 +201,13 @@ $(function() {
         if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
 
         // 选项卡菜单已存在
-        $('.menuTab').each(function() {
+        $('.menuTab').each(function () {
             if ($(this).data('id') == dataUrl) {
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active').siblings('.menuTab').removeClass('active');
                     scrollToTab(this);
                     // 显示tab对应的内容区
-                    $('.mainContent .Smart_iframe').each(function() {
+                    $('.mainContent .Smart_iframe').each(function () {
                         if ($(this).data('id') == dataUrl) {
                             $(this).show().siblings('.Smart_iframe').hide();
                             return false;
@@ -256,7 +256,7 @@ $(function() {
                 var activeId = $(this).parents('.menuTab').next('.menuTab:eq(0)').data('id');
                 $(this).parents('.menuTab').next('.menuTab:eq(0)').addClass('active');
 
-                $('.mainContent .Smart_iframe').each(function() {
+                $('.mainContent .Smart_iframe').each(function () {
                     if ($(this).data('id') == activeId) {
                         $(this).show().siblings('.Smart_iframe').hide();
                         return false;
@@ -275,7 +275,7 @@ $(function() {
                 $(this).parents('.menuTab').remove();
 
                 // 移除tab对应的内容区
-                $('.mainContent .Smart_iframe').each(function() {
+                $('.mainContent .Smart_iframe').each(function () {
                     if ($(this).data('id') == closeTabId) {
                         $(this).remove();
                         return false;
@@ -287,7 +287,7 @@ $(function() {
             if ($(this).parents('.menuTab').prev('.menuTab').size()) {
                 var activeId = $(this).parents('.menuTab').prev('.menuTab:last').data('id');
                 $(this).parents('.menuTab').prev('.menuTab:last').addClass('active');
-                $('.mainContent .Smart_iframe').each(function() {
+                $('.mainContent .Smart_iframe').each(function () {
                     if ($(this).data('id') == activeId) {
                         $(this).show().siblings('.Smart_iframe').hide();
                         return false;
@@ -298,7 +298,7 @@ $(function() {
                 $(this).parents('.menuTab').remove();
 
                 // 移除tab对应的内容区
-                $('.mainContent .Smart_iframe').each(function() {
+                $('.mainContent .Smart_iframe').each(function () {
                     if ($(this).data('id') == closeTabId) {
                         $(this).remove();
                         return false;
@@ -312,7 +312,7 @@ $(function() {
             $(this).parents('.menuTab').remove();
 
             // 移除相应tab对应的内容区
-            $('.mainContent .Smart_iframe').each(function() {
+            $('.mainContent .Smart_iframe').each(function () {
                 if ($(this).data('id') == closeTabId) {
                     $(this).remove();
                     return false;
@@ -327,18 +327,20 @@ $(function() {
 
     //关闭其他选项卡
     function closeOtherTabs() {
-        $('.page-tabs-content').children("[data-id]").not(":first").not(".active").each(function() {
+        $('.page-tabs-content').children("[data-id]").not(":first").not(".active").each(function () {
             $('.Smart_iframe[data-id="' + $(this).data('id') + '"]').remove();
             $(this).remove();
         });
         $('.page-tabs-content').css("margin-left", "0");
     }
+
     $('.tabCloseOther').on('click', closeOtherTabs);
 
     //滚动到已激活的选项卡
     function showActiveTab() {
         scrollToTab($('.menuTab.active'));
     }
+
     $('.tabShowActive').on('click', showActiveTab);
 
     // 点击选项卡菜单
@@ -346,7 +348,7 @@ $(function() {
         if (!$(this).hasClass('active')) {
             var currentId = $(this).data('id');
             // 显示tab对应的内容区
-            $('.mainContent .Smart_iframe').each(function() {
+            $('.mainContent .Smart_iframe').each(function () {
                 if ($(this).data('id') == currentId) {
                     $(this).show().siblings('.Smart_iframe').hide();
                     return false;
@@ -367,6 +369,39 @@ $(function() {
         var url = target.attr('src');
         target.attr('src', url).ready();
     }
+
+    /*// 打开右侧边栏
+    $('.right-sidebar-toggle').click(function () {
+        $('#right-sidebar').toggleClass('sidebar-open');
+    });
+
+    // 默认主题
+    $('.s-skin-0').click(function () {
+        $("body").removeClass("skin-1");
+        $("body").removeClass("skin-2");
+        $("body").removeClass("skin-3");
+        return false;
+    });
+
+    // 蓝色主题
+    $('.s-skin-1').click(function () {
+        $("body").removeClass("skin-2");
+        $("body").removeClass("skin-3");
+        $("body").removeClass("background-color");
+        $("body").removeClass("color");
+        $("body").removeClass("background");
+
+        $("body").addClass("skin-1");
+        return false;
+    });
+
+    // 黄色主题
+    $('.s-skin-3').click(function () {
+        $("body").removeClass("skin-1");
+        $("body").removeClass("skin-2");
+        $("body").addClass("skin-3");
+        return false;
+    });*/
 
     // 全屏显示
     $('#fullScreen').on('click', function () {
@@ -390,12 +425,12 @@ $(function() {
     });
 
     // 关闭全部
-    $('.tabCloseAll').on('click', function() {
-        $('.page-tabs-content').children("[data-id]").not(":first").each(function() {
+    $('.tabCloseAll').on('click', function () {
+        $('.page-tabs-content').children("[data-id]").not(":first").each(function () {
             $('.Smart_iframe[data-id="' + $(this).data('id') + '"]').remove();
             $(this).remove();
         });
-        $('.page-tabs-content').children("[data-id]:first").each(function() {
+        $('.page-tabs-content').children("[data-id]:first").each(function () {
             $('.Smart_iframe[data-id="' + $(this).data('id') + '"]').show();
             $(this).addClass("active");
         });

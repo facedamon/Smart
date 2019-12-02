@@ -75,7 +75,7 @@ public class PasswordService {
          * 密码输入错误
          */
         if (!match(user, password)) {
-            AsyncFactory.INSTANCE.recordLogininfor(loginName,Constants.LOGIN_FAIL.getValue(),MessageUtils.message("user.password.retry.limit.count"));
+            AsyncFactory.INSTANCE.recordLogininfor(loginName, Constants.LOGIN_FAIL.getValue(), MessageUtils.message("user.password.retry.limit.count"));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         } else {

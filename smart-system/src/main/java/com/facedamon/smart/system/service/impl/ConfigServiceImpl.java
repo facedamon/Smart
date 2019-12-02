@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description:    参数配置service
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 16:30
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 16:30
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 参数配置service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 16:30
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 16:30
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class ConfigServiceImpl implements IConfigService {
@@ -32,9 +32,8 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 参数配置信息
      */
     @Override
-    public Config selectConfigById(Long configId)
-    {
-        Config config  = Config.builder().configId(configId).build();
+    public Config selectConfigById(Long configId) {
+        Config config = Config.builder().configId(configId).build();
         return configMapper.selectConfig(config);
     }
 
@@ -45,8 +44,7 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 参数键值
      */
     @Override
-    public String selectConfigByKey(String configKey)
-    {
+    public String selectConfigByKey(String configKey) {
         Config config = Config.builder().configKey(configKey).build();
         Config retConfig = configMapper.selectConfig(config);
         return null != retConfig ? retConfig.getConfigValue() : "";
@@ -59,8 +57,7 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 参数配置集合
      */
     @Override
-    public List<Config> selectConfigList(Config config)
-    {
+    public List<Config> selectConfigList(Config config) {
         return configMapper.selectConfigList(config);
     }
 
@@ -71,8 +68,7 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 结果
      */
     @Override
-    public int insertConfig(Config config)
-    {
+    public int insertConfig(Config config) {
         return configMapper.insertConfig(config);
     }
 
@@ -83,8 +79,7 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 结果
      */
     @Override
-    public int updateConfig(Config config)
-    {
+    public int updateConfig(Config config) {
         return configMapper.updateConfig(config);
     }
 
@@ -95,8 +90,7 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 结果
      */
     @Override
-    public int deleteConfigByIds(String ids)
-    {
+    public int deleteConfigByIds(String ids) {
         return configMapper.deleteConfigByIds(Convert.toStrArray(ids));
     }
 
@@ -107,12 +101,10 @@ public class ConfigServiceImpl implements IConfigService {
      * @return 结果
      */
     @Override
-    public String checkConfigKeyUnique(Config config)
-    {
-        Long configId = null != config.getConfigId() ? -1L : config.getConfigId();
+    public String checkConfigKeyUnique(Config config) {
+        Long configId = null == config.getConfigId() ? -1L : config.getConfigId();
         Config info = configMapper.checkConfigKeyUnique(config.getConfigKey());
-        if (null != info && info.getConfigId().longValue() != configId.longValue())
-        {
+        if (null != info && info.getConfigId().longValue() != configId.longValue()) {
             return UserConstants.CONFIG_KEY_NOT_UNIQUE.getValue();
         }
         return UserConstants.CONFIG_KEY_UNIQUE.getValue();

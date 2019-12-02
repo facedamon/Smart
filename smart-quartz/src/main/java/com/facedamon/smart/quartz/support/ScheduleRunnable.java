@@ -8,13 +8,13 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Method;
 
 /**
- * @Description:    核心任务
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 17:40
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 17:40
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 核心任务
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 17:40
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 17:40
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class ScheduleRunnable implements Runnable {
 
@@ -24,12 +24,12 @@ public class ScheduleRunnable implements Runnable {
     private Method method;
     private String params;
 
-    public ScheduleRunnable(String beanName,String methodName,String params) throws NoSuchMethodException,SecurityException{
+    public ScheduleRunnable(String beanName, String methodName, String params) throws NoSuchMethodException, SecurityException {
         this.target = ApplicationHolders.getBean(beanName);
         this.params = params;
 
-        if (StringUtils.isNotBlank(params)){
-            this.method = target.getClass().getDeclaredMethod(methodName,String.class);
+        if (StringUtils.isNotBlank(params)) {
+            this.method = target.getClass().getDeclaredMethod(methodName, String.class);
         } else {
             this.method = target.getClass().getDeclaredMethod(methodName);
         }
@@ -39,13 +39,13 @@ public class ScheduleRunnable implements Runnable {
     public void run() {
         try {
             ReflectionUtils.makeAccessible(method);
-            if (StringUtils.isNotBlank(params)){
-                method.invoke(target,params);
+            if (StringUtils.isNotBlank(params)) {
+                method.invoke(target, params);
             } else {
                 method.invoke(target);
             }
-        } catch (Exception e){
-            log.error("执行定时任务异常: ",e);
+        } catch (Exception e) {
+            log.error("执行定时任务异常: ", e);
         }
     }
 }

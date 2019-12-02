@@ -141,6 +141,7 @@ public class ShiroConfig {
 
     /**
      * 自定义sessionfactory会话
+     *
      * @return
      */
     @Bean
@@ -150,10 +151,11 @@ public class ShiroConfig {
 
     /**
      * 自定义sessionFactory调度器
+     *
      * @return
      */
     @Bean
-    public SpringSessionValidationScheduler sessionValidationScheduler(){
+    public SpringSessionValidationScheduler sessionValidationScheduler() {
         SpringSessionValidationScheduler sessionValidationScheduler = new SpringSessionValidationScheduler();
         /**
          * 相隔多久检查一次session的有效性，单位毫秒
@@ -166,6 +168,7 @@ public class ShiroConfig {
         sessionValidationScheduler.setValidatingSessionManager(sessionValidationManager());
         return sessionValidationScheduler;
     }
+
     /**
      * 安全管理器
      *
@@ -250,10 +253,11 @@ public class ShiroConfig {
 
     /**
      * thymeleaf 模板引擎和shiro框架整合
+     *
      * @return
      */
     @Bean
-    public ShiroDialect shiroDialect(){
+    public ShiroDialect shiroDialect() {
         return new ShiroDialect();
     }
 
@@ -311,7 +315,7 @@ public class ShiroConfig {
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         filters.put("captchaValidate", captchaValidateFilter());
 
-        filters.put("logout",logoutFilter());
+        filters.put("logout", logoutFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         filterChainDefinitionMap.put("/**", "user,onlineSession,syncOnlineSession");
@@ -353,10 +357,11 @@ public class ShiroConfig {
 
     /**
      * 验证码
+     *
      * @return
      */
     @Bean
-    public CaptchaValidateFilter captchaValidateFilter(){
+    public CaptchaValidateFilter captchaValidateFilter() {
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
         captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
         captchaValidateFilter.setCaptchaType(captchaType);
@@ -371,7 +376,7 @@ public class ShiroConfig {
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager")
-                                                                                               SecurityManager securityManager) {
+                                                                                           SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;

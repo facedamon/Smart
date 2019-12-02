@@ -3,7 +3,6 @@ package com.facedamon.smart.web.controller.system;
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
-import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.system.domain.Post;
@@ -94,17 +93,6 @@ public class PostController extends BaseController {
         } catch (Exception e) {
             return Response.error(e.getMessage());
         }
-    }
-
-    @Log(model = "导出岗位信息", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:post:export")
-    @PostMapping("/export")
-    @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
-    public Response export(Post post) {
-        List<Post> posts = postService.selectPostList(post);
-        ExcelUtils utils = new ExcelUtils<Post>(Post.class);
-        return utils.export(posts, "post");
     }
 
     @PostMapping("/checkPostNameUnique")

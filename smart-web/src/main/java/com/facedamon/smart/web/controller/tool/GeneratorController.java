@@ -18,13 +18,13 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @Description:    逆向工程controller
- * @Author:         facedamon
- * @CreateDate:     2018/11/21 14:37
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/21 14:37
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 逆向工程controller
+ * @Author: facedamon
+ * @CreateDate: 2018/11/21 14:37
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/21 14:37
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Controller
 @RequestMapping("/tool/gen")
@@ -37,43 +37,43 @@ public class GeneratorController extends BaseController {
 
     @RequiresPermissions("tool:gen:view")
     @GetMapping
-    public String gen(){
+    public String gen() {
         return prefix + "/gen";
     }
 
     @RequiresPermissions("tool:gen:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(TableInfo tableInfo){
+    public TableDataInfo list(TableInfo tableInfo) {
         startPage();
         List<TableInfo> tableInfos = generatorService.selectTableList(tableInfo);
         return getDataTable(tableInfos);
     }
 
-    @Log(model = "代码生成",businessType = BusinessType.GENCODE)
+    @Log(model = "代码生成", businessType = BusinessType.GENCODE)
     @RequiresPermissions("tool:gen:code")
     @GetMapping("/genCode/{tableName}")
     public void genCode(@PathVariable("tableName") String tableName, HttpServletResponse response) throws IOException {
         byte[] codes = generatorService.generatorCode(tableName);
-        setStream(response,codes.length);
-        IOUtils.write(codes,response.getOutputStream());
+        setStream(response, codes.length);
+        IOUtils.write(codes, response.getOutputStream());
     }
 
-    @Log(model = "批量代码生成",businessType = BusinessType.GENCODE)
+    @Log(model = "批量代码生成", businessType = BusinessType.GENCODE)
     @RequiresPermissions("tool:gen:code")
     @GetMapping("/batchGenCode")
-    public void genCode(HttpServletResponse response,String tableNames) throws IOException {
+    public void genCode(HttpServletResponse response, String tableNames) throws IOException {
         String[] tables = Convert.toStrArray(tableNames);
         byte[] codes = generatorService.generatorCode(tables);
 
-        setStream(response,codes.length);
-        IOUtils.write(codes,response.getOutputStream());
+        setStream(response, codes.length);
+        IOUtils.write(codes, response.getOutputStream());
     }
 
-    protected void setStream(HttpServletResponse response,int len){
+    protected void setStream(HttpServletResponse response, int len) {
         response.reset();
-        response.setHeader("Content-Disposition","attachment;filename=\"smart.zip\"");
-        response.addHeader("Content-Length","" + len);
+        response.setHeader("Content-Disposition", "attachment;filename=\"smart.zip\"");
+        response.addHeader("Content-Length", "" + len);
         response.setContentType("application/octet-stream;charset=UTF-8");
     }
 }

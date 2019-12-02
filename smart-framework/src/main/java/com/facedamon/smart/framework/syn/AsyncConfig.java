@@ -7,13 +7,13 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
- * @Description:    自定义异步线程池
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 13:54
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 13:54
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 自定义异步线程池
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 13:54
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 13:54
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 public class AsyncConfig {
@@ -28,7 +28,7 @@ public class AsyncConfig {
     private Integer keepAliveSeconds;
 
     @Bean
-    public AsyncTaskExecutor taskExecutor(){
+    public AsyncTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setThreadNamePrefix("Anno-Executor");
         executor.setMaxPoolSize(maxPoolSize);

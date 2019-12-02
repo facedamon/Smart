@@ -13,13 +13,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Description:    防止xss攻击的过滤器
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 13:09
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 13:09
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 防止xss攻击的过滤器
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 13:09
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 13:09
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class XssFilter implements Filter {
 
@@ -35,6 +35,7 @@ public class XssFilter implements Filter {
 
     /**
      * 设置变量
+     *
      * @param filterConfig
      * @throws ServletException
      */
@@ -43,14 +44,14 @@ public class XssFilter implements Filter {
         String excludes = filterConfig.getInitParameter("excludes");
         String enabled = filterConfig.getInitParameter("enabled");
 
-        if (StringUtils.isNotBlank(excludes)){
+        if (StringUtils.isNotBlank(excludes)) {
             String[] url = excludes.split(",");
-            for (int i = 0; url != null && i < url.length; i++){
+            for (int i = 0; url != null && i < url.length; i++) {
                 this.excludes.add(url[i]);
             }
         }
 
-        if (StringUtils.isNotBlank(enabled)){
+        if (StringUtils.isNotBlank(enabled)) {
             this.enabled = Boolean.valueOf(enabled);
         }
 
@@ -64,32 +65,32 @@ public class XssFilter implements Filter {
         /**
          * 跳过excludes
          */
-        if (handleExcludeURL(req,resp)){
-            chain.doFilter(request,response);
+        if (handleExcludeURL(req, resp)) {
+            chain.doFilter(request, response);
             return;
         }
         /**
          * 处理excludesh之外的链接
          */
         XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(req);
-        chain.doFilter(xssRequest,response);
+        chain.doFilter(xssRequest, response);
     }
 
     protected boolean handleExcludeURL(HttpServletRequest req, HttpServletResponse resp) {
-        if (!enabled){
+        if (!enabled) {
             return true;
         }
-        if (CollectionUtils.isEmpty(excludes)){
+        if (CollectionUtils.isEmpty(excludes)) {
             return false;
         }
         String url = req.getServletPath();
-        for (String pattern : excludes){
+        for (String pattern : excludes) {
             /**
              * 以pattern开头的链接
              */
             Pattern p = Pattern.compile("^" + pattern);
             Matcher m = p.matcher(url);
-            if (m.find()){
+            if (m.find()) {
                 return true;
             }
         }

@@ -1,5 +1,15 @@
 /**
  * 通用JS方法封装处理
+ * 包括{
+ *  Table
+ *  treeTable
+ *  form
+ *  modal
+ *  operate
+ *  validate
+ *  tree
+ *  common
+ * }
  */
 
 (function ($) {
@@ -47,44 +57,44 @@
 
             /**
              * 查询条件
-             * @param params
+             * @system params
              */
-            queryParams: function(params){
+            queryParams: function (params) {
                 /**
                  * 可以覆盖传递更多参数
                  */
                 return {
-                    pageSize:       params.limit,
-                    pageNum:        params.offset / params.limit + 1,
-                    searchValue:    params.search,
-                    orderByColumn:  params.sort,
-                    isAsc:          params.order
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    searchValue: params.search,
+                    orderByColumn: params.sort,
+                    isAsc: params.order
                 }
             },
 
             /**
              * 请求获取数据后处理回调函数
-             * @param res
+             * @system res
              */
-            responseHandler: function(res){
-                if (res.code == 0){
-                    return {rows: res.rows,total:res.total};
+            responseHandler: function (res) {
+                if (res.code == 0) {
+                    return {rows: res.rows, total: res.total};
                 } else {
                     $.modal.alertWarning(res.msg);
-                    return {rows:[],total:0};
+                    return {rows: [], total: 0};
                 }
             },
 
             /**
              * 搜索功能
-             * @param formId
+             * @system formId
              */
             search: function (formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 var params = $('#bootstrap-table').bootstrapTable('getOptions');
                 params.queryParams = function (params) {
                     var search = {};
-                    $.each($("#" + currentId).serializeArray(),function (i,field) {
+                    $.each($("#" + currentId).serializeArray(), function (i, field) {
                         search[field.name] = field.value;
                     });
                     search.pageSize = params.limit;
@@ -94,14 +104,14 @@
                     search.isAsc = params.order;
                     return search;
                 }
-                $('#bootstrap-table').bootstrapTable('refresh',params);
+                $('#bootstrap-table').bootstrapTable('refresh', params);
             },
 
             /**
              * 刷新
              */
             refresh: function () {
-                $('#bootstrap-table').bootstrapTable('refresh',{
+                $('#bootstrap-table').bootstrapTable('refresh', {
                     url: $.table._option.url,
                     silent: true
                 });
@@ -109,13 +119,13 @@
 
             /**
              * 下载数据
-             * @param formId
+             * @system formId
              */
-            exportExcel: function(formId){
+            exportExcel: function (formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 $.modal.loading("正在导出数据，请稍后...");
-                $.post($.table._option.exportUrl,$("#" + currentId).serializeArray(),function (result) {
-                    if (result.code == web_status.SUCCESS){
+                $.post($.table._option.exportUrl, $("#" + currentId).serializeArray(), function (result) {
+                    if (result.code == web_status.SUCCESS) {
                         window.location.href = ctx + "common/download?fileName=" + result.msg + "&delete=" + true;
                     } else {
                         $.modal.alertError(result.msg);
@@ -126,10 +136,10 @@
 
             /**
              * 查询选中列值
-             * @param column
+             * @system column
              */
-            selectColumns: function(column){
-                return $.map($('#bootstrap-table').bootstrapTable('getSelections'),function (row) {
+            selectColumns: function (column) {
+                return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
                     return row[column];
                 });
             },
@@ -138,20 +148,20 @@
              * 查询选中首列值
              */
             selectFirstColumns: function () {
-                return $.map($('#bootstrap-table').bootstrapTable('getSelections'),function(row){
+                return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
                     return row[$.table._option.columns[1].field];
                 });
             },
 
             /**
              * 回显数据字典
-             * @param datas
-             * @param value
+             * @system datas
+             * @system value
              */
-            selectDictLabel: function(datas,value){
+            selectDictLabel: function (datas, value) {
                 var actions = [];
-                $.each(datas,function(index,dict){
-                    if (dict.dictValue == value){
+                $.each(datas, function (index, dict) {
+                    if (dict.dictValue == value) {
                         actions.push("<span class='badge badge-" + dict.listClass + "'>" + dict.dictLabel + "</span>");
                         return false;
                     }
@@ -163,22 +173,22 @@
         /**
          * 表格树封装处理
          */
-        treeTable:{
-            _option:{},
+        treeTable: {
+            _option: {},
 
             init: function (options) {
                 $.table._option = options;
                 var treeTable = $('#bootstrap-table').bootstrapTreeTable({
-                    id : options.id,                                    // 用于设置父子关系
-                    parentId : options.parentId,                        // 用于设置父子关系
+                    id: options.id,                                    // 用于设置父子关系
+                    parentId: options.parentId,                        // 用于设置父子关系
                     type: 'get',                                        // 请求方式（*）
                     url: options.url,                                   // 请求后台的URL（*）
-                    ajaxParams : {},                                    // 请求数据的ajax的data属性
-                    expandColumn : '1',                                 // 在哪一列上面显示展开按钮
-                    striped : false,                                    // 是否各行渐变色
-                    bordered : true,                                    // 是否显示边框
+                    ajaxParams: {},                                    // 请求数据的ajax的data属性
+                    expandColumn: '1',                                 // 在哪一列上面显示展开按钮
+                    striped: false,                                    // 是否各行渐变色
+                    bordered: true,                                    // 是否显示边框
                     toolbar: '#toolbar',                                // 指定工作栏
-                    expandAll : $.common.visible(options.expandAll),    // 是否全部展开
+                    expandAll: $.common.visible(options.expandAll),    // 是否全部展开
                     columns: options.columns
                 });
                 $._treeTable = treeTable;
@@ -186,12 +196,12 @@
 
             /**
              * 条件查询
-             * @param formId
+             * @system formId
              */
-            search: function(formId) {
+            search: function (formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 var params = {};
-                $.each($("#" + currentId).serializeArray(), function(i, field) {
+                $.each($("#" + currentId).serializeArray(), function (i, field) {
                     params[field.name] = field.value;
                 });
                 $._treeTable.bootstrapTreeTable('refresh', params);
@@ -200,7 +210,7 @@
             /**
              * 刷新
              */
-            refresh: function() {
+            refresh: function () {
                 $._treeTable.bootstrapTreeTable('refresh');
             }
 
@@ -212,21 +222,21 @@
         form: {
             /**
              * 表单重置
-             * @param formId
+             * @system formId
              */
-            reset: function(formId){
+            reset: function (formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 $("#" + currentId)[0].reset();
             },
 
             /**
              * 获取选中复选框项
-             * @param name
+             * @system name
              */
-            selectCheckeds: function(name){
+            selectCheckeds: function (name) {
                 var checkeds = "";
-                $('input:checkbox[name="'+ name +'"]:checked').each(function (i) {
-                    if (0 == i){
+                $('input:checkbox[name="' + name + '"]:checked').each(function (i) {
+                    if (0 == i) {
                         checkeds = $(this).val();
                     } else {
                         checkeds += ("," + $(this).val());
@@ -237,12 +247,12 @@
 
             /**
              * 获取选中下拉框
-             * @param name
+             * @system name
              */
-            selectSelects: function(name){
+            selectSelects: function (name) {
                 var selects = "";
                 $('#' + name + ' option:selected').each(function (i) {
-                    if (0 == i){
+                    if (0 == i) {
                         selects = $(this).val();
                     } else {
                         selects += ("," + $(this).val());
@@ -259,10 +269,10 @@
 
             /**
              * 显示图标
-             * @param type
+             * @system type
              * @returns {number}
              */
-            icon: function(type){
+            icon: function (type) {
                 var icon = "";
                 if (type == modal_status.WARNING) {
                     icon = 0;
@@ -278,12 +288,12 @@
 
             /**
              * 消息提示
-             * @param content
-             * @param type
+             * @system content
+             * @system type
              */
-            msg: function(content,type){
+            msg: function (content, type) {
                 if (type != undefined) {
-                    layer.msg(content, { icon: $.modal.icon(type), time: 1000, shift: 5 });
+                    layer.msg(content, {icon: $.modal.icon(type), time: 1000, shift: 5});
                 } else {
                     layer.msg(content);
                 }
@@ -291,7 +301,7 @@
 
             /**
              * 错误消息
-             * @param content
+             * @system content
              */
             msgError: function (content) {
                 $.modal.msg(content, modal_status.FAIL);
@@ -299,7 +309,7 @@
 
             /**
              * 成功消息
-             * @param content
+             * @system content
              */
             msgSuccess: function (content) {
                 $.modal.msg(content, modal_status.SUCCESS);
@@ -307,7 +317,7 @@
 
             /**
              * 警告信息
-             * @param content
+             * @system content
              */
             msgWarning: function (content) {
                 $.modal.msg(content, modal_status.WARNING);
@@ -315,10 +325,10 @@
 
             /**
              * 弹出提示
-             * @param content
-             * @param type
+             * @system content
+             * @system type
              */
-            alert: function (content,type) {
+            alert: function (content, type) {
                 layer.alert(content, {
                     icon: $.modal.icon(type),
                     title: "系统提示",
@@ -329,23 +339,23 @@
 
             /**
              * 消息提示并刷新父窗体
-             * @param msg
-             * @param type
+             * @system msg
+             * @system type
              */
-            msgReload: function (msg,type) {
+            msgReload: function (msg, type) {
                 layer.msg(msg, {
                         icon: $.modal.icon(type),
                         time: 500,
                         shade: [0.1, '#8F8F8F']
                     },
-                    function() {
+                    function () {
                         $.modal.reload();
                     });
             },
 
             /**
              * 错误提示
-             * @param content
+             * @system content
              */
             alertError: function (content) {
                 $.modal.alert(content, modal_status.FAIL);
@@ -353,17 +363,17 @@
 
             /**
              * 成功提示
-             * @param content
+             * @system content
              */
-            alertSuccess: function(content) {
+            alertSuccess: function (content) {
                 $.modal.alert(content, modal_status.SUCCESS);
             },
 
             /**
              * 警告提示
-             * @param content
+             * @system content
              */
-            alertWarning: function(content) {
+            alertWarning: function (content) {
                 $.modal.alert(content, modal_status.WARNING);
             },
 
@@ -377,8 +387,8 @@
 
             /**
              * 确认窗体
-             * @param content
-             * @param callBack
+             * @system content
+             * @system callBack
              */
             confirm: function (content, callBack) {
                 layer.confirm(content, {
@@ -394,10 +404,10 @@
 
             /**
              * 弹出层指定宽度
-             * @param title
-             * @param url
-             * @param width
-             * @param height
+             * @system title
+             * @system url
+             * @system width
+             * @system height
              */
             open: function (title, url, width, height) {
                 //如果是移动端，就使用自适应大小弹窗
@@ -407,16 +417,20 @@
                 }
                 if ($.common.isEmpty(title)) {
                     title = false;
-                };
+                }
+                ;
                 if ($.common.isEmpty(url)) {
                     url = "/404.html";
-                };
+                }
+                ;
                 if ($.common.isEmpty(width)) {
                     width = 800;
-                };
+                }
+                ;
                 if ($.common.isEmpty(height)) {
                     height = ($(window).height() - 50);
-                };
+                }
+                ;
                 layer.open({
                     type: 2,
                     area: [width + 'px', height + 'px'],
@@ -429,11 +443,11 @@
                     btn: ['确定', '关闭'],
                     // 弹层外区域关闭
                     shadeClose: true,
-                    yes: function(index, layero) {
+                    yes: function (index, layero) {
                         var iframeWin = layero.find('iframe')[0];
                         iframeWin.contentWindow.submitHandler();
                     },
-                    cancel: function(index) {
+                    cancel: function (index) {
                         return true;
                     }
                 });
@@ -441,7 +455,7 @@
 
             /**
              * 弹出层指定参数选项
-             * @param options
+             * @system options
              */
             openOptions: function (options) {
                 var _url = $.common.isEmpty(options.url) ? "/404.html" : options.url;
@@ -468,10 +482,10 @@
 
             /**
              * 弹出层全屏
-             * @param title
-             * @param url
-             * @param width
-             * @param height
+             * @system title
+             * @system url
+             * @system width
+             * @system height
              */
             openFull: function (title, url, width, height) {
                 //如果是移动端，就使用自适应大小弹窗
@@ -481,16 +495,20 @@
                 }
                 if ($.common.isEmpty(title)) {
                     title = false;
-                };
+                }
+                ;
                 if ($.common.isEmpty(url)) {
                     url = "/404.html";
-                };
+                }
+                ;
                 if ($.common.isEmpty(width)) {
                     width = 800;
-                };
+                }
+                ;
                 if ($.common.isEmpty(height)) {
                     height = ($(window).height() - 50);
-                };
+                }
+                ;
                 var index = layer.open({
                     type: 2,
                     area: [width + 'px', height + 'px'],
@@ -508,17 +526,17 @@
 
             /**
              * 打开遮罩层
-             * @param message
+             * @system message
              */
             loading: function (message) {
-                $.blockUI({ message: '<div class="loaderbox"><div class="loading-activity"></div> ' + message + '</div>' });
+                $.blockUI({message: '<div class="loaderbox"><div class="loading-activity"></div> ' + message + '</div>'});
             },
 
             /**
              * 关闭遮罩层
              */
             closeLoading: function () {
-                setTimeout(function(){
+                setTimeout(function () {
                     $.unblockUI();
                 }, 50);
             },
@@ -535,19 +553,19 @@
 
             /**
              * 提交数据
-             * @param url
-             * @param type
-             * @param dataType
-             * @param data
+             * @system url
+             * @system type
+             * @system dataType
+             * @system data
              */
-            submit: function(url, type, dataType, data) {
+            submit: function (url, type, dataType, data) {
                 $.modal.loading("正在处理中，请稍后...");
                 var config = {
                     url: url,
                     type: type,
                     dataType: dataType,
                     data: data,
-                    success: function(result) {
+                    success: function (result) {
                         $.operate.ajaxSuccess(result);
                     }
                 };
@@ -556,18 +574,18 @@
 
             /**
              * post请求传输
-             * @param url
-             * @param data
+             * @system url
+             * @system data
              */
-            post: function(url, data) {
+            post: function (url, data) {
                 $.operate.submit(url, "post", "json", data);
             },
 
             /**
              * 详细信息
-             * @param id
+             * @system id
              */
-            detail: function(id) {
+            detail: function (id) {
                 var _url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);
                 layer.open({
                     type: 2,
@@ -581,7 +599,7 @@
                     btn: ['<i class="fa fa-close"></i> 关闭'],
                     // 弹层外区域关闭
                     shadeClose: true,
-                    cancel: function(index) {
+                    cancel: function (index) {
                         return true;
                     }
                 });
@@ -589,12 +607,12 @@
 
             /**
              * 删除信息
-             * @param id
+             * @system id
              */
-            remove: function(id) {
-                $.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
+            remove: function (id) {
+                $.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function () {
                     var url = $.common.isEmpty(id) ? $.table._option.removeUrl : $.table._option.removeUrl.replace("{id}", id);
-                    var data = { "ids": id };
+                    var data = {"ids": id};
                     $.operate.submit(url, "post", "json", data);
                 });
             },
@@ -602,15 +620,15 @@
             /**
              * 批量删除信息
              */
-            removeAll: function() {
+            removeAll: function () {
                 var rows = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
                 if (rows.length == 0) {
                     $.modal.alertWarning("请至少选择一条记录");
                     return;
                 }
-                $.modal.confirm("确认要删除选中的" + rows.length + "条数据吗?", function() {
+                $.modal.confirm("确认要删除选中的" + rows.length + "条数据吗?", function () {
                     var url = $.table._option.removeUrl;
-                    var data = { "ids": rows.join() };
+                    var data = {"ids": rows.join()};
                     $.operate.submit(url, "post", "json", data);
                 });
             },
@@ -618,8 +636,8 @@
             /**
              * 清空信息
              */
-            clean: function() {
-                $.modal.confirm("确定清空所有" + $.table._option.modalName + "吗？", function() {
+            clean: function () {
+                $.modal.confirm("确定清空所有" + $.table._option.modalName + "吗？", function () {
                     var url = $.table._option.cleanUrl;
                     $.operate.submit(url, "post", "json", "");
                 });
@@ -627,18 +645,18 @@
 
             /**
              * 添加信息
-             * @param id
+             * @system id
              */
-            add: function(id) {
+            add: function (id) {
                 var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
                 $.modal.open("添加" + $.table._option.modalName, url);
             },
 
             /**
              * 修改信息
-             * @param id
+             * @system id
              */
-            edit: function(id) {
+            edit: function (id) {
                 var url = "/404.html";
                 if ($.common.isNotEmpty(id)) {
                     url = $.table._option.updateUrl.replace("{id}", id);
@@ -655,7 +673,7 @@
             /**
              * 工具栏表格树修改
              */
-            editTree: function() {
+            editTree: function () {
                 var row = $('#bootstrap-table').bootstrapTreeTable('getSelections')[0];
                 if ($.common.isEmpty(row)) {
                     $.modal.alertWarning("请至少选择一条记录");
@@ -667,18 +685,18 @@
 
             /**
              * 添加信息全屏
-             * @param id
+             * @system id
              */
-            addFull: function(id) {
+            addFull: function (id) {
                 var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
                 $.modal.openFull("添加" + $.table._option.modalName, url);
             },
 
             /**
              * 修改信息全屏
-             * @param id
+             * @system id
              */
-            editFull: function(id) {
+            editFull: function (id) {
                 var url = "/404.html";
                 if ($.common.isNotEmpty(id)) {
                     url = $.table._option.updateUrl.replace("{id}", id);
@@ -691,17 +709,17 @@
 
             /**
              * 保存信息
-             * @param url
-             * @param data
+             * @system url
+             * @system data
              */
-            save: function(url, data) {
+            save: function (url, data) {
                 $.modal.loading("正在处理中，请稍后...");
                 var config = {
                     url: url,
                     type: "post",
                     dataType: "json",
                     data: data,
-                    success: function(result) {
+                    success: function (result) {
                         $.operate.saveSuccess(result);
                     }
                 };
@@ -710,7 +728,7 @@
 
             /**
              * 保存结果弹出msg刷新table表格
-             * @param result
+             * @system result
              */
             ajaxSuccess: function (result) {
                 if (result.code == web_status.SUCCESS) {
@@ -724,7 +742,7 @@
 
             /**
              * 保存结果提示msg
-             * @param result
+             * @system result
              */
             saveSuccess: function (result) {
                 if (result.code == web_status.SUCCESS) {
@@ -743,7 +761,7 @@
 
             /**
              * 判断返回标识是否唯一 false不存在 true 存在
-             * @param value
+             * @system value
              * @returns {boolean}
              */
             unique: function (value) {
@@ -755,7 +773,7 @@
 
             /**
              * 表单验证
-             * @param formId
+             * @system formId
              * @returns {*}
              */
             form: function (formId) {
@@ -765,6 +783,7 @@
         },
 
         /**
+         * jqueryZtree plugins
          * 树插件封装处理
          */
         tree: {
@@ -772,9 +791,9 @@
             _lastValue: {},
             /**
              * 初始化树结构
-             * @param options
+             * @system options
              */
-            init: function(options) {
+            init: function (options) {
                 $.tree._option = options;
                 // 属性ID
                 var _id = $.common.isEmpty(options.id) ? "tree" : options.id;
@@ -783,11 +802,11 @@
                 // 树结构初始化加载
                 var setting = {
                     check: options.check,
-                    view: { selectedMulti: false, nameIsHTML: true },
-                    data: { key: { title: "title" }, simpleData: { enable: true } },
-                    callback: { onClick: options.onClick }
+                    view: {selectedMulti: false, nameIsHTML: true},
+                    data: {key: {title: "title"}, simpleData: {enable: true}},
+                    callback: {onClick: options.onClick}
                 };
-                $.get(options.url, function(data) {
+                $.get(options.url, function (data) {
                     var treeName = $("#treeName").val();
                     var treeId = $("#treeId").val();
                     tree = $.fn.zTree.init($("#" + _id), setting, data);
@@ -795,7 +814,7 @@
                     // 展开第一级节点
                     var nodes = tree.getNodesByParam("level", 0);
                     for (var i = 0; i < nodes.length; i++) {
-                        if(_expandLevel > 0) {
+                        if (_expandLevel > 0) {
                             tree.expandNode(nodes[i], true, false, false);
                         }
                         $.tree.selectByIdName(treeId, treeName, nodes[i]);
@@ -803,7 +822,7 @@
                     // 展开第二级节点
                     nodes = tree.getNodesByParam("level", 1);
                     for (var i = 0; i < nodes.length; i++) {
-                        if(_expandLevel > 1) {
+                        if (_expandLevel > 1) {
                             tree.expandNode(nodes[i], true, false, false);
                         }
                         $.tree.selectByIdName(treeId, treeName, nodes[i]);
@@ -811,7 +830,7 @@
                     // 展开第三级节点
                     nodes = tree.getNodesByParam("level", 2);
                     for (var i = 0; i < nodes.length; i++) {
-                        if(_expandLevel > 2) {
+                        if (_expandLevel > 2) {
                             tree.expandNode(nodes[i], true, false, false);
                         }
                         $.tree.selectByIdName(treeId, treeName, nodes[i]);
@@ -822,7 +841,7 @@
             /**
              * 搜索节点
              */
-            searchNode: function() {
+            searchNode: function () {
                 // 取得输入的关键字的值
                 var value = $.common.trim($("#keyword").val());
                 if ($.tree._lastValue === value) {
@@ -838,16 +857,17 @@
                 }
                 $.tree.hideAllNode(nodes);
                 // 根据搜索值模糊匹配
-                $.tree.updateNodes($._tree.getNodesByParamFuzzy("name", value));c
+                $.tree.updateNodes($._tree.getNodesByParamFuzzy("name", value));
+                c
             },
 
             /**
              * 根据Id和Name选中指定节点
-             * @param treeId
-             * @param treeName
-             * @param node
+             * @system treeId
+             * @system treeName
+             * @system node
              */
-            selectByIdName: function(treeId, treeName, node) {
+            selectByIdName: function (treeId, treeName, node) {
                 if ($.common.isNotEmpty(treeName) && $.common.isNotEmpty(treeId)) {
                     if (treeId == node.id && treeName == node.name) {
                         $._tree.selectNode(node, true);
@@ -857,9 +877,9 @@
 
             /**
              * 显示所有节点
-             * @param nodes
+             * @system nodes
              */
-            showAllNode: function(nodes) {
+            showAllNode: function (nodes) {
                 nodes = $._tree.transformToArray(nodes);
                 for (var i = nodes.length - 1; i >= 0; i--) {
                     if (nodes[i].getParentNode() != null) {
@@ -874,9 +894,9 @@
 
             /**
              * 隐藏所有节点
-             * @param nodes
+             * @system nodes
              */
-            hideAllNode: function(nodes) {
+            hideAllNode: function (nodes) {
                 var tree = $.fn.zTree.getZTreeObj("tree");
                 var nodes = $._tree.transformToArray(nodes);
                 for (var i = nodes.length - 1; i >= 0; i--) {
@@ -886,9 +906,9 @@
 
             /**
              * 显示所有父节点
-             * @param treeNode
+             * @system treeNode
              */
-            showParent: function(treeNode) {
+            showParent: function (treeNode) {
                 var parentNode;
                 while ((parentNode = treeNode.getParentNode()) != null) {
                     $._tree.showNode(parentNode);
@@ -899,9 +919,9 @@
 
             /**
              * 显示所有孩子节点
-             * @param treeNode
+             * @system treeNode
              */
-            showChildren: function(treeNode) {
+            showChildren: function (treeNode) {
                 if (treeNode.isParent) {
                     for (var idx in treeNode.children) {
                         var node = treeNode.children[idx];
@@ -913,9 +933,9 @@
 
             /**
              * 更新节点状态
-             * @param nodeList
+             * @system nodeList
              */
-            updateNodes: function(nodeList) {
+            updateNodes: function (nodeList) {
                 $._tree.showNodes(nodeList);
                 for (var i = 0, l = nodeList.length; i < l; i++) {
                     var treeNode = nodeList[i];
@@ -926,10 +946,10 @@
 
             /**
              * 获取当前被勾选集合
-             * @param column
+             * @system column
              * @returns {string}
              */
-            getCheckedNodes: function(column) {
+            getCheckedNodes: function (column) {
                 var _column = $.common.isEmpty(column) ? "id" : column;
                 var nodes = $._tree.getCheckedNodes(true);
                 return $.map(nodes, function (row) {
@@ -939,10 +959,10 @@
 
             /**
              * 不允许根父节点选择
-             * @param _tree
+             * @system _tree
              * @returns {boolean}
              */
-            notAllowParents: function(_tree) {
+            notAllowParents: function (_tree) {
                 var nodes = _tree.getSelectedNodes();
                 for (var i = 0; i < nodes.length; i++) {
                     if (nodes[i].level == 0) {
@@ -960,7 +980,7 @@
             /**
              * 隐藏/显示搜索栏
              */
-            toggleSearch: function() {
+            toggleSearch: function () {
                 $('#search').slideToggle(200);
                 $('#btnShow').toggle();
                 $('#btnHide').toggle();
@@ -970,14 +990,14 @@
             /**
              * 折叠
              */
-            collapse: function() {
+            collapse: function () {
                 $._tree.expandAll(false);
             },
 
             /**
              * 展开
              */
-            expand: function() {
+            expand: function () {
                 $._tree.expandAll(true);
             }
         },
@@ -989,7 +1009,7 @@
 
             /**
              * 判断字符串是否为空
-             * @param value
+             * @system value
              * @returns {boolean}
              */
             isEmpty: function (value) {
@@ -1001,7 +1021,7 @@
 
             /**
              * 判断一个字符串是否为非空串
-             * @param value
+             * @system value
              * @returns {boolean}
              */
             isNotEmpty: function (value) {
@@ -1010,7 +1030,7 @@
 
             /**
              * 是否显示数据 为空默认为显示
-             * @param value
+             * @system value
              * @returns {boolean}
              */
             visible: function (value) {
@@ -1022,7 +1042,7 @@
 
             /**
              * 空格截取
-             * @param value
+             * @system value
              * @returns {string}
              */
             trim: function (value) {
@@ -1034,8 +1054,8 @@
 
             /**
              * 指定随机数返回
-             * @param min
-             * @param max
+             * @system min
+             * @system max
              * @returns {number}
              */
             random: function (min, max) {

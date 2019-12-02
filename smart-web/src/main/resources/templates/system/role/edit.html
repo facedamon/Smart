@@ -1,166 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 <body>
 
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-role-edit" th:object="${role}">
-            <input id="roleId" name="roleId" type="hidden" th:field="*{roleId}" />
-            <div class="form-group">
-                <label class="col-sm-3 control-label ">角色名称：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="roleName" id="roleName" th:field="*{roleName}"/>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-role-edit" th:object="${role}">
+        <input id="roleId" name="roleId" type="hidden" th:field="*{roleId}"/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label ">角色名称：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="roleName" id="roleName" th:field="*{roleName}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">权限字符：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="roleKey" id="roleKey" th:field="*{roleKey}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">显示顺序：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="roleSort" id="roleSort" th:field="*{roleSort}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">状态：</label>
+            <div class="col-sm-8">
+                <div class="onoffswitch">
+                    <input type="checkbox" th:checked="${role.status == '0' ? true : false}"
+                           class="onoffswitch-checkbox" id="status" name="status">
+                    <label class="onoffswitch-label" for="status">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">权限字符：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="roleKey" id="roleKey" th:field="*{roleKey}">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-8">
+                <input id="remark" name="remark" class="form-control" type="text" th:field="*{remark}">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">显示顺序：</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" name="roleSort" id="roleSort" th:field="*{roleSort}">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">菜单权限</label>
+            <div class="col-sm-8">
+                <div id="menuTrees" class="ztree"></div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-                    <div class="onoffswitch">
-                        <input type="checkbox" th:checked="${role.status == '0' ? true : false}" class="onoffswitch-checkbox" id="status" name="status">
-                        <label class="onoffswitch-label" for="status">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">备注：</label>
-                <div class="col-sm-8">
-                    <input id="remark" name="remark" class="form-control" type="text" th:field="*{remark}">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">菜单权限</label>
-                <div class="col-sm-8">
-                    <div id="menuTrees" class="ztree"></div>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 
-    <div th:include="include::footer"></div>
-    <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
-    <script type="text/javascript">
-        $(function () {
-            var options = {
-                id: 'menuTrees',
-                url: ctx + 'system/menu/roleMenuTreeData?roleId=' + $('#roleId').val(),
-                expandLevel: 0,
-                check: {
-                    /**
-                     * 设置zTree是否可以被勾选,及勾选的参数配置
-                     */
-                    enable: true,
-                    /**
-                     * 当父节点设置 nocheck = true 时，设置子节点是否自动继承 nocheck = true
-                     */
-                    nocheckInherit: true,
-                    /**
-                     * 勾选 checkbox 对于父子节点的关联关系
-                     */
-                    chkboxType: {
-                        "Y": "ps",
-                        "N": "ps"
-                    }
+<div th:include="include::footer"></div>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        var options = {
+            id: 'menuTrees',
+            url: ctx + 'system/menu/roleMenuTreeData?roleId=' + $('#roleId').val(),
+            expandLevel: 0,
+            check: {
+                /**
+                 * 设置zTree是否可以被勾选,及勾选的参数配置
+                 */
+                enable: true,
+                /**
+                 * 当父节点设置 nocheck = true 时，设置子节点是否自动继承 nocheck = true
+                 */
+                nocheckInherit: true,
+                /**
+                 * 勾选 checkbox 对于父子节点的关联关系
+                 */
+                chkboxType: {
+                    "Y": "ps",
+                    "N": "ps"
                 }
-            };
-            $.tree.init(options);
-        });
+            }
+        };
+        $.tree.init(options);
+    });
 
-        $('#form-role-edit').validate({
-            rules: {
-                roleName: {
-                    required: true,
-                    remote: {
-                        url: ctx + 'system/role/checkRoleNameUnique',
-                        type: 'post',
-                        dataType: 'json',
-                        data: {
-                            roleName: function () {
-                                return $.common.trim($('#roleName').val());
-                            },
-                            roleId: function () {
-                                return $('#roleId').val();
-                            }
+    $('#form-role-edit').validate({
+        rules: {
+            roleName: {
+                required: true,
+                remote: {
+                    url: ctx + 'system/role/checkRoleNameUnique',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        roleName: function () {
+                            return $.common.trim($('#roleName').val());
                         },
-                        dataFilter: function (data,type) {
-                            return $.validate.unique(data);
+                        roleId: function () {
+                            return $('#roleId').val();
                         }
+                    },
+                    dataFilter: function (data, type) {
+                        return $.validate.unique(data);
                     }
-                },
-                roleKey: {
-                    required: true,
-                    remote: {
-                        url: ctx + 'system/role/checkRoleKeyUnique',
-                        type: 'post',
-                        dataType: 'json',
-                        data: {
-                            roleId: function () {
-                                return $('#roleId').val();
-                            },
-                            roleKey: function () {
-                                return $.common.trim($('#roleKey').val());
-                            }
-                        },
-                        dataFilter: function (data,type) {
-                            $.validate.unique(data);
-                        }
-                    }
-                },
-                roleSort: {
-                    required: true,
-                    digits: true
                 }
             },
-            messages: {
-                roleName: {
-                    remote: '角色名称已存在'
-                },
-                roleKey: {
-                    remote: '角色数据权限已存在'
-                }
-            }
-        });
-
-        function submitHandler(){
-            if ($.validate.form()){
-                $.ajax({
-                    url: ctx + 'system/role/edit',
+            roleKey: {
+                required: true,
+                remote: {
+                    url: ctx + 'system/role/checkRoleKeyUnique',
                     type: 'post',
-                    cache: true,
-                    async: false,
+                    dataType: 'json',
                     data: {
-                        'roleId': $("input[name='roleId']").val(),
-                        'roleName': $("input[name='roleName']").val(),
-                        'roleKey': $("input[name='roleKey']").val(),
-                        'roleSort': $("input[name='roleSort']").val(),
-                        'status': $("input[name='status']").is(":checked") == true ? 0 : 1,
-                        'menuIds': $.tree.getCheckedNodes()
+                        roleId: function () {
+                            return $('#roleId').val();
+                        },
+                        roleKey: function () {
+                            return $.common.trim($('#roleKey').val());
+                        }
                     },
-                    success: function (data) {
-                        $.operate.saveSuccess(data);
-                    },
-                    error: function (request) {
-                        $.modal.alertError("保存失败");
+                    dataFilter: function (data, type) {
+                        $.validate.unique(data);
                     }
-                });
+                }
+            },
+            roleSort: {
+                required: true,
+                digits: true
+            }
+        },
+        messages: {
+            roleName: {
+                remote: '角色名称已存在'
+            },
+            roleKey: {
+                remote: '角色数据权限已存在'
             }
         }
-    </script>
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.ajax({
+                url: ctx + 'system/role/edit',
+                type: 'post',
+                cache: true,
+                async: false,
+                data: {
+                    'roleId': $("input[name='roleId']").val(),
+                    'roleName': $("input[name='roleName']").val(),
+                    'roleKey': $("input[name='roleKey']").val(),
+                    'roleSort': $("input[name='roleSort']").val(),
+                    'status': $("input[name='status']").is(":checked") == true ? 0 : 1,
+                    'menuIds': $.tree.getCheckedNodes()
+                },
+                success: function (data) {
+                    $.operate.saveSuccess(data);
+                },
+                error: function (request) {
+                    $.modal.alertError("保存失败");
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>

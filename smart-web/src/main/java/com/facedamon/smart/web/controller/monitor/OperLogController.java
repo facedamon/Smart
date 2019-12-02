@@ -1,24 +1,19 @@
 package com.facedamon.smart.web.controller.monitor;
 
-import java.util.List;
-
-import com.facedamon.smart.common.base.Response;
-import com.facedamon.smart.framework.util.ExcelUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.facedamon.smart.common.annotation.Log;
+import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.system.domain.OperLog;
 import com.facedamon.smart.system.service.IOperLogService;
 import com.facedamon.smart.web.core.base.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.facedamon.smart.common.base.Response.success;
 
@@ -29,7 +24,7 @@ import static com.facedamon.smart.common.base.Response.success;
  */
 @Controller
 @RequestMapping("/monitor/operlog")
-public class OperlogController extends BaseController {
+public class OperLogController extends BaseController {
 
     private String prefix = "monitor/operlog";
 
@@ -49,16 +44,6 @@ public class OperlogController extends BaseController {
         startPage();
         List<OperLog> list = operLogService.selectOperLogList(operLog);
         return getDataTable(list);
-    }
-
-    @Log(model = "导出日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:operlog:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public Response export(OperLog operLog) {
-        List<OperLog> list = operLogService.selectOperLogList(operLog);
-        ExcelUtils<OperLog> util = new ExcelUtils<>(OperLog.class);
-        return util.export(list, "operLog");
     }
 
     @RequiresPermissions("monitor:operlog:remove")

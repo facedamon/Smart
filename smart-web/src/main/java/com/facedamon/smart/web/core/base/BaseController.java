@@ -62,10 +62,11 @@ public class BaseController {
 
     /**
      * 返回是否成功
+     *
      * @param rows
      * @return
      */
-    public Response isSuccess(int rows){
+    public Response isSuccess(int rows) {
         return rows > 0 ? Response.success() : Response.error();
     }
 

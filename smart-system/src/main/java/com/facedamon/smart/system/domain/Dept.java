@@ -65,11 +65,6 @@ public class Dept extends BaseEntity {
     private String status;
 
     /**
-     * 删除标志：0：存在，2: 删除
-     */
-    private String delFlag;
-
-    /**
      * 父部门名称
      */
     private String parentName;
@@ -77,7 +72,7 @@ public class Dept extends BaseEntity {
     public Dept() {
     }
 
-    public Dept(Long deptId, String deptName, Long parentId, String ancestors, String orderNum, String leader, String phone, String email, String status, String delFlag, String parentName) {
+    public Dept(Long deptId, String deptName, Long parentId, String ancestors, String orderNum, String leader, String phone, String email, String status, String parentName) {
         this.deptId = deptId;
         this.deptName = deptName;
         this.parentId = parentId;
@@ -87,7 +82,6 @@ public class Dept extends BaseEntity {
         this.phone = phone;
         this.email = email;
         this.status = status;
-        this.delFlag = delFlag;
         this.parentName = parentName;
     }
 }

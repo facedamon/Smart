@@ -22,13 +22,13 @@ import java.util.List;
 import static com.facedamon.smart.common.base.Response.success;
 
 /**
- * @Description:    在线用户
- * @Author:         facedamon
- * @CreateDate:     2018/11/23 17:38
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/23 17:38
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 在线用户
+ * @Author: facedamon
+ * @CreateDate: 2018/11/23 17:38
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/23 17:38
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Controller
 @RequestMapping("/monitor/online")
@@ -47,7 +47,7 @@ public class UserOnlineController extends BaseController {
 
     @RequiresPermissions("monitor:online:view")
     @GetMapping
-    public String online(){
+    public String online() {
         return prefix + "/online";
     }
 
@@ -60,27 +60,27 @@ public class UserOnlineController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(model = "强退用户",businessType = BusinessType.FORCE)
+    @Log(model = "强退用户", businessType = BusinessType.FORCE)
     @RequiresPermissions("monitor:online:forceLogout")
     @PostMapping("/forceLogout")
     @ResponseBody
-    public Response forceLogout(String sessionId){
+    public Response forceLogout(String sessionId) {
         UserOnline online = userOnlineService.selectOnlineById(sessionId);
-        if (sessionId.equals(ShiroUtils.getSessionId())){
+        if (sessionId.equals(ShiroUtils.getSessionId())) {
             return Response.error("当前登录用户无法强退,如需退出，请点击右上角退出按钮");
         }
-        if (null == online){
+        if (null == online) {
             return Response.error("该用户已下线");
         }
         OnlineSession onlineSession = null;
         try {
             onlineSession = (OnlineSession) onlineSessionDAO.readSession(sessionId);
-        } catch (UnknownSessionException e){
+        } catch (UnknownSessionException e) {
             userOnlineService.deleteOnlineById(online.getSessionId());
             return success();
         }
 
-        if (null == onlineSession){
+        if (null == onlineSession) {
             return Response.error("该用户已下线");
         }
         onlineSession.setStatus(OnlineStatus.OFF_LINE);
@@ -90,27 +90,27 @@ public class UserOnlineController extends BaseController {
         return success();
     }
 
-    @Log(model = "批量强退用户",businessType = BusinessType.FORCE)
+    @Log(model = "批量强退用户", businessType = BusinessType.FORCE)
     @RequiresPermissions("monitor:online:forceLogout")
     @PostMapping("/batchForceLogout")
     @ResponseBody
-    public Response batchForceLogout(@RequestParam("ids[]") String[] ids){
-        for (String sessionId : ids){
+    public Response batchForceLogout(@RequestParam("ids[]") String[] ids) {
+        for (String sessionId : ids) {
             UserOnline online = userOnlineService.selectOnlineById(sessionId);
-            if (null == online){
+            if (null == online) {
                 return Response.error("该用户已下线");
             }
             OnlineSession onlineSession = null;
             try {
                 onlineSession = (OnlineSession) onlineSessionDAO.readSession(sessionId);
-            } catch (UnknownSessionException e){
+            } catch (UnknownSessionException e) {
                 userOnlineService.deleteOnlineById(online.getSessionId());
                 return success();
             }
-            if (null == onlineSession){
+            if (null == onlineSession) {
                 return Response.error("该用户已下线");
             }
-            if (sessionId.equals(ShiroUtils.getSessionId())){
+            if (sessionId.equals(ShiroUtils.getSessionId())) {
                 return Response.error("当前登录用户无法强退");
             }
             onlineSession.setStatus(OnlineStatus.OFF_LINE);

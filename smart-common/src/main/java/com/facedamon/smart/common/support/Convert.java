@@ -291,6 +291,7 @@ public class Convert {
 
     /**
      * 转换为Long数组<br>
+     *
      * @param split
      * @param str
      * @return
@@ -649,7 +650,7 @@ public class Convert {
      * @return 字符串
      */
     public static String utf8Str(Object obj) {
-        return str(obj,StandardCharsets.UTF_8.displayName());
+        return str(obj, StandardCharsets.UTF_8.displayName());
     }
 
     /**

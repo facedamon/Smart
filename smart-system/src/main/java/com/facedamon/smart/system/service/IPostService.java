@@ -5,13 +5,13 @@ import com.facedamon.smart.system.domain.Post;
 import java.util.List;
 
 /**
- * @Description:    岗位信息 service
- * @Author:         facedamon
- * @CreateDate:     2018/10/30 17:29
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/30 17:29
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 岗位信息 service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/30 17:29
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/30 17:29
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IPostService {
 

@@ -54,6 +54,12 @@
             <artifactId>smart-framework</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.facedamon</groupId>
+            <artifactId>smart-param</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
@@ -75,5 +81,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

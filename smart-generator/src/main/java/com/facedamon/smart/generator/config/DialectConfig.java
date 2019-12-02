@@ -14,13 +14,13 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * @Description:    
- * @Author:         facedamon
- * @CreateDate:     2018/11/20 16:04
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/20 16:04
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description:
+ * @Author: facedamon
+ * @CreateDate: 2018/11/20 16:04
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/20 16:04
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 @Slf4j
@@ -36,28 +36,28 @@ public class DialectConfig {
     private String oracle = "oracle";
 
     @Bean
-    public Dialect dialect(){
+    public Dialect dialect() {
         try {
             String databaseId = databaseIdProvider.getDatabaseId(dataSource);
-            if (StringUtils.equalsIgnoreCase(databaseId,mysql)){
+            if (StringUtils.equalsIgnoreCase(databaseId, mysql)) {
                 return mySql();
-            } else if (StringUtils.equalsIgnoreCase(databaseId,oracle)){
+            } else if (StringUtils.equalsIgnoreCase(databaseId, oracle)) {
                 return oracle();
             }
         } catch (SQLException e) {
-            log.error("加载databaseId异常",e.getMessage());
+            log.error("加载databaseId异常", e.getMessage());
             throw new RuntimeException(e);
         }
         return null;
     }
 
     @Bean
-    public MySql mySql(){
+    public MySql mySql() {
         return new MySql();
     }
 
     @Bean
-    public Oracle oracle(){
+    public Oracle oracle() {
         return new Oracle();
     }
 }

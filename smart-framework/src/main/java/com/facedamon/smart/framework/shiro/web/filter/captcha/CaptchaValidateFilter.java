@@ -11,13 +11,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description:    验证码过滤器
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 11:37
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 11:37
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 验证码过滤器
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 11:37
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 11:37
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class CaptchaValidateFilter extends AccessControlFilter {
 
@@ -41,6 +41,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
 
     /**
      * 前置控制器
+     *
      * @param request
      * @param response
      * @param mappedValue
@@ -49,13 +50,14 @@ public class CaptchaValidateFilter extends AccessControlFilter {
      */
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        request.setAttribute(ShiroConstants.CURRENT_ENABLED.getValue(),captchaEnabled);
-        request.setAttribute(ShiroConstants.CURRENT_TYPE.getValue(),captchaType);
+        request.setAttribute(ShiroConstants.CURRENT_ENABLED.getValue(), captchaEnabled);
+        request.setAttribute(ShiroConstants.CURRENT_TYPE.getValue(), captchaType);
         return super.onPreHandle(request, response, mappedValue);
     }
 
     /**
      * 核心控制器
+     *
      * @param servletRequest
      * @param servletResponse
      * @param o
@@ -68,14 +70,15 @@ public class CaptchaValidateFilter extends AccessControlFilter {
         /**
          * 验证码禁用，或不是表单提交模式，允许访问
          */
-        if (!captchaEnabled || !"post".equals(httpServletRequest.getMethod().toLowerCase())){
+        if (!captchaEnabled || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
             return true;
         }
-        return validateResponse(httpServletRequest,httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE.getValue()));
+        return validateResponse(httpServletRequest, httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE.getValue()));
     }
 
     /**
-     *  验证码匹配
+     * 验证码匹配
+     *
      * @param httpServletRequest
      * @param validateCode
      * @return
@@ -86,7 +89,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
         /**
          * 验证码不匹配
          */
-        if (StringUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
+        if (StringUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)) {
             return false;
         }
         return true;
@@ -94,6 +97,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
 
     /**
      * 拒绝策略
+     *
      * @param servletRequest
      * @param servletResponse
      * @return

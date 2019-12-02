@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+        <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:fieldTableQuote:add">
+            <i class="fa fa-plus"></i> 添加
+        </a>
+        <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+           shiro:hasPermission="system:fieldTableQuote:edit">
+            <i class="fa fa-edit"></i> 修改
+        </a>
+        <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
+           shiro:hasPermission="system:fieldTableQuote:remove">
+            <i class="fa fa-remove"></i> 删除
+        </a>
+    </div>
+
+    <div class="col-sm-12 select-table table-striped">
+        <table id="bootstrap-table" data-mobile-responsive="true"></table>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var editPerm = [[${@permission.hasPermi('system:fieldTableQuote:edit')}]];
+    var removePerm = [[${@permission.hasPermi('system:fieldTableQuote:remove')}]];
+    var prefix = ctx + "system/fieldTableQuote";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            modalName: "模型字段与表引用信息",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'uniqueNum',
+                    title: '唯一编号'
+                },
+                {
+                    field: 'tableId',
+                    title: '表名编号'
+                },
+                {
+                    field: 'fieldId',
+                    title: '字段编号'
+                },
+                {
+                    field: 'fieldOrderId',
+                    title: '字段顺序'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editPerm + '" href="#" onclick="$.operate.edit(\'' + row.uniqueNum + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removePerm + '" href="#" onclick="$.operate.remove(\'' + row.uniqueNum + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

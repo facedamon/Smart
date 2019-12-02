@@ -11,12 +11,12 @@ import java.util.List;
 
 /**
  * @Description:
- * @Author:         facedamon
- * @CreateDate:     2018/10/16 下午4:15
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/16 下午4:15
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Author: facedamon
+ * @CreateDate: 2018/10/16 下午4:15
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/16 下午4:15
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class LogininforServiceImpl implements ILogininforService {
@@ -26,6 +26,7 @@ public class LogininforServiceImpl implements ILogininforService {
 
     /**
      * 新增系统登录日志
+     *
      * @param logininfor 访问日志对象
      */
     @Override
@@ -35,6 +36,7 @@ public class LogininforServiceImpl implements ILogininforService {
 
     /**
      * 查询系统登录日志集合
+     *
      * @param logininfor 访问日志对象
      * @return 登录记录集合
      */
@@ -45,6 +47,7 @@ public class LogininforServiceImpl implements ILogininforService {
 
     /**
      * 批量删除系统登录日志
+     *
      * @param ids 需要删除的数据
      * @return
      */
@@ -55,6 +58,7 @@ public class LogininforServiceImpl implements ILogininforService {
 
     /**
      * 清空系统登录日志
+     *
      * @return
      */
     @Override

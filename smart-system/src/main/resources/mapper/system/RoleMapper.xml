@@ -11,7 +11,6 @@
         <result property="roleSort" column="role_sort"/>
         <result property="dataScope" column="data_scope"/>
         <result property="status" column="status"/>
-        <result property="delFlag" column="del_flag"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -21,7 +20,7 @@
 
     <sql id="selectRoleContactVo">
         select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope,
-            r.status, r.del_flag, r.create_time, r.remark
+            r.status, r.create_time, r.remark
         from sys_role r
 	        left join sys_user_role ur on ur.role_id = r.role_id
 	        left join sys_user u on u.user_id = ur.user_id
@@ -29,48 +28,48 @@
     </sql>
 
     <sql id="selectRoleVo">
-		select r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.del_flag, r.create_time, r.remark
+		select r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.create_time, r.remark
         from sys_role r
 	</sql>
 
     <select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
         <include refid="selectRoleContactVo"/>
-        where r.del_flag = '0'
-        <if test="roleName != null and roleName != ''">
-            AND r.role_name like concat('%', #{roleName}, '%')
-        </if>
-        <if test="status != null and status != ''">
-            AND r.status = #{status}
-        </if>
-        <if test="roleKey != null and roleKey != ''">
-            AND r.role_key like concat('%', #{roleKey}, '%')
-        </if>
-        <if test="dataScope != null and dataScope != ''">
-            AND r.data_scope = #{dataScope}
-        </if>
 
-        <if test="params != null">
-            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-                and date_format(r.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        <where>
+            <if test="roleName != null and roleName != ''">
+                AND r.role_name like concat('%', #{roleName}, '%')
             </if>
-            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-                and date_format(r.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            <if test="status != null and status != ''">
+                AND r.status = #{status}
             </if>
-        </if>
+            <if test="roleKey != null and roleKey != ''">
+                AND r.role_key like concat('%', #{roleKey}, '%')
+            </if>
+            <if test="dataScope != null and dataScope != ''">
+                AND r.data_scope = #{dataScope}
+            </if>
 
-
+            <if test="params != null">
+                <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                    and date_format(r.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+                </if>
+                <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                    and date_format(r.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+                </if>
+            </if>
+        </where>
         <!-- 数据范围过滤 ${params.dataScope}-->
 
     </select>
 
     <select id="selectRolesByUserId" parameterType="Long" resultMap="RoleResult">
         <include refid="selectRoleContactVo"/>
-        WHERE r.del_flag = '0' and ur.user_id = #{userId}
+        WHERE ur.user_id = #{userId}
     </select>
 
     <select id="selectRoleById" parameterType="Long" resultMap="RoleResult">
         <include refid="selectRoleVo"/>
-        where r.del_flag = '0' and r.role_id = #{roleId}
+        where r.role_id = #{roleId}
     </select>
 
     <select id="checkRoleNameUnique" parameterType="String" resultMap="RoleResult">
@@ -86,13 +85,6 @@
     <delete id="deleteRoleById" parameterType="Long">
  		delete from sys_role where role_id = #{roleId}
  	</delete>
-
-    <delete id="deleteRoleByIds" parameterType="Long">
-        update sys_role set del_flag = '2' where role_id in
-        <foreach collection="array" item="roleId" open="(" separator="," close=")">
-            #{roleId}
-        </foreach>
-    </delete>
 
     <update id="updateRole" parameterType="Role">
         update sys_role

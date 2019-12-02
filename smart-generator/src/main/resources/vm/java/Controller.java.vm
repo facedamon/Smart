@@ -1,4 +1,4 @@
-package ${package}.web.controller;
+package
 
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
@@ -7,13 +7,13 @@ import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.web.core.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import ${package}.domain.${className};
-import ${package}.service.I${className}Service;
+${package}.web.controller;
+    ${package}.domain.${className};
+    ${package}.service.I${className}Service;
 
 /**
  * ${tableComment} 信息操作处理
@@ -23,8 +23,7 @@ import ${package}.service.I${className}Service;
  */
 @Controller
 @RequestMapping("/${moduleName}/${classNameLower}")
-public class ${className}Controller extends BaseController
-{
+public class ${className}Controller extends BaseController {
     private String prefix = "${moduleName}/${classNameLower}";
 
     @Autowired
@@ -32,8 +31,7 @@ public class ${className}Controller extends BaseController
 
     @RequiresPermissions("${moduleName}:${classNameLower}:view")
     @GetMapping()
-    public String ${classNameLower}()
-    {
+    public String${classNameLower}() {
         return prefix + "/${classNameLower}";
     }
 
@@ -43,8 +41,7 @@ public class ${className}Controller extends BaseController
     @RequiresPermissions("${moduleName}:${classNameLower}:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(${className} ${classNameLower})
-    {
+    public TableDataInfo list(${className} ${classNameLower}) {
         startPage();
         List<${className}> list = ${classNameLower}Service.select${className}List(${classNameLower});
         return getDataTable(list);
@@ -54,8 +51,7 @@ public class ${className}Controller extends BaseController
      * 新增${tableComment}
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -66,8 +62,7 @@ public class ${className}Controller extends BaseController
     @Log(model = "${tableComment}", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public Response addSave(${className} ${classNameLower})
-    {
+    public Response addSave(${className} ${classNameLower}) {
         return isSuccess(${classNameLower}Service.insert${className}(${classNameLower}));
     }
 
@@ -75,9 +70,8 @@ public class ${className}Controller extends BaseController
      * 修改${tableComment}
      */
     @GetMapping("/edit/{${primaryKey.attrNameLower}}")
-    public String edit(@PathVariable("${primaryKey.attrNameLower}") ${primaryKey.javaType} ${primaryKey.attrNameLower}, ModelMap mmap)
-    {
-        ${className} ${classNameLower} = ${classNameLower}Service.select${className}ById(${primaryKey.attrNameLower});
+    public String edit(@PathVariable("${primaryKey.attrNameLower}") ${primaryKey.javaType} ${primaryKey.attrNameLower}, ModelMap mmap) {
+        ${className} ${classNameLower} =${classNameLower}Service.select${className}ById(${primaryKey.attrNameLower});
         mmap.put("${classNameLower}", ${classNameLower});
         return prefix + "/edit";
     }
@@ -89,8 +83,7 @@ public class ${className}Controller extends BaseController
     @Log(model = "${tableComment}", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public Response editSave(${className} ${classNameLower})
-    {
+    public Response editSave(${className} ${classNameLower}) {
         return isSuccess(${classNameLower}Service.update${classNameLower}(${classNameLower}));
     }
 
@@ -99,10 +92,9 @@ public class ${className}Controller extends BaseController
      */
     @RequiresPermissions("${moduleName}:${classNameLower}:remove")
     @Log(model = "${tableComment}", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
-    public Response remove(String ids)
-    {
+    public Response remove(String ids) {
         return isSuccess(${classNameLower}Service.delete${className}ByIds(ids));
     }
 

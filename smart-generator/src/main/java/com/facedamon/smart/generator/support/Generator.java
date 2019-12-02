@@ -19,13 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description:    generator工具
- * @Author:         facedamon
- * @CreateDate:     2018/11/20 10:55
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/20 10:55
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: generator工具
+ * @Author: facedamon
+ * @CreateDate: 2018/11/20 10:55
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/20 10:55
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Component
 public class Generator {
@@ -36,20 +36,20 @@ public class Generator {
     private static Generator generator;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         generator = this;
     }
 
 
-
     /**
      * 转换列信息
+     *
      * @param columnInfos
      * @return
      */
-    public static List<ColumnInfo> transColumns(List<ColumnInfo> columnInfos){
+    public static List<ColumnInfo> transColumns(List<ColumnInfo> columnInfos) {
         List<ColumnInfo> columnInfoList = new ArrayList<>();
-        for (ColumnInfo columnInfo : columnInfos){
+        for (ColumnInfo columnInfo : columnInfos) {
             String attrName = StringUtils.under2Camel2UpperCase(columnInfo.getColumnName());
             columnInfo.setAttrName(attrName);
             columnInfo.setAttrNameLower(StringUtils.uncapitalize(attrName));
@@ -63,20 +63,21 @@ public class Generator {
 
     /**
      * 表名转换
+     *
      * @param tableName
      * @return
      */
-    public static String table2Java(String tableName){
-        if (Constants.AUTO_REMOVE_PRE.getValue().equals(SmartConfig.INSTANCE.getAutoRemovePre())){
+    public static String table2Java(String tableName) {
+        if (Constants.AUTO_REMOVE_PRE.getValue().equals(SmartConfig.INSTANCE.getAutoRemovePre())) {
             tableName = tableName.substring(tableName.indexOf("_") + 1);
         }
-        if (StringUtils.isNotBlank(SmartConfig.INSTANCE.getTablePrefix())){
-            tableName = tableName.replace(SmartConfig.INSTANCE.getTablePrefix(),"");
+        if (StringUtils.isNotBlank(SmartConfig.INSTANCE.getTablePrefix())) {
+            tableName = tableName.replace(SmartConfig.INSTANCE.getTablePrefix(), "");
         }
         return StringUtils.under2Camel2UpperCase(tableName);
     }
 
-    public static List<String> getTemplates(){
+    public static List<String> getTemplates() {
         return new ArrayList<>(Arrays.asList(
                 TemplateVM.TemplateDir.DOMAIN.getValue(),
                 TemplateVM.TemplateDir.MAPPER.getValue(),
@@ -92,12 +93,13 @@ public class Generator {
 
     /**
      * 获取文件路径+名
+     *
      * @param template
      * @param tableInfo
      * @param moduleName
      * @return
      */
-    public static String getFileName(String template, TableInfo tableInfo,String moduleName){
+    public static String getFileName(String template, TableInfo tableInfo, String moduleName) {
         String classname = tableInfo.getClassNameLower();
         String className = tableInfo.getClassName();
         String javaPath = SmartConfig.INSTANCE.getProjectPath() + "/" + moduleName + "/";
@@ -137,6 +139,7 @@ public class Generator {
 
     /**
      * 获取模块名
+     *
      * @param packageName
      * @return
      */
@@ -150,22 +153,23 @@ public class Generator {
     /**
      * 获取模板信息
      * Java对象数据传递到模板文件vm
+     *
      * @param tableInfo
      * @return
      */
-    public static VelocityContext getVelocityContext(TableInfo tableInfo){
+    public static VelocityContext getVelocityContext(TableInfo tableInfo) {
         VelocityContext velocityContext = new VelocityContext();
         String packageName = SmartConfig.INSTANCE.getPackageName();
-        velocityContext.put("tableName",tableInfo.getTableName());
-        velocityContext.put("tableComment",tableInfo.getTableComment());
-        velocityContext.put("primaryKey",tableInfo.getPrimaryKey());
-        velocityContext.put("className",tableInfo.getClassName());
-        velocityContext.put("classNameLower",tableInfo.getClassNameLower());
-        velocityContext.put("moduleName",getModuleName(packageName));
-        velocityContext.put("columns",tableInfo.getColumnInfos());
-        velocityContext.put("package",packageName);
-        velocityContext.put("author",SmartConfig.INSTANCE.getAuthor());
-        velocityContext.put("datetime",DateUtils.getDate());
+        velocityContext.put("tableName", tableInfo.getTableName());
+        velocityContext.put("tableComment", tableInfo.getTableComment());
+        velocityContext.put("primaryKey", tableInfo.getPrimaryKey());
+        velocityContext.put("className", tableInfo.getClassName());
+        velocityContext.put("classNameLower", tableInfo.getClassNameLower());
+        velocityContext.put("moduleName", getModuleName(packageName));
+        velocityContext.put("columns", tableInfo.getColumnInfos());
+        velocityContext.put("package", packageName);
+        velocityContext.put("author", SmartConfig.INSTANCE.getAuthor());
+        velocityContext.put("datetime", DateUtils.getDate());
         return velocityContext;
     }
 

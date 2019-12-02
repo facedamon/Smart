@@ -94,6 +94,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过userId查询用户
+     *
      * @param userId
      * @return
      */
@@ -105,6 +106,9 @@ public class UserServiceImpl implements IUserService {
     /**
      * 通过用户ID删除用户
      *
+     * 删除与用户关联的角色
+     * 删除与用户关联的岗位信息
+     * 再删除用户本身信息
      * @param userId
      * @return
      */
@@ -122,8 +126,9 @@ public class UserServiceImpl implements IUserService {
             if (User.isAdmin(id)) {
                 throw new Exception("不允许删除管理员账户");
             }
+            deleteUserById(id);
         }
-        return userMapper.deleteUserByIds(userIds);
+        return 1;
     }
 
     /**
@@ -283,11 +288,11 @@ public class UserServiceImpl implements IUserService {
     public String selectUserPostGroup(Long userId) {
         List<Post> posts = postMapper.selectPostsByUserId(userId);
         StringBuffer sb = new StringBuffer();
-        for (Post post : posts){
+        for (Post post : posts) {
             sb.append(post.getPostName() + ",");
         }
-        if (StringUtils.isNotBlank(sb.toString())){
-            return sb.substring(0,sb.length() - 1);
+        if (StringUtils.isNotBlank(sb.toString())) {
+            return sb.substring(0, sb.length() - 1);
         }
         return sb.toString();
     }

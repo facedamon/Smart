@@ -3,7 +3,6 @@ package com.facedamon.smart.web.controller.system;
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
-import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.system.domain.DictData;
@@ -90,16 +89,5 @@ public class DictDataController extends BaseController {
     @ResponseBody
     public Response remove(String ids) {
         return isSuccess(dictDataService.deleteDictDataByIds(ids));
-    }
-
-    @Log(model = "导出字典数据", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:dict:export")
-    @PostMapping("/export")
-    @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
-    public Response export(DictData dictData) {
-        List<DictData> dictDataList = dictDataService.selectDictDataList(dictData);
-        ExcelUtils utils = new ExcelUtils<DictData>(DictData.class);
-        return utils.export(dictDataList, "dictData");
     }
 }

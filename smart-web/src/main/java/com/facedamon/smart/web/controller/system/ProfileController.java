@@ -17,13 +17,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @Description:    个人信息
- * @Author:         facedamon
- * @CreateDate:     2018/11/15 下午7:30
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/15 下午7:30
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 个人信息
+ * @Author: facedamon
+ * @CreateDate: 2018/11/15 下午7:30
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/15 下午7:30
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Controller
 @RequestMapping("/system/user/profile")
@@ -42,18 +42,18 @@ public class ProfileController extends BaseController {
     private IDictDataService dictDataService;
 
     @GetMapping
-    public String profile(ModelMap map){
+    public String profile(ModelMap map) {
         User user = ShiroUtils.getUser();
-        user.setSex(dictDataService.selectDictLabel("sys_user_sex",user.getSex()));
-        map.put("user",user);
-        map.put("roleGroup",userService.selectUserRoleGroup(user.getUserId()));
-        map.put("postGroup",userService.selectUserPostGroup(user.getUserId()));
+        user.setSex(dictDataService.selectDictLabel("sys_user_sex", user.getSex()));
+        map.put("user", user);
+        map.put("roleGroup", userService.selectUserRoleGroup(user.getUserId()));
+        map.put("postGroup", userService.selectUserPostGroup(user.getUserId()));
         return prefix + "/profile";
     }
 
     @GetMapping("/checkPassword")
     @ResponseBody
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password) {
         User user = ShiroUtils.getUser();
         String encrypt = new Md5Hash(user.getLoginName() + password + user.getSalt()).toHex().toString();
 
@@ -61,19 +61,19 @@ public class ProfileController extends BaseController {
     }
 
     @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap map){
-        map.put("user",userService.selectUserById(userId));
+    public String resetPwd(@PathVariable("userId") Long userId, ModelMap map) {
+        map.put("user", userService.selectUserById(userId));
         return prefix + "/resetPwd";
     }
 
-    @Log(model = "重置密码",businessType = BusinessType.UPDATE)
+    @Log(model = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
-    public Response resetPwd(User user){
+    public Response resetPwd(User user) {
         user.setSalt(ShiroUtils.randomSalt());
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
 
-        if (userService.resetUserPwd(user) <= 0){
+        if (userService.resetUserPwd(user) <= 0) {
             return Response.error();
         } else {
             ShiroUtils.setUser(userService.selectUserById(user.getUserId()));
@@ -82,7 +82,7 @@ public class ProfileController extends BaseController {
     }
 
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId,ModelMap map){
+    public String edit(@PathVariable("userId") Long userId, ModelMap map) {
         map.put("user", userService.selectUserById(userId));
         return prefix + "/edit";
     }
@@ -90,10 +90,8 @@ public class ProfileController extends BaseController {
     @Log(model = "更新个人信息", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     @ResponseBody
-    public Response update(User user)
-    {
-        if (userService.updateUserInfo(user) > 0)
-        {
+    public Response update(User user) {
+        if (userService.updateUserInfo(user) > 0) {
             ShiroUtils.setUser((userService.selectUserById(user.getUserId())));
             return Response.success();
         }

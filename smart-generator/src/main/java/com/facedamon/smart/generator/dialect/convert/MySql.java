@@ -5,18 +5,18 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 
 /**
- * @Description:    mysql dialect
- * @Author:         facedamon
- * @CreateDate:     2018/11/21 16:04
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/21 16:04
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: mysql dialect
+ * @Author: facedamon
+ * @CreateDate: 2018/11/21 16:04
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/21 16:04
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Component
-public class MySql extends HashMap<String,String> implements Dialect{
+public class MySql extends HashMap<String, String> implements Dialect {
 
-    public MySql(){
+    public MySql() {
         put("tinyint", "Integer");
         put("smallint", "Integer");
         put("mediumint", "Integer");

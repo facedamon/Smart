@@ -11,19 +11,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @Description:    定时配置
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 14:03
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 14:03
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 定时配置
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 14:03
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 14:03
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Configuration
 public class ScheduleConfig {
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) throws IOException{
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) throws IOException {
         SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setQuartzProperties(quartz());
@@ -36,7 +36,7 @@ public class ScheduleConfig {
     }
 
     @Bean
-    public Properties quartz() throws IOException{
+    public Properties quartz() throws IOException {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         propertiesFactoryBean.setLocation(new ClassPathResource("/quartz.properties"));
         propertiesFactoryBean.afterPropertiesSet();

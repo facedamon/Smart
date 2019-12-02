@@ -5,13 +5,13 @@ import com.facedamon.smart.system.domain.Config;
 import java.util.List;
 
 /**
- * @Description:    参数配置service
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 16:29
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 16:29
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 参数配置service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 16:29
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 16:29
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IConfigService {
 

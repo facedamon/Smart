@@ -1,13 +1,13 @@
 package com.facedamon.smart.common.constant;
 
 /**
- * @Description:    任务调度常量
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 14:45
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 14:45
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 任务调度常量
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 14:45
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 14:45
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface ScheduleConstants {
 
@@ -15,16 +15,24 @@ public interface ScheduleConstants {
 
     public static final String TASK_PROPERTIES = "__TASK_PROPERTIES__";
 
-    /** 默认策略 */
+    /**
+     * 默认策略
+     */
     public static final String MISFIRE_DEFAULT = "0";
 
-    /** 立即触发执行 */
+    /**
+     * 立即触发执行
+     */
     public static final String MISFIRE_IGNORE_MISFIRES = "1";
 
-    /** 触发一次执行 */
+    /**
+     * 触发一次执行
+     */
     public static final String MISFIRE_FIRE_AND_PROCEED = "2";
 
-    /** 不触发立即执行 */
+    /**
+     * 不触发立即执行
+     */
     public static final String MISFIRE_DO_NOTHING = "3";
 
     public enum Status {
@@ -39,13 +47,11 @@ public interface ScheduleConstants {
 
         private String value;
 
-        private Status(String value)
-        {
+        private Status(String value) {
             this.value = value;
         }
 
-        public String getValue()
-        {
+        public String getValue() {
             return value;
         }
     }

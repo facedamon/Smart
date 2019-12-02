@@ -55,13 +55,7 @@ public interface IRoleService {
      */
     Role selectRoleById(Long roleId);
 
-    /**
-     * 通过角色ID删除角色
-     *
-     * @param roleId
-     * @return
-     */
-    boolean deleteRoleById(Long roleId);
+    abstract int deleteRoleById(Long roleId);
 
     /**
      * 批量删除角色信息

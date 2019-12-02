@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
  * @UpdateDate: 2018/10/15 下午7:25
  * @UpdateRemark: 修改内容
  * @Version: 1.0
- *
  * @deprecated 目前尚未解决离线获取登录地址
  */
 @Slf4j

@@ -4,13 +4,13 @@ import com.facedamon.smart.common.constant.PermissionConstants;
 import com.facedamon.smart.common.utils.StringUtils;
 
 /**
- * @Description:    权限工具类
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 15:40
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 15:40
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 权限工具类
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 15:40
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 15:40
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public class PermissionUtils {
     /**

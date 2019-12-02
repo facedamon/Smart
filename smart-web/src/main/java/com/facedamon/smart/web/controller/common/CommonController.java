@@ -12,13 +12,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * @Description:    通用controller
- * @Author:         facedamon
- * @CreateDate:     2018/11/8 16:08
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/8 16:08
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 通用controller
+ * @Author: facedamon
+ * @CreateDate: 2018/11/8 16:08
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/8 16:08
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @RequestMapping("/common")
 @Controller
@@ -27,7 +27,7 @@ public class CommonController {
 
     @RequestMapping("/download")
     public void download(String fileName, Boolean delete,
-                         HttpServletRequest request, HttpServletResponse response){
+                         HttpServletRequest request, HttpServletResponse response) {
         try {
             /**
              * 此时filePath已经下载了文件
@@ -35,15 +35,15 @@ public class CommonController {
             String filePath = SmartConfig.INSTANCE.getDownloadPath() + fileName;
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition","attachment;fileName="+setFileDownloadHeader(request,fileName));
+            response.setHeader("Content-Disposition", "attachment;fileName=" + setFileDownloadHeader(request, fileName));
 
-            FileUtils.writeBytes(filePath,response.getOutputStream());
+            FileUtils.writeBytes(filePath, response.getOutputStream());
 
-            if (delete){
+            if (delete) {
                 FileUtils.deleteFile(filePath);
             }
-        }catch (Exception e){
-            log.error("下载文件失败,{}",e.getMessage());
+        } catch (Exception e) {
+            log.error("下载文件失败,{}", e.getMessage());
         }
     }
 

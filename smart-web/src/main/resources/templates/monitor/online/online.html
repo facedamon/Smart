@@ -3,143 +3,146 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="form-online">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                登录地址: <input type="text" name="ipaddr" />
-                            </li>
-                            <li>
-                                登录名称: <input type="text" name="loginName" />
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-            <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-                <a class="btn btn-danger btn-del disabled" onclick="javascript:batchForceLogout()" shiro:hasPermission="monitor:online:batchForceLogout">
-                    <i class="fa fa-sign-out"></i>强退
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table" data-mobile-responsive="true"></table>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="form-online">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            登录地址: <input type="text" name="ipaddr"/>
+                        </li>
+                        <li>
+                            登录名称: <input type="text" name="loginName"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-danger btn-del disabled" onclick="javascript:batchForceLogout()"
+               shiro:hasPermission="monitor:online:batchForceLogout">
+                <i class="fa fa-sign-out"></i>强退
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
         </div>
     </div>
+</div>
 
-    <div th:include="include :: footer"></div>
-    <script th:inline="javascript">
-        var forcePerm = [[${@permission.hasPermi('monitor:online:forceLogout')}]];
-        var prefix = ctx + 'monitor/online';
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var forcePerm = [[${@permission.hasPermi('monitor:online:forceLogout')}]];
+    var prefix = ctx + 'monitor/online';
 
-        /**
-         * 批量强退
-         */
-        function batchForceLogout(){
-            var rows = $.table.selectColumns("sessionId");
-            if (rows.length == 0){
-                $.modal.alertWarning("请选择要强退的用户");
-                return;
-            }
-            $.modal.confirm('确定要强退选中的' + rows.length + '条数据吗?',function () {
-               var url = prefix + '/batchForceLogout';
-               var data = {
-                   'ids': rows
-               };
-               $.operate.post(url,data);
-            });
+    /**
+     * 批量强退
+     */
+    function batchForceLogout() {
+        var rows = $.table.selectColumns("sessionId");
+        if (rows.length == 0) {
+            $.modal.alertWarning("请选择要强退的用户");
+            return;
         }
+        $.modal.confirm('确定要强退选中的' + rows.length + '条数据吗?', function () {
+            var url = prefix + '/batchForceLogout';
+            var data = {
+                'ids': rows
+            };
+            $.operate.post(url, data);
+        });
+    }
 
-        /**
-         * 单条强退
-         * @param sessionId
-         */
-        function forceLogout(sessionId){
-            $.modal.confirm("确定要强退选中用户吗?",function () {
-               var data = {
-                   'sessionId': sessionId
-               };
-               $.operate.post(prefix + '/forceLogout',data);
-            });
-        }
+    /**
+     * 单条强退
+     * @system sessionId
+     */
+    function forceLogout(sessionId) {
+        $.modal.confirm("确定要强退选中用户吗?", function () {
+            var data = {
+                'sessionId': sessionId
+            };
+            $.operate.post(prefix + '/forceLogout', data);
+        });
+    }
 
-        $(function () {
-            var options = {
-                url: prefix + '/list',
-                sortName: 'lastAccessTime',
-                sortOrder: 'desc',
-                search: false,
-                showExport: false,
-                columns: [
-                    {
-                        checkbox: true
-                    },
-                    {
-                        field: 'sessionId',
-                        title: '会话编号'
-                    },
-                    {
-                        field: 'loginName',
-                        title: '登录名称'
-                    },
-                    {
-                        field: 'deptName',
-                        title: '部门名称'
-                    },
-                    {
-                        field: 'ipaddr',
-                        title: '主机'
-                    },
-                    {
-                        title: '浏览器',
-                        field: 'browser'
-                    },
-                    {
-                        title: '操作系统',
-                        field: 'os'
-                    },
-                    {
-                        title: '会话状态',
-                        field: 'status',
-                        align: 'center',
-                        formatter: function (value,row,index) {
-                            if ('ON_LINE' == value){
-                                return '<span class="badge badge-primary">在线</span>';
-                            } else if ('OFF_LINE' == value){
-                                return '<span class="badge badge-danger">离线</span>';
-                            }
-                        }
-                    },
-                    {
-                        title: '登录时间',
-                        field: 'startTimestamp',
-                        sortable: true
-                    },
-                    {
-                        title: '最后访问时间',
-                        field: 'lastAccessTime',
-                        sortable: true
-                    },
-                    {
-                        title: '操作',
-                        align: 'center',
-                        formatter: function (value,row,index) {
-                            var action = '<a class="btn btn-danger btn-xs ' + forcePerm + '" href="#" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
-                            return action;
+    $(function () {
+        var options = {
+            url: prefix + '/list',
+            sortName: 'lastAccessTime',
+            sortOrder: 'desc',
+            search: false,
+            showExport: false,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    field: 'sessionId',
+                    title: '会话编号'
+                },
+                {
+                    field: 'loginName',
+                    title: '登录名称'
+                },
+                {
+                    field: 'deptName',
+                    title: '部门名称'
+                },
+                {
+                    field: 'ipaddr',
+                    title: '主机'
+                },
+                {
+                    title: '浏览器',
+                    field: 'browser'
+                },
+                {
+                    title: '操作系统',
+                    field: 'os'
+                },
+                {
+                    title: '会话状态',
+                    field: 'status',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if ('ON_LINE' == value) {
+                            return '<span class="badge badge-primary">在线</span>';
+                        } else if ('OFF_LINE' == value) {
+                            return '<span class="badge badge-danger">离线</span>';
                         }
                     }
-                ]
-            };
-            $.table.init(options);
-        });
+                },
+                {
+                    title: '登录时间',
+                    field: 'startTimestamp',
+                    sortable: true
+                },
+                {
+                    title: '最后访问时间',
+                    field: 'lastAccessTime',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var action = '<a class="btn btn-danger btn-xs ' + forcePerm + '" href="#" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
+                        return action;
+                    }
+                }
+            ]
+        };
+        $.table.init(options);
+    });
 
-    </script>
+</script>
 </body>
 </html>

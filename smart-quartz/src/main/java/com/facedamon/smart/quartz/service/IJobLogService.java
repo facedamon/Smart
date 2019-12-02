@@ -5,18 +5,19 @@ import com.facedamon.smart.quartz.domain.JobLog;
 import java.util.List;
 
 /**
- * @Description:    定时任务调度日志 service
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 15:20
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 15:20
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 定时任务调度日志 service
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 15:20
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 15:20
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IJobLogService {
 
     /**
      * 查询调度器日志
+     *
      * @param jobLog
      * @return
      */
@@ -24,6 +25,7 @@ public interface IJobLogService {
 
     /**
      * 根据ID查询调度日志信息
+     *
      * @param jobLogId
      * @return
      */
@@ -31,12 +33,14 @@ public interface IJobLogService {
 
     /**
      * 新增任务日志
+     *
      * @param jobLog
      */
     int addJobLog(JobLog jobLog);
 
     /**
      * 批量删除调度日志
+     *
      * @param ids
      * @return
      */
@@ -44,6 +48,7 @@ public interface IJobLogService {
 
     /**
      * 删除任务日志
+     *
      * @param jobId
      * @return
      */

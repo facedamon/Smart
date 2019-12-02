@@ -6,13 +6,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description:    字典数据mapper
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 17:06
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 17:06
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 字典数据mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 17:06
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 17:06
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface DictDataMapper {
 
@@ -35,7 +35,7 @@ public interface DictDataMapper {
     /**
      * 根据字典类型和字典键值查询字典数据信息
      *
-     * @param dictType 字典类型
+     * @param dictType  字典类型
      * @param dictValue 字典键值
      * @return 字典标签
      */

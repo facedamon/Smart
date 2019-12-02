@@ -48,14 +48,6 @@ public interface RoleMapper {
     int deleteRoleById(Long roleId);
 
     /**
-     * 批量删除角色用户信息
-     *
-     * @param ids
-     * @return
-     */
-    int deleteRoleByIds(Long[] ids);
-
-    /**
      * 修改角色信息
      *
      * @param role

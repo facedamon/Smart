@@ -1,50 +1,57 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <head th:include="include :: header"></head>
+    <link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 
-<style>
-    body{height:auto;font-family: "Microsoft YaHei";}
-    button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
-</style>
-<body class="box box-main hold">
-    <input id="treeId" name="treeId" hidden="hidden" th:value="${menu.menuId}" />
-    <input id="treeName" name="treeName" hidden="hidden" th:value="${menu.menuName}" />
-
-    <div class="wrapper">
-        <div class="treeShowHideButton" onclick="$.tree.toggleSearch()">
-            <label id="btnShow" title="显示搜索" style="display: none">︾</label>
-            <label id="btnHide" title="隐藏搜索">︽</label>
-        </div>
-        <div class="treeSearchInput" id="search">
-            <label for="keyword">关键字: </label>
-            <input type="text" class="empty" id="keyword" maxlength="50" />
-            <button id="btn" class="btn" onclick="$.tree.searchNode()">搜索</button>
-        </div>
-        <div class="treeExpandCollapse">
-            <a href="#" onclick="$.tree.expand()">展开</a> /
-            <a href="#" onclick="$.tree.collapse()">折叠</a>
-        </div>
-        <div id="tree" class="ztree treeselect"></div>
-    </div>
-
-    <div th:include="include::footer"></div>
-    <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
-    <script th:inline="javascript">
-        $(function () {
-            var options = {
-                url: ctx + 'system/menu/menuTreeData',
-                expandLevel: 1,
-                onClick: zOnClick
-            };
-            $.tree.init(options);
-        });
-
-        function zOnClick(event,treeId,treeNode) {
-            $('#treeId').val(treeNode.id);
-            $('#treeName').val(treeNode.name);
+    <style>
+        body {
+            height: auto;
+            font-family: "Microsoft YaHei";
         }
-    </script>
-</body>
+
+        button {
+            font-family: "SimSun", "Helvetica Neue", Helvetica, Arial;
+        }
+    </style>
+    <body class="box box-main hold">
+        <input id="treeId" name="treeId" hidden="hidden" th:value="${menu.menuId}"/>
+        <input id="treeName" name="treeName" hidden="hidden" th:value="${menu.menuName}"/>
+
+        <div class="wrapper">
+            <div class="treeShowHideButton" onclick="$.tree.toggleSearch()">
+                <label id="btnShow" title="显示搜索" style="display: none">︾</label>
+                <label id="btnHide" title="隐藏搜索">︽</label>
+            </div>
+            <div class="treeSearchInput" id="search">
+                <label for="keyword">关键字:</label>
+                <input type="text" class="empty" id="keyword" maxlength="50"/>
+                <button id="btn" class="btn" onclick="$.tree.searchNode()">搜索</button>
+            </div>
+            <div class="treeExpandCollapse">
+                <a href="#" onclick="$.tree.expand()">展开</a>
+                /
+                <a href="#" onclick="$.tree.collapse()">折叠</a>
+            </div>
+            <div id="tree" class="ztree treeselect"></div>
+        </div>
+
+        <div th:include="include::footer"></div>
+        <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+        <script th:inline="javascript">
+            $(function () {
+                var options = {
+                    url: ctx + 'system/menu/menuTreeData',
+                    expandLevel: 1,
+                    onClick: zOnClick
+                };
+                $.tree.init(options);
+            });
+
+            function zOnClick(event, treeId, treeNode) {
+                $('#treeId').val(treeNode.id);
+                $('#treeName').val(treeNode.name);
+            }
+        </script>
+    </body>
 </html>

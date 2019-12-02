@@ -52,9 +52,10 @@ public interface IMenuService {
 
     /**
      * 根据角色ID查询权限
+     *
      * @return
      */
-    List<Map<String,Object>> roleMenuTreeData(Role role);
+    List<Map<String, Object>> roleMenuTreeData(Role role);
 
     /**
      * 查询所有菜单信息

@@ -4,13 +4,13 @@ import lombok.Getter;
 import org.apache.commons.fileupload.FileUploadException;
 
 /**
- * @Description:    文件名超长异常类
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 15:03
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 15:03
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 文件名超长异常类
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 15:03
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 15:03
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Getter
 public class FileNameLengthLimitExceededException extends FileUploadException {

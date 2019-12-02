@@ -5,18 +5,19 @@ import com.facedamon.smart.quartz.domain.Job;
 import java.util.List;
 
 /**
- * @Description:    调度任务信息mapper
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 14:52
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 14:52
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 调度任务信息mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 14:52
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 14:52
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface JobMapper {
 
     /**
      * 查询调度任务日志
+     *
      * @param job
      * @return
      */
@@ -24,12 +25,14 @@ public interface JobMapper {
 
     /**
      * 查询所有调度任务
+     *
      * @return
      */
     List<Job> selectJobAll();
 
     /**
      * 根据ID查询调度任务信息
+     *
      * @param jobId
      * @return
      */
@@ -37,6 +40,7 @@ public interface JobMapper {
 
     /**
      * 根据ID删除调度任务
+     *
      * @param jobId
      * @return
      */
@@ -44,6 +48,7 @@ public interface JobMapper {
 
     /**
      * 批量删除调度任务
+     *
      * @param ids
      * @return
      */
@@ -51,6 +56,7 @@ public interface JobMapper {
 
     /**
      * 修改调度任务信息
+     *
      * @param job
      * @return
      */
@@ -58,6 +64,7 @@ public interface JobMapper {
 
     /**
      * 新增调度任务信息
+     *
      * @param job
      * @return
      */

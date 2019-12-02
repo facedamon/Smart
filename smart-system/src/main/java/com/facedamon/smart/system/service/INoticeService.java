@@ -6,17 +6,18 @@ import java.util.List;
 
 /**
  * @Description:
- * @Author:         facedamon
- * @CreateDate:     2018/11/23 14:50
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/23 14:50
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Author: facedamon
+ * @CreateDate: 2018/11/23 14:50
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/23 14:50
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface INoticeService {
 
     /**
      * 根据ID查询公告信息
+     *
      * @param noticeId
      * @return
      */
@@ -24,6 +25,7 @@ public interface INoticeService {
 
     /**
      * 查询公告列表
+     *
      * @param notice
      * @return
      */
@@ -31,6 +33,7 @@ public interface INoticeService {
 
     /**
      * 新增公告
+     *
      * @param notice
      * @return
      */
@@ -38,6 +41,7 @@ public interface INoticeService {
 
     /**
      * 更新公告
+     *
      * @param notice
      * @return
      */
@@ -45,6 +49,7 @@ public interface INoticeService {
 
     /**
      * 批量删除公告
+     *
      * @param ids
      * @return
      */

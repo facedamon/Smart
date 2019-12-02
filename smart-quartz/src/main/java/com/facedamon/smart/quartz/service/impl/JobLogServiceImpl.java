@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description:    定时任务调度日志信息 service
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 15:28
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 15:28
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 定时任务调度日志信息 service
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 15:28
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 15:28
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class JobLogServiceImpl implements IJobLogService {
@@ -26,6 +26,7 @@ public class JobLogServiceImpl implements IJobLogService {
 
     /**
      * 获取quartz调度器日志的计划任务
+     *
      * @param jobLog
      * @return
      */
@@ -36,6 +37,7 @@ public class JobLogServiceImpl implements IJobLogService {
 
     /**
      * 通过调度任务日志ID查询调度信息
+     *
      * @param jobLogId
      * @return
      */
@@ -46,6 +48,7 @@ public class JobLogServiceImpl implements IJobLogService {
 
     /**
      * 新增任务日志
+     *
      * @param jobLog
      */
     @Override
@@ -55,6 +58,7 @@ public class JobLogServiceImpl implements IJobLogService {
 
     /**
      * 批量删除调度日志信息
+     *
      * @param ids
      * @return
      */
@@ -65,6 +69,7 @@ public class JobLogServiceImpl implements IJobLogService {
 
     /**
      * 删除任务日志
+     *
      * @param jobId
      * @return
      */

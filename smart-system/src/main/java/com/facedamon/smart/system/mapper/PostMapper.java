@@ -5,13 +5,13 @@ import com.facedamon.smart.system.domain.Post;
 import java.util.List;
 
 /**
- * @Description:    岗位信息mapper
- * @Author:         facedamon
- * @CreateDate:     2018/10/30 17:25
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/30 17:25
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 岗位信息mapper
+ * @Author: facedamon
+ * @CreateDate: 2018/10/30 17:25
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/30 17:25
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface PostMapper {
 
@@ -85,5 +85,5 @@ public interface PostMapper {
      * @return 结果
      */
     Post checkPostCodeUnique(String postCode);
-    
+
 }

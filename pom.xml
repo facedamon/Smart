@@ -48,6 +48,8 @@
         <module>smart-quartz</module>
         <module>smart-common</module>
         <module>smart-generator</module>
+        <module>smart-activti</module>
+        <module>smart-param</module>
     </modules>
     <packaging>pom</packaging>
 

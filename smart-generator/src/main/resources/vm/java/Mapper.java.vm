@@ -1,7 +1,9 @@
-package ${package}.mapper
+package
 
 import java.util.List;
-import ${package}.domain.${className}
+
+${package}.mapper
+    ${package}.domain.${className}
 
 /**
  * @Description:    ${tableComment} mapper
@@ -9,17 +11,17 @@ import ${package}.domain.${className}
  * @CreateDate:     ${datetime}
  * @UpdateUser:     ${author}
  * @UpdateDate:     ${datetime}
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
-public interface ${className}Mapper{
+public interface ${className}Mapper {
 
     /**
      * 查询${tableComment}信息
      * @param ${primaryKey.attrNameLower} ${tableComment}ID
      *  @return ${tableComment}信息
      */
-    ${className} select${className}ById(${primaryKey.javaType} ${primaryKey.attrNameLower});
+        ${className} select${className}ById(${primaryKey.javaType} ${primaryKey.attrNameLower});
 
     /**
      * 查询${tableComment}列表

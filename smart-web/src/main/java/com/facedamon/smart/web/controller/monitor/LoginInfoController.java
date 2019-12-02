@@ -3,7 +3,6 @@ package com.facedamon.smart.web.controller.monitor;
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
-import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.system.domain.Logininfor;
 import com.facedamon.smart.system.service.ILogininforService;
@@ -51,16 +50,6 @@ public class LoginInfoController extends BaseController {
         startPage();
         List<Logininfor> logininfors = logininforService.selectLogininforList(logininfor);
         return getDataTable(logininfors);
-    }
-
-    @Log(model = "导出登陆日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:logininfor:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public Response export(Logininfor logininfor) {
-        List<Logininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtils<Logininfor> util = new ExcelUtils<Logininfor>(Logininfor.class);
-        return util.export(list, "logininfor");
     }
 
     @RequiresPermissions("monitor:logininfor:remove")

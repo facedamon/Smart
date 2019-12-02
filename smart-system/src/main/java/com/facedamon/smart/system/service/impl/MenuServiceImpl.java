@@ -98,6 +98,7 @@ public class MenuServiceImpl implements IMenuService {
 
     /**
      * 根据角色查询菜单
+     *
      * @param role
      * @return
      */
@@ -106,13 +107,10 @@ public class MenuServiceImpl implements IMenuService {
         Long roleId = role.getRoleId();
         List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
         List<Menu> menuList = menuMapper.selectMenuAll();
-        if (null != roleId)
-        {
+        if (null != roleId) {
             List<String> roleMenuList = menuMapper.selectMenuTree(roleId);
             trees = getTrees(menuList, true, roleMenuList, true);
-        }
-        else
-        {
+        } else {
             trees = getTrees(menuList, false, null, true);
         }
         return trees;

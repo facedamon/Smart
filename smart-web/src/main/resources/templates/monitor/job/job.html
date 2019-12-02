@@ -3,176 +3,179 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="form-job">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                任务名称: <input type="text" name="jobName" placeholder="Bean名称" />
-                            </li>
-                            <li>
-                                方法名称: <input type="text" name="methodName" />
-                            </li>
-                            <li>
-                                任务状态:
-                                <select name="status" th:with="type = ${@dict.selectDataByType('sys_job_status')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                        </ul>
-                        <div class="btn-group btn-group-sm" style="margin: 0px auto;display: table;" role="group">
-                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()">
-                                <i class="fa fa-search">&nbsp;</i>搜索
-                            </a>
-                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()">
-                                <i class="fa fa-refresh">&nbsp;</i>重置
-                            </a>
-                        </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="form-job">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            任务名称: <input type="text" name="jobName" placeholder="Bean名称"/>
+                        </li>
+                        <li>
+                            方法名称: <input type="text" name="methodName"/>
+                        </li>
+                        <li>
+                            任务状态:
+                            <select name="status" th:with="type = ${@dict.selectDataByType('sys_job_status')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                        th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="btn-group btn-group-sm" style="margin: 0px auto;display: table;" role="group">
+                        <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()">
+                            <i class="fa fa-search">&nbsp;</i>搜索
+                        </a>
+                        <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()">
+                            <i class="fa fa-refresh">&nbsp;</i>重置
+                        </a>
                     </div>
-                </form>
-            </div>
-            <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="monitor:job:add">
-                    <i class="fa fa-plus"></i> 新增
-                </a>
-                <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:job:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:job:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-success" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
-                    <i class="fa fa-list"></i> 日志
-                </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:job:export">
-                    <i class="fa fa-download"></i> 导出
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table" data-mobile-responsive="true"></table>
-            </div>
+                </div>
+            </form>
+        </div>
+        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="monitor:job:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="system:job:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="monitor:job:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-success" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
+                <i class="fa fa-list"></i> 日志
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:job:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
         </div>
     </div>
-    <div th:include="include :: footer"></div>
-    <script th:inline="javascript">
-        var editPerm = [[${@permission.hasPermi('monitor:job:edit')}]];
-        var removePerm = [[${@permission.hasPermi('monitor:job:remove')}]];
-        var changeStatusPerm = [[${@permission.hasPermi('monitor:job:changeStatus')}]];
-        var datas = [[${@dict.selectDataByType('sys_job_status')}]];
-        var prefix = ctx + "monitor/job";
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var editPerm = [[${@permission.hasPermi('monitor:job:edit')}]];
+    var removePerm = [[${@permission.hasPermi('monitor:job:remove')}]];
+    var changeStatusPerm = [[${@permission.hasPermi('monitor:job:changeStatus')}]];
+    var datas = [[${@dict.selectDataByType('sys_job_status')}]];
+    var prefix = ctx + "monitor/job";
 
-        function run(jobId){
-            $.modal.confirm('确定要立即执行该任务吗?',function () {
-               $.operate.post(prefix + "/run",{
-                   'jobId': jobId
-               })
-            });
-        }
+    function run(jobId) {
+        $.modal.confirm('确定要立即执行该任务吗?', function () {
+            $.operate.post(prefix + "/run", {
+                'jobId': jobId
+            })
+        });
+    }
 
-        function stop(jobId){
-            $.modal.confirm("确定要停用该任务吗?",function () {
-                $.operate.post(prefix + '/changeStatus',{
-                    'jobId': jobId,
-                    'status': 1
-                })
-            });
-        }
+    function stop(jobId) {
+        $.modal.confirm("确定要停用该任务吗?", function () {
+            $.operate.post(prefix + '/changeStatus', {
+                'jobId': jobId,
+                'status': 1
+            })
+        });
+    }
 
-        function start(jobId){
-            $.modal.confirm("确定要启用该任务吗?",function () {
-                $.operate.post(prefix + "/changeStatus",{
-                    'jobId': jobId,
-                    'status': 0
-                })
-            });
-        }
+    function start(jobId) {
+        $.modal.confirm("确定要启用该任务吗?", function () {
+            $.operate.post(prefix + "/changeStatus", {
+                'jobId': jobId,
+                'status': 0
+            })
+        });
+    }
 
-        function jobLog(){
-            createMenuItem(ctx + 'monitor/jobLog','调度日志');
-        }
+    function jobLog() {
+        createMenuItem(ctx + 'monitor/jobLog', '调度日志');
+    }
 
-        function statusModel(row){
-            if (row.status == 1){
-                return '<a class="btn btn-info btn-xs ' + changeStatusPerm + '" href="#" onclick="start(\''+ row.jobId +'\')"><i class="fa fa-play"></i>启用</a>';
-            } else {
-                return '<a class="btn btn-warning btn-xs '+ changeStatusPerm +'" href="#" onclick="stop(\''+ row.jobId +'\')"><i class="fa fa-pause"></i>停用</a>'
-            }
+    function statusModel(row) {
+        if (row.status == 1) {
+            return '<a class="btn btn-info btn-xs ' + changeStatusPerm + '" href="#" onclick="start(\'' + row.jobId + '\')"><i class="fa fa-play"></i>启用</a>';
+        } else {
+            return '<a class="btn btn-warning btn-xs ' + changeStatusPerm + '" href="#" onclick="stop(\'' + row.jobId + '\')"><i class="fa fa-pause"></i>停用</a>'
         }
-        
-        $(function () {
-            var options = {
-                url: prefix + '/list',
-                createUrl: prefix + '/add',
-                updateUrl: prefix + '/edit/{id}',
-                removeUrl: prefix + '/remove',
-                exportUrl: prefix + '/export',
-                modalName: '任务',
-                sortName: 'createTime',
-                sortOrder: 'desc',
-                search: false,
-                showExport: false,
-                columns: [
-                    {
-                        checkbox: true
-                    },
-                    {
-                        title: '任务编号',
-                        field: 'jobId'
-                    },
-                    {
-                        title: '任务名称',
-                        field: 'jobName',
-                        sortable: true
-                    },
-                    {
-                        title: '任务组名称',
-                        field: 'jobGroup',
-                        sortable: true
-                    },
-                    {
-                        title: '方法名称',
-                        field: 'methodName'
-                    },
-                    {
-                        title: '方法参数',
-                        field: 'methodParams'
-                    },
-                    {
-                        title: '执行表达式',
-                        field: 'cronExpression'
-                    },
-                    {
-                        title: '任务状态',
-                        field: 'status',
-                        align: 'center',
-                        formatter: function (value,row,index) {
-                            return $.table.selectDictLabel(datas,value);
-                        }
-                    },
-                    {
-                        title: '创建时间',
-                        field: 'createTime',
-                        sortable: true
-                    },
-                    {
-                        title: '操作',
-                        align: 'center',
-                        formatter: function(value, row, index) {
-                            var actions = [];
-                            actions.push(statusModel(row));
-                            actions.push('<a class="btn btn-primary btn-xs ' + changeStatusPerm + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行</a> ');
-                            actions.push('<a class="btn btn-success btn-xs ' + editPerm + '" href="#" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                            actions.push('<a class="btn btn-danger btn-xs ' + removePerm + '" href="#" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                            return actions.join('');
-                        }
+    }
+
+    $(function () {
+        var options = {
+            url: prefix + '/list',
+            createUrl: prefix + '/add',
+            updateUrl: prefix + '/edit/{id}',
+            removeUrl: prefix + '/remove',
+            exportUrl: prefix + '/export',
+            modalName: '任务',
+            sortName: 'createTime',
+            sortOrder: 'desc',
+            search: false,
+            showExport: false,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    title: '任务编号',
+                    field: 'jobId'
+                },
+                {
+                    title: '任务名称',
+                    field: 'jobName',
+                    sortable: true
+                },
+                {
+                    title: '任务组名称',
+                    field: 'jobGroup',
+                    sortable: true
+                },
+                {
+                    title: '方法名称',
+                    field: 'methodName'
+                },
+                {
+                    title: '方法参数',
+                    field: 'methodParams'
+                },
+                {
+                    title: '执行表达式',
+                    field: 'cronExpression'
+                },
+                {
+                    title: '任务状态',
+                    field: 'status',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
                     }
-                ]
-            }
-            $.table.init(options);
-        })
-    </script>
+                },
+                {
+                    title: '创建时间',
+                    field: 'createTime',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push(statusModel(row));
+                        actions.push('<a class="btn btn-primary btn-xs ' + changeStatusPerm + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editPerm + '" href="#" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removePerm + '" href="#" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }
+            ]
+        }
+        $.table.init(options);
+    })
+</script>
 </body>
 </html>

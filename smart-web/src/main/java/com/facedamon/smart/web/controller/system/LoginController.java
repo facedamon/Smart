@@ -30,6 +30,7 @@ public class LoginController extends BaseController {
 
     /**
      * 通过get方式请求拦截
+     *
      * @param request
      * @param response
      * @return
@@ -44,6 +45,7 @@ public class LoginController extends BaseController {
 
     /**
      * post 登录controller
+     *
      * @param username
      * @param password
      * @param rememberMe
@@ -60,7 +62,7 @@ public class LoginController extends BaseController {
             return Response.success();
         } catch (AuthenticationException e) {
             String msg = "用户名或密码错误";
-            if (StringUtils.isNotBlank(e.getMessage())){
+            if (StringUtils.isNotBlank(e.getMessage())) {
                 msg = e.getMessage();
             }
             return Response.error(msg);
@@ -69,10 +71,11 @@ public class LoginController extends BaseController {
 
     /**
      * 认证失败
+     *
      * @return
      */
     @GetMapping("/unauth")
-    public String unauth(){
+    public String unauth() {
         return "/error/unauth";
     }
 

@@ -5,18 +5,19 @@ import com.facedamon.smart.quartz.domain.Job;
 import java.util.List;
 
 /**
- * @Description:    调度 service
- * @Author:         facedamon
- * @CreateDate:     2018/11/26 15:14
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/26 15:14
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 调度 service
+ * @Author: facedamon
+ * @CreateDate: 2018/11/26 15:14
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/26 15:14
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IJobService {
 
     /**
      * 获取调度任务计划
+     *
      * @param job
      * @return
      */
@@ -24,6 +25,7 @@ public interface IJobService {
 
     /**
      * 根据ID查询调度信息
+     *
      * @param jobId
      * @return
      */
@@ -31,6 +33,7 @@ public interface IJobService {
 
     /**
      * 暂停任务
+     *
      * @param job
      * @return
      */
@@ -38,6 +41,7 @@ public interface IJobService {
 
     /**
      * 恢复任务
+     *
      * @param job
      * @return
      */
@@ -45,6 +49,7 @@ public interface IJobService {
 
     /**
      * 删除任务，对应的trigger也将被删除
+     *
      * @param job
      * @return
      */
@@ -52,12 +57,14 @@ public interface IJobService {
 
     /**
      * 批量删除调度信息
+     *
      * @param ids
      */
     void deleteJobByIds(String ids);
 
     /**
      * 任务调度状态修改
+     *
      * @param job
      * @return
      */
@@ -65,6 +72,7 @@ public interface IJobService {
 
     /**
      * 新增任务表达式
+     *
      * @param job
      * @return
      */
@@ -72,6 +80,7 @@ public interface IJobService {
 
     /**
      * 更新任务时间表达式
+     *
      * @param job
      * @return
      */
@@ -79,6 +88,7 @@ public interface IJobService {
 
     /**
      * 立即运行
+     *
      * @param job
      * @return
      */

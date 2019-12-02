@@ -9,8 +9,8 @@ $(function () {
     /**
      * 时间控件绑定与校验
      */
-    if ($('.select-time').length > 0){
-        layui.use('laydate',function () {
+    if ($('.select-time').length > 0) {
+        layui.use('laydate', function () {
             //日期模板
             var laydate = layui.laydate;
             //开始渲染
@@ -22,17 +22,17 @@ $(function () {
                 trigger: 'click',
                 /**
                  * 校验器 结束时间大于开始时间
-                 * @param value
-                 * @param date 选中的日期
+                 * @system value
+                 * @system date 选中的日期
                  */
-                done: function (value,date) {
-                    if ('' !== value){
+                done: function (value, date) {
+                    if ('' !== value) {
                         endDate.config.min.year = date.year;
                         endDate.config.min.month = date.month - 1;
                         endDate.config.min.date = date.date;
                     } else {
                         endDate.config.min.year = '';
-                        endDate.config.min.month ='';
+                        endDate.config.min.month = '';
                         endDate.config.min.date = '';
                     }
                 }
@@ -46,11 +46,11 @@ $(function () {
                 trigger: 'click',
                 /**
                  * 校验器 开始时间小于结束时间
-                 * @param value
-                 * @param date
+                 * @system value
+                 * @system date
                  */
-                done: function (value,date) {
-                    if ('' != value){
+                done: function (value, date) {
+                    if ('' != value) {
                         startDate.config.max.year = date.year;
                         startDate.config.max.month = date.month - 1;
                         startDate.config.max.date = date.date;
@@ -67,7 +67,7 @@ $(function () {
     /**
      * checkbox 复选框变更状态，修改按钮样式
      */
-    $('#bootstrap-table').on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table',function () {
+    $('#bootstrap-table').on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
         /**
          * 获取选中的id
          * @type {*|jQuery}
@@ -77,28 +77,28 @@ $(function () {
         /**
          * 批量删除按钮 ids.length != 0
          */
-        $('#toolbar .btn-del').toggleClass('disabled',!ids.length);
+        $('#toolbar .btn-del').toggleClass('disabled', !ids.length);
 
         /**
          * 单个修改按钮，ids.length != 1
          */
-        $('#toolbar .btn-edit').toggleClass('disabled',ids.length!=1);
+        $('#toolbar .btn-edit').toggleClass('disabled', ids.length != 1);
     })
 
     /**
      * tree 搜索关键字绑定
      */
-    if ($('#keyword').length > 0){
-        $('#keyword').bind('focus',function focusKey(e) {
-            if ($('#keyword').hasClass('empty')){
+    if ($('#keyword').length > 0) {
+        $('#keyword').bind('focus', function focusKey(e) {
+            if ($('#keyword').hasClass('empty')) {
                 $('#keyword').removeClass('empty');
             }
-        }).bind('blur',function blurKey(e){
-            if ($('#keyword').val() === ""){
+        }).bind('blur', function blurKey(e) {
+            if ($('#keyword').val() === "") {
                 $('#keyword').addClass("empty");
             }
             $.tree.searchNode(e);
-        }).bind("input propertychange",$.tree.searchNode);
+        }).bind("input propertychange", $.tree.searchNode);
     }
 
     /**
@@ -107,7 +107,7 @@ $(function () {
      */
     var expandFlag = false;
     $('#expandAllBtn').click(function () {
-        if (expandFlag){
+        if (expandFlag) {
             $('#bootstrap-table').bootstrapTreeTable('expandAll');
         } else {
             $('#bootstrap-table').bootstrapTreeTable('collapseAll');
@@ -118,9 +118,9 @@ $(function () {
     /**
      * select2 标签复选框事件绑定
      */
-    if ($.fn.select2 != undefined){
+    if ($.fn.select2 != undefined) {
         $('select.form-control:not(.noselect2)').each(function () {
-            $(this).select2().on("change",function () {
+            $(this).select2().on("change", function () {
                 $(this).valid();
             })
         })
@@ -148,8 +148,8 @@ $(function () {
 
 /**
  * 创建选项卡
- * @param dataUrl
- * @param menuName
+ * @system dataUrl
+ * @system menuName
  * @returns {boolean}
  */
 function createMenuItem(dataUrl, menuName) {
@@ -201,11 +201,11 @@ function createMenuItem(dataUrl, menuName) {
     return false;
 }
 
-function getDateStr(addDay){
+function getDateStr(addDay) {
     var today = new Date();
-    today.setDate(today.getDate()+addDay);
+    today.setDate(today.getDate() + addDay);
     var y = today.getFullYear();
     var m = today.getMonth() + 1;
     var d = today.getDate();
-    return y+"-"+m+"-"+d;
+    return y + "-" + m + "-" + d;
 }

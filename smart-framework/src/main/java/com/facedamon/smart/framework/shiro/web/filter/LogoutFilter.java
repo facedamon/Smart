@@ -15,7 +15,7 @@ import javax.servlet.ServletResponse;
 
 /**
  * @Description: 退出过滤连
- * @Author:     facedamon
+ * @Author: facedamon
  * @CreateDate: 2018/10/26 15:43
  * @UpdateUser: facedamon
  * @UpdateDate: 2018/10/26 15:43
@@ -47,7 +47,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                 User user = ShiroUtils.getUser();
                 if (null != user) {
                     String loginName = user.getLoginName();
-                    AsyncFactory.INSTANCE.recordLogininfor(loginName,Constants.LOGOUT.getValue(),MessageUtils.message("user.logout.success"));
+                    AsyncFactory.INSTANCE.recordLogininfor(loginName, Constants.LOGOUT.getValue(), MessageUtils.message("user.logout.success"));
                 }
                 // 退出登录
                 subject.logout();

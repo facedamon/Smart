@@ -1,20 +1,20 @@
 package com.facedamon.smart.generator.constants.vm;
 
 /**
- * @Description:    模板常量
- * @Author:         facedamon
- * @CreateDate:     2018/11/20 14:43
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/20 14:43
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 模板常量
+ * @Author: facedamon
+ * @CreateDate: 2018/11/20 14:43
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/20 14:43
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface TemplateVM {
 
     /**
      * 模板文件目录
      */
-    enum TemplateDir implements TemplateVM{
+    enum TemplateDir implements TemplateVM {
         /**
          *
          */
@@ -42,7 +42,7 @@ public interface TemplateVM {
     /**
      * 模板文件
      */
-    enum TemplateFile implements TemplateVM{
+    enum TemplateFile implements TemplateVM {
         /**
          *
          */

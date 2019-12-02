@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description:    公告service
- * @Author:         facedamon
- * @CreateDate:     2018/11/23 14:55
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/23 14:55
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 公告service
+ * @Author: facedamon
+ * @CreateDate: 2018/11/23 14:55
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/23 14:55
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 public class NoticeServiceImpl implements INoticeService {
@@ -26,6 +26,7 @@ public class NoticeServiceImpl implements INoticeService {
 
     /**
      * 根据ID查询公告
+     *
      * @param noticeId
      * @return
      */
@@ -36,6 +37,7 @@ public class NoticeServiceImpl implements INoticeService {
 
     /**
      * 查询公告列表
+     *
      * @param notice
      * @return
      */
@@ -46,6 +48,7 @@ public class NoticeServiceImpl implements INoticeService {
 
     /**
      * 新增公告
+     *
      * @param notice
      * @return
      */
@@ -56,6 +59,7 @@ public class NoticeServiceImpl implements INoticeService {
 
     /**
      * 更新公告
+     *
      * @param notice
      * @return
      */
@@ -66,6 +70,7 @@ public class NoticeServiceImpl implements INoticeService {
 
     /**
      * 批量删除公告
+     *
      * @param ids
      * @return
      */

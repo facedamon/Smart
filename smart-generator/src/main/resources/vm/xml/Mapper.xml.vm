@@ -6,7 +6,7 @@
 
     <resultMap type="${className}" id="${className}Result">
         #foreach ($column in $columns)
-            <result property="${column.attrNameLower}"    column="${column.columnName}"    />
+            <result property="${column.attrNameLower}" column="${column.columnName}"/>
         #end
     </resultMap>
 
@@ -18,7 +18,10 @@
         <include refid="select${className}Vo"/>
         <where>
             #foreach($column in $columns)
-                <if test="$column.attrNameLower != null #if($column.javaType == 'String' ) and $column.attrNameLower.trim() != '' #end"> and $column.columnName = #{$column.attrNameLower}</if>
+                <if test="$column.attrNameLower != null #if($column.javaType ==
+                    'String' ) and $column.attrNameLower.trim() != '' #end">and $column.columnName =
+                    #{$column.attrNameLower}
+                </if>
             #end
         </where>
     </select>
@@ -28,19 +31,24 @@
         where ${primaryKey.columnName} = #{${primaryKey.attrNameLower}}
     </select>
 
-    <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrNameLower"#end>
+    <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment')
+            useGeneratedKeys="true" keyProperty="$primaryKey.attrNameLower"#end>
         insert into ${tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             #foreach($column in $columns)
                 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-                    <if test="$column.attrNameLower != null #if($column.javaType == 'String' ) and $column.attrNameLower != '' #end ">$column.columnName,</if>
+                    <if test="$column.attrNameLower != null #if($column.javaType ==
+                        'String' ) and $column.attrNameLower != '' #end ">$column.columnName,
+                    </if>
                 #end
             #end
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             #foreach($column in $columns)
                 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-                    <if test="$column.attrNameLower != null #if($column.javaType == 'String' ) and $column.attrNameLower != '' #end ">#{$column.attrNameLower},</if>
+                    <if test="$column.attrNameLower != null #if($column.javaType ==
+                        'String' ) and $column.attrNameLower != '' #end ">#{$column.attrNameLower},
+                    </if>
                 #end
             #end
         </trim>
@@ -51,7 +59,9 @@
         <trim prefix="SET" suffixOverrides=",">
             #foreach($column in $columns)
                 #if($column.columnName != $primaryKey.columnName)
-                    <if test="$column.attrNameLower != null #if($column.javaType == 'String' ) and $column.attrNameLower != '' #end ">$column.columnName = #{$column.attrNameLower},</if>
+                    <if test="$column.attrNameLower != null #if($column.javaType ==
+                        'String' ) and $column.attrNameLower != '' #end ">$column.columnName = #{$column.attrNameLower},
+                    </if>
                 #end
             #end
         </trim>

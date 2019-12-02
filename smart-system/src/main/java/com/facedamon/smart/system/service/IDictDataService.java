@@ -5,13 +5,13 @@ import com.facedamon.smart.system.domain.DictData;
 import java.util.List;
 
 /**
- * @Description:    字典数据service
- * @Author:         facedamon
- * @CreateDate:     2018/10/29 17:09
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/10/29 17:09
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 字典数据service
+ * @Author: facedamon
+ * @CreateDate: 2018/10/29 17:09
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/10/29 17:09
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 public interface IDictDataService {
 
@@ -34,7 +34,7 @@ public interface IDictDataService {
     /**
      * 根据字典类型和字典键值查询字典数据信息
      *
-     * @param dictType 字典类型
+     * @param dictType  字典类型
      * @param dictValue 字典键值
      * @return 字典标签
      */

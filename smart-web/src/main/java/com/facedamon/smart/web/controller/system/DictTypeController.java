@@ -3,7 +3,6 @@ package com.facedamon.smart.web.controller.system;
 import com.facedamon.smart.common.annotation.Log;
 import com.facedamon.smart.common.base.Response;
 import com.facedamon.smart.common.enums.BusinessType;
-import com.facedamon.smart.framework.util.ExcelUtils;
 import com.facedamon.smart.framework.util.ShiroUtils;
 import com.facedamon.smart.framework.web.page.TableDataInfo;
 import com.facedamon.smart.system.domain.DictType;
@@ -93,17 +92,6 @@ public class DictTypeController extends BaseController {
         } catch (Exception e) {
             return Response.error(e.getMessage());
         }
-    }
-
-    @Log(model = "导出字典类型", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:dict:export")
-    @PostMapping("/export")
-    @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
-    public Response export(DictType dictType) {
-        List<DictType> dictTypes = dictTypeService.selectDictTypeList(dictType);
-        ExcelUtils utils = new ExcelUtils<DictType>(DictType.class);
-        return utils.export(dictTypes, "dictType");
     }
 
     @PostMapping("/checkDictTypeUnique")

@@ -25,13 +25,13 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * @Description:    生成代码service
- * @Author:         facedamon
- * @CreateDate:     2018/11/20 10:35
- * @UpdateUser:     facedamon
- * @UpdateDate:     2018/11/20 10:35
- * @UpdateRemark:   修改内容
- * @Version:        1.0
+ * @Description: 生成代码service
+ * @Author: facedamon
+ * @CreateDate: 2018/11/20 10:35
+ * @UpdateUser: facedamon
+ * @UpdateDate: 2018/11/20 10:35
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
  */
 @Service
 @Slf4j
@@ -47,11 +47,12 @@ public class GeneratorServiceImpl implements IGeneratorService {
 
     /**
      * 生成代码
+     *
      * @param tableInfo
      * @param columnInfos
      * @param zip
      */
-    protected void generatorCode(TableInfo tableInfo,List<ColumnInfo> columnInfos, ZipOutputStream zip){
+    protected void generatorCode(TableInfo tableInfo, List<ColumnInfo> columnInfos, ZipOutputStream zip) {
         String className = Generator.table2Java(tableInfo.getTableName());
         tableInfo.setClassName(className);
         tableInfo.setClassNameLower(StringUtils.uncapitalize(className));
@@ -70,29 +71,30 @@ public class GeneratorServiceImpl implements IGeneratorService {
          * 获取模板列表
          */
         List<String> templates = Generator.getTemplates();
-        for (String template : templates){
+        for (String template : templates) {
             /**
              * 渲染模板
              */
             StringWriter sw = new StringWriter();
-            Template template1 = Velocity.getTemplate(template,StandardCharsets.UTF_8.displayName());
-            template1.merge(context,sw);
+            Template template1 = Velocity.getTemplate(template, StandardCharsets.UTF_8.displayName());
+            template1.merge(context, sw);
             try {
                 /**
                  * 添加到zip
                  */
-                zip.putNextEntry(new ZipEntry(Generator.getFileName(template,tableInfo,moduleName)));
-                IOUtils.write(sw.toString(),zip,StandardCharsets.UTF_8.displayName());
+                zip.putNextEntry(new ZipEntry(Generator.getFileName(template, tableInfo, moduleName)));
+                IOUtils.write(sw.toString(), zip, StandardCharsets.UTF_8.displayName());
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
-            }catch (IOException e){
-                log.error("渲染模板失败，表名: " + tableInfo.getTableName(),e);
+            } catch (IOException e) {
+                log.error("渲染模板失败，表名: " + tableInfo.getTableName(), e);
             }
         }
     }
 
     /**
      * 生成代码字节码
+     *
      * @param tableName
      * @return
      */
@@ -102,13 +104,14 @@ public class GeneratorServiceImpl implements IGeneratorService {
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         TableInfo tableInfo = generatorMapper.selectTableByName(tableName);
         List<ColumnInfo> columnInfos = generatorMapper.selectTableColumnsByName(tableName);
-        generatorCode(tableInfo,columnInfos,zip);
+        generatorCode(tableInfo, columnInfos, zip);
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
 
     /**
      * 批量生成代码字节码
+     *
      * @param tableNames
      * @return
      */
@@ -116,10 +119,10 @@ public class GeneratorServiceImpl implements IGeneratorService {
     public byte[] generatorCode(String[] tableNames) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        for (String tableName: tableNames){
+        for (String tableName : tableNames) {
             TableInfo tableInfo = generatorMapper.selectTableByName(tableName);
             List<ColumnInfo> columnInfos = generatorMapper.selectTableColumnsByName(tableName);
-            generatorCode(tableInfo,columnInfos,zip);
+            generatorCode(tableInfo, columnInfos, zip);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();

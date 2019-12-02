@@ -1,7 +1,9 @@
-package {package}.service;
+package
 
 import java.util.List;
-import ${package}.domain.${className};
+
+{package}.service;
+    ${package}.domain.${className};
 
 /**
  * @Description: $ tableComment} service
@@ -12,46 +14,45 @@ import ${package}.domain.${className};
  * @UpdateRemark: 修改内容
  * @Version: 1.0
  */
-public interface I${className}Service 
-{
-	/**
+public interface I${className}Service {
+    /**
      * 查询${tableComment}信息
-     * 
+     *
      * @param ${primaryKey.attrNameLower} ${tableComment}ID
      * @return ${tableComment}信息
      */
-	public ${className} select${className}ById(${primaryKey.javaType} ${primaryKey.attrNameLower});
-	
-	/**
+    public ${className} select${className}ById(${primaryKey.javaType} ${primaryKey.attrNameLower});
+
+    /**
      * 查询${tableComment}列表
-     * 
+     *
      * @param ${classNameLower} ${tableComment}信息
      * @return ${tableComment}集合
      */
-	public List<${className}> select${className}List(${className} ${classNameLower});
-	
-	/**
+    public List<${className}> select${className}List(${className} ${classNameLower});
+
+    /**
      * 新增${tableComment}
-     * 
+     *
      * @param ${classNameLower} ${tableComment}信息
      * @return 结果
      */
-	public int insert${className}(${className} ${classNameLower});
-	
-	/**
+    public int insert${className}(${className} ${classNameLower});
+
+    /**
      * 修改${tableComment}
-     * 
+     *
      * @param ${classNameLower} ${tableComment}信息
      * @return 结果
      */
-	public int update${className}(${className} ${classNameLower});
-		
-	/**
+    public int update${className}(${className} ${classNameLower});
+
+    /**
      * 删除${tableComment}信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int delete${className}ByIds(String ids);
-	
+    public int delete${className}ByIds(String ids);
+
 }
