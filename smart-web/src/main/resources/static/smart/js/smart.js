@@ -49,6 +49,16 @@
                     showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
                     showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
                     showExport: $.common.visible(options.showExport),   // 是否支持导出文件
+                    exportDataType: "all",                              //basic', 'all', 'selected'.
+                    exportTypes:['excel'],                              //导出文件类型
+                    Icons:'glyphicon-export',
+                    exportOptions:{
+                        //ignoreColumn: [0,1],  //忽略某一列的索引
+                        fileName: 'test',  //文件名称设置
+                        worksheetName: 'sheet1',  //表格工作区名称
+                        tableName: 'test',
+                        excelstyles: ['background-color', 'color', 'font-size', 'font-weight']
+                    },
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.table.responseHandler            // 回调函数
