@@ -9,6 +9,7 @@
         <result property="deptId" column="dept_id"/>
         <result property="loginName" column="login_name"/>
         <result property="userName" column="user_name"/>
+        <result property="userType" column="user_type"/>
         <result property="email" column="email"/>
         <result property="phonenumber" column="phonenumber"/>
         <result property="sex" column="sex"/>
@@ -45,7 +46,7 @@
     </resultMap>
 
     <sql id="selectUserVo">
-        select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
+        select  u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status,
        		    r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
 		from sys_user u
@@ -55,7 +56,7 @@
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
-        select u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.password, u.sex, u.avatar,
+        select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.phonenumber, u.password, u.sex, u.avatar,
         u.salt, u.status, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name from
         sys_user u
         left join sys_dept d on u.dept_id = d.dept_id

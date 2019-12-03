@@ -60,9 +60,9 @@
                shiro:hasPermission="system:config:remove">
                 <i class="fa fa-remove"></i> 批量删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:config:export">
+            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:config:export">
                 <i class="fa fa-download"></i>导出
-            </a>
+            </a>-->
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true">
@@ -101,7 +101,7 @@
             sortOrder: "desc",
             modalName: "参数",
             search: false,
-            showExport: true,
+            showExport: false,
 
             columns: [
                 {

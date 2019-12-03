@@ -60,9 +60,9 @@
                shiro:hasPermission="system:user:remove">
                 <i class="fa fa-remove"></i> 批量删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
+            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
                 <i class="fa fa-download"></i>导出
-            </a>
+            </a>-->
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true">
@@ -81,6 +81,8 @@
     var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd')}]];
     var datas = [[${@dict.selectDataByType('sys_normal_disable')}]];
     var sex = [[${@dict.selectDataByType('sys_user_sex')}]];
+    // 是否系统内置
+    var userType = [[${@dict.selectDataByType('sys_user_type')}]];
     var prefix = ctx + "system/user";
 
     $(function () {
@@ -154,6 +156,13 @@
                     title: '性别',
                     formatter: function (value, row, index) {
                         return $.table.selectDictLabel(sex, value);
+                    }
+                },
+                {
+                    field: 'userType',
+                    title: '用户类型',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(userType,value);
                     }
                 },
                 {

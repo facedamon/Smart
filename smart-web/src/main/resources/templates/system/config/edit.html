@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <!--水平布局表单-->
+    <form class="form-horizontal m" id="form-user-edit" th:object="${config}">
+        <input name="configId" type="hidden" th:field="*{configId}"/>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">参数名称：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" readonly="true" th:field="*{configName}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">参数键：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="configKey" id="configKey" readonly="readonly" th:field="*{configKey}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">参数值：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="configValue" id="configValue" th:field="*{configValue}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否系统内置：</label>
+            <div class="col-sm-8">
+                <select id="configType" class="form-control m-b" th:with="type=${@dict.selectDataByType('sys_yes_no')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
+                            th:field="*{configType}"/>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:include="include::footer"></div>
+<script th:src="@{/ajax/libs/select/select2.js}"></script>
+
+<script th:inline="javascript">
+    /**
+     * form表单校验器
+     */
+    $('#form-user-add').validate({
+        rules: {
+            configName: {
+                required: true
+            },
+        }
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            edit();
+        }
+    }
+
+    function edit() {
+        $.ajax({
+            cache: true,
+            type: "post",
+            url: ctx + "system/user/edit",
+            data: {
+                "configId": $('input[name="configId"]').val(),
+                "configName": $('input[name="configName"]').val(),
+                "configKey": $('input[name="configKey"]').val(),
+                "configValue": $('input[name="configValue"]').val(),
+                "configType": $('#configType option:selected').val()
+            },
+            async: false,
+            success: function (data) {
+                $.operate.saveSuccess(data);
+            },
+            error: function (request) {
+                $.modal.alertError("保存失败");
+            }
+        });
+    }
+</script>
+</body>
+</html>

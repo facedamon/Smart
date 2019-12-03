@@ -135,6 +135,19 @@
         </foreach>
     </update>
 
+    <update id="updateDeptChildrenStatus" parameterType="map">
+        update sys_dept set status = ${status}
+        where dept_id in
+        <foreach collection="depts" item="item" index="index" separator="," open="(" close=")">
+            #{item.deptId}
+        </foreach>
+    </update>
+
+    <select id="selectAllChildren" parameterType="Dept" resultMap="DeptResult">
+        <include refid="selectDeptVo"/>
+        where ancestors like concat(concat(#{ancestors}, ',', #{deptId}), '%')
+    </select>
+
     <delete id="deleteDeptById" parameterType="Long">
 		delete from sys_dept where dept_id = #{deptId}
 	</delete>

@@ -47,6 +47,11 @@ public class User extends BaseEntity {
     private String userName;
 
     /**
+     * 用户类型
+     */
+    private String userType;
+
+    /**
      * 用户邮箱
      */
     private String email;

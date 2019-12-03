@@ -73,6 +73,14 @@ public interface DeptMapper {
     int updateDeptChildren(@Param("depts") List<Dept> depts);
 
     /**
+     * 修改子元素的状态
+     * @param childrens
+     * @param status
+     * @return
+     */
+    int updateDeptChildrenStatus(@Param("depts") List<Dept> childrens, @Param("status") String status);
+
+    /**
      * 根据部门Id查询信息
      *
      * @param deptId
@@ -95,4 +103,6 @@ public interface DeptMapper {
      * @return
      */
     List<String> selectRoleDeptTree(Long roleId);
+
+    List<Dept> selectAllChildren(Dept dept);
 }

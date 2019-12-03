@@ -31,6 +31,7 @@
                     url: options.url,                                   // 请求后台的list URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
                     method: 'post',                                     // 请求方式（*）
+                    striped: true,                                      //是否显示行间隔色
                     cache: false,                                       // 是否使用缓存
                     sortable: true,                                     // 是否启用排序
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
@@ -43,13 +44,14 @@
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
                     toolbar: '#toolbar',                                // 指定工作栏
                     sidePagination: 'server',                           // 启用服务端分页
+                    clickToSelect: true,                                //是否启用点击选中行
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
                     showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
                     showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
                     showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
                     showExport: $.common.visible(options.showExport),   // 是否支持导出文件
-                    exportDataType: "all",                              //basic', 'all', 'selected'.
+                    /*exportDataType: "all",                              //basic', 'all', 'selected'.
                     exportTypes:['excel'],                              //导出文件类型
                     Icons:'glyphicon-export',
                     exportOptions:{
@@ -58,7 +60,7 @@
                         worksheetName: 'sheet1',  //表格工作区名称
                         tableName: 'test',
                         excelstyles: ['background-color', 'color', 'font-size', 'font-weight']
-                    },
+                    },*/
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.table.responseHandler            // 回调函数

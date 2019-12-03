@@ -139,8 +139,14 @@ public class DeptServiceImpl implements IDeptService {
         if (null != parentDept) {
             String ancestors = Ancestor.calculateAncestor(parentDept.getAncestors(), dept.getParentId());
             dept.setAncestors(ancestors);
+            //更新dept的树形序列
             updateDeptChildren(dept.getDeptId(), ancestors);
         }
+        // 更新dept状态
+        // 父节点启用/停用，则子节点启用/停用
+        // 子节点启用启用，则父节点启用。子节点停用，则父节点不一定停用
+        // 子节点全部停用，则父节点一定停用
+        updateDeptChildrenStatus(dept);
         return deptMapper.updateDept(dept);
     }
 
@@ -158,6 +164,18 @@ public class DeptServiceImpl implements IDeptService {
         }
         if (!childrens.isEmpty()) {
             deptMapper.updateDeptChildren(childrens);
+        }
+    }
+
+    /**
+     * 修改子元素的状态
+     * @param dept 部门
+     */
+    private void updateDeptChildrenStatus(Dept dept) {
+        // 找到所有的子元素
+        List<Dept> childrens = deptMapper.selectAllChildren(dept);
+        if (!childrens.isEmpty()) {
+            deptMapper.updateDeptChildrenStatus(childrens, dept.getStatus());
         }
     }
 
